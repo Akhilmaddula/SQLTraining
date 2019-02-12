@@ -1,0 +1,78 @@
+1. Create a table cricket_players with below columns
+player_name (This contains  player name)
+played_test_flag (contains Y or N)
+played_odi_flag (contains Y or N)
+played_t20_flag (contains Y or N)
+
+Write a program to find if a player played all cricket formats or not.
+
+
+2.Write a program to give output of a string in alternative case characters. 
+For example, if given string is oracle, the output should be OrAcLe
+
+
+3.Write a program to print first 10 Fibonacci numbers.
+A: declare 
+first number :=0;
+second number :=1;
+third number;
+i number;
+begin
+DBMS_OUTPUT.PUT_LINE('Fibonacci series of first 10 numbers is');
+DBMS_OUTPUT.PUT_LINE(first);
+dbms_output.put_line(second);
+for i in 1..10
+loop
+third:=first+second;
+first:=second;
+second:=third;
+dbms_output.put_line(third);
+end loop;
+end;
+/
+set SERVEROUTPUT ON
+
+4.Create a table emp1 with below columns
+empno number unique
+empname varchar2(100) unique
+dob date unique
+Write a program that inserts 1000 dummy values to above table.
+
+5.Create tables for Police department like below
+Table: criminal_data
+criminal_name varchar2, 
+crime_type varchar2,
+no_of_crimes number
+
+Table: crime_weightage
+crime_type varchar2,
+crime_weightage number
+
+Table: Most_wanted
+rank number,
+criminal_name varchar2
+
+Insert some example values into them.
+Write a PL/SQL program to get top 10 most wanted criminal list and insert into table Most_wanted table.
+
+
+
+6.Create patients table like below
+patient_name varchar2
+age number,
+visit_date date,
+temperature number(4,1)
+Write a procedure enter_patient_data which takes above 4 as input and inserts into patients table.
+If there is no temperature given, it should take 98.6 as default value.
+
+
+7.Create a table “orders” with below columns
+order_id number
+customer_name varcahr2(100)
+order_date date
+Write a function to find if the customer is repeated customer or not (input is customer name).
+A customer is repeated customer if he/she places 2 orders in last 30 days.
+
+
+
+

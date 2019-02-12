@@ -1,0 +1,870 @@
+SQL> spool assignment8.log append;
+SQL> hgbsdfhh
+SP2-0042: unknown command "hgbsdfhh" - rest of line ignored.
+SQL> spool off
+1. find the names of aircraft such that all pilots certified to operate them have salaries more than $80,000.
+
+ANS-SELECT A.ANAME,E.ENAME,E.SALARY,C.AID FROM AIRCRAFT A,CERTIFIED C,EMPLOYEES E WHERE E.EID=C.EID AND C.AID=A.AID AND E.SALARY>80000;
+
+OUTPUT-
+
+ANAME ENAME SALARY
+
+------------------------------ ------------------------------ ----------
+
+AID
+
+----------
+
+BOEING 747-400 lisa walker 256481
+
+1
+
+BOEING 737-800 lisa walker 256481
+
+2
+
+boeing 757-300 lisa walker 256481
+
+10
+
+ANAME ENAME SALARY
+
+------------------------------ ------------------------------ ----------
+
+AID
+
+----------
+
+BOEING 737-800 larry west 101745
+
+2
+
+airbus a319 larry west 101745
+
+14
+
+BOEING 747-400 karen scott 205187
+
+1
+
+ANAME ENAME SALARY
+
+------------------------------ ------------------------------ ----------
+
+AID
+
+----------
+
+boeing 767-400er karen scott 205187
+
+12
+
+AIRBUS A340-300 lawrence sperry 212156
+
+3
+
+airbus a320 lawrence sperry 212156
+
+13
+
+ANAME ENAME SALARY
+
+------------------------------ ------------------------------ ----------
+
+AID
+
+----------
+
+boeing 757-300 michael miller 99890
+
+10
+
+boeing 767-400er michael miller 99890
+
+12
+
+boeing 777-300 george wright 289950
+
+11
+
+ANAME ENAME SALARY
+
+------------------------------ ------------------------------ ----------
+
+AID
+
+----------
+
+boeing 767-400er george wright 289950
+
+12
+
+AIRBUS A340-300 mark young 205187
+
+3
+
+BOEING 737-800 mark young 205187
+
+2
+
+ANAME ENAME SALARY
+
+------------------------------ ------------------------------ ----------
+
+AID
+
+----------
+
+boeing 757-300 james smith 120433
+
+10
+
+16 rows selected.
+
+2. for each pilot who is certified for more than three aircraft, find the eid and the maximum cruising range of the aircraft for which she or he is certified.
+
+ANS-SELECT C.EID,A.CRUISINGRANGE FROM CERTIFIED C,AIRCRAFT A WHERE A.AID=C.AID AND C.EID IN(SELECT C.EID FROM CERTIFIED C GROUP BY C.EID HAVING COUNT(C.AID)>3);
+
+OUTPUT-
+
+no rows selected
+
+3. find the names of pilots whose salary is less than the price of the cheapest route from los angeles to honolulu.
+
+ANS-SELECT ENAME FROM EMPLOYEES WHERE SALARY<(SELECT MIN(PRICE) FROM
+
+FLIGHTS WHERE F_FROM='LOS ANGELES' AND F_TO='HONOLULU');
+
+OUTPUT-
+
+ENAME
+
+------------------------------
+
+milo brooks
+
+4. for all aircraft with cruising range over 1000 miles, find the name of the aircraft and the average salary of all pilots certified for this aircraft.
+
+ANS-SELECT A.ANAME ,A.CRUISINGRANGE,AVG_SAL FROM AIRCRAFT A JOIN (SELECT C.AID AS A_ID, AVG(E.SALARY) AS AVG_SAL FROM EMPLOYEES E,CERTIFIED C WHERE E.EID=C.EID GROUP BY C.AID) X ON A.AID=X.A_ID WHERE CRUISINGRANGE>1000;
+
+OUTPUT-
+
+ANAME CRUISINGRANGE AVG_SAL
+
+------------------------------ ------------- ----------
+
+airbus a319 1805 101745
+
+airbus a320 2605 212156
+
+boeing 777-300 6441 289950
+
+AIRBUS A340-300 7120 208671.5
+
+boeing 757-300 4010 158934.667
+
+boeing 767-400er 6475 198342.333
+
+BOEING 737-800 3383 187804.333
+
+BOEING 747-400 8430 230834
+
+8 rows selected.
+
+5. find the names of pilots certified for some boeing aircraft.
+
+ANS-SELECT E.ENAME FROM EMPLOYEES E,AIRCRAFT A,CERTIFIED C WHERE A.AID=C.AID AND E.EID=C.EID AND A.ANAME LIKE 'BOEING%';
+
+OUTPUT-
+
+ENAME
+
+------------------------------
+
+lisa walker
+
+lisa walker
+
+larry west
+
+karen scott
+
+mark young
+
+6. find the aids of all aircraft that can be used on routes from los angeles to chicago.
+
+ANS-SELECT AID FROM AIRCRAFT WHERE CRUISINGRANGE>(SELECT DISTANCE FROM FLIGHTS WHERE F_FROM='LOS ANGELES' AND F_TO='CHICAGO');
+
+OUTPUT-
+
+AID
+
+----------
+
+1
+
+2
+
+3
+
+6
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+11 rows selected.
+
+7. identify the routes that can be piloted by every pilot who makes more than $100,000.
+
+ANS-SELECT F_FROM,F_TO FROM FLIGHTS WHERE DISTANCE<=(SELECT MIN(CRUISINGRANGE) FROM AIRCRAFT WHERE AID IN(SELECT AID FROM CERTIFIED WHERE EID IN(SELECT EID FROM EMPLOYEES WHERE SALARY>100000)));
+
+OUTPUT-
+
+F_FROM F_TO
+
+------------------------------ ------------------------------
+
+LOS ANGELES CHICAGO
+
+LOS ANGELES DALLAS
+
+CHICAGO LOS ANGELES
+
+CHICAGO NEW YORK
+
+MADISON DETROIT
+
+DETROIT NEWYORK
+
+MADISON NEWYORK
+
+MADISON CHICAGO
+
+MADISON PITTSBURGH
+
+MADISON MINNEAPOLIS
+
+MINNEAPOLIS NEW YORK
+
+F_FROM F_TO
+
+------------------------------ ------------------------------
+
+PITTSBURGH NEW YORK
+
+12 rows selected.
+
+8. print the enames of pilots who can operate planes with cruisingrange greater than 3000 miles but are not certified on any boeing aircraft.
+
+ANS-SELECT E.ENAME ,A.AID FROM EMPLOYEES E,CERTIFIED C,AIRCRAFT A WHERE A.AID=C.AID AND E.EID=C.EID AND A.ANAME IN(SELECT ANAME FROM AIRCRAFT WHERE CRUISINGRANGE>3000 AND lower(ANAME) NOT LIKE 'boeing%');
+
+OUTPUT-
+
+ENAME AID
+
+------------------------------ ----------
+
+mark young 3
+
+lawrence sperry 3
+
+9. a customer wants to travel from madison to new york with no more than two changes of flight. list the choice of departure times from madison if the customer wants to arrive in new york by 6 p.m.
+
+ANS-
+
+OUTPUT-
+
+10. compute the deference between the average salary of a pilot and the average salary of all employees (including pilots).
+
+ANS-SELECT ((SELECT AVG(E.SALARY) FROM EMPLOYEES E ,CERTIFIED C WHERE E.EID=C.EID)-(SELECT AVG(SALARY) FROM EMPLOYEES)) AS DIFFERENCE FROM DUAL;
+
+OUTPUT-
+
+DIFFERENCE
+
+----------
+
+59702.825
+
+11. print the name and salary of every nonpilot whose salary is more than the average salary for pilots.
+
+ANS-SELECT ENAME ,SALARY FROM EMPLOYEES WHERE EID NOT IN(SELECT EID FROM CERTIFIED) AND SALARY>(SELECT AVG(SALARY) FROM EMPLOYEES E,CERTIFIED C WHERE E.EID=C.EID);
+
+OUTPUT-
+
+ENAME SALARY
+
+------------------------------ ----------
+
+angela martinez 212156
+
+betty adams 227489
+
+joseph thompson 212156
+
+david anderson 743001
+SQL> SELECT E.ENAME FROM EMPLOYEES E,AIRCRAFT A,CERTIFIED C WHERE A.AID=C.AID AND C.EID=E.EID AND A.CRUISINGRANGE>1000 GROUP BY E.ENAME HAVING COUNT(A.AID)>=2;
+
+ENAME                                                                           
+--------------------------------------------------                              
+george wright                                                                   
+karen scott                                                                     
+michael miller                                                                  
+lisa walker                                                                     
+lawrence sperry                                                                 
+larry west                                                                      
+james smith                                                                     
+
+7 rows selected.
+
+SQL> select ename from employees where eid in(select eid from certified where aid in(select aid from certified where aid in(select aid from aircraft where cruisingrange>1000)));
+
+ENAME                                                                           
+--------------------------------------------------                              
+lisa walker                                                                     
+larry west                                                                      
+karen scott                                                                     
+lawrence sperry                                                                 
+michael miller                                                                  
+george wright                                                                   
+mark young                                                                      
+james smith                                                                     
+
+8 rows selected.
+
+SQL> select e.ename from employees e,aircraft a,certified c where a.aid=c.aid and c.eid=e.eid and a.cruisingrange>1000;
+
+ENAME                                                                           
+--------------------------------------------------                              
+lisa walker                                                                     
+lisa walker                                                                     
+lisa walker                                                                     
+larry west                                                                      
+larry west                                                                      
+karen scott                                                                     
+karen scott                                                                     
+lawrence sperry                                                                 
+lawrence sperry                                                                 
+michael miller                                                                  
+michael miller                                                                  
+
+ENAME                                                                           
+--------------------------------------------------                              
+george wright                                                                   
+george wright                                                                   
+mark young                                                                      
+james smith                                                                     
+james smith                                                                     
+
+16 rows selected.
+
+SQL> select e.ename from employees e,aircraft a,certified c where a.aid=c.aid and c.eid=e.eid and a.cruisingrange>1000 and aname like 'boeing%';
+
+ENAME                                                                           
+--------------------------------------------------                              
+lisa walker                                                                     
+lisa walker                                                                     
+lisa walker                                                                     
+larry west                                                                      
+karen scott                                                                     
+karen scott                                                                     
+michael miller                                                                  
+michael miller                                                                  
+george wright                                                                   
+george wright                                                                   
+james smith                                                                     
+
+ENAME                                                                           
+--------------------------------------------------                              
+james smith                                                                     
+
+12 rows selected.
+
+SQL> select distinct  e.ename from employees e,aircraft a,certified c where a.aid=c.aid and c.eid=e.eid and a.cruisingrange>1000 and aname like 'boeing%';
+
+ENAME                                                                           
+--------------------------------------------------                              
+george wright                                                                   
+karen scott                                                                     
+michael miller                                                                  
+lisa walker                                                                     
+larry west                                                                      
+james smith                                                                     
+
+6 rows selected.
+
+SQL> select aid from aircraft where aname like 'boeing%';
+
+       AID                                                                      
+----------                                                                      
+         1                                                                      
+         2                                                                      
+        10                                                                      
+        11                                                                      
+        12                                                                      
+        15                                                                      
+
+6 rows selected.
+
+SQL> select eid from certified where aid in(select aid from aircraft where aname like 'boeing%';
+select eid from certified where aid in(select aid from aircraft where aname like 'boeing%'
+                                                                                         *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> select eid from certified where aid in(select aid from aircraft where aname like 'boeing%');
+
+       EID                                                                      
+----------                                                                      
+ 550156548                                                                      
+ 567354612                                                                      
+ 242518965                                                                      
+ 552455318                                                                      
+ 567354612                                                                      
+ 242518965                                                                      
+ 274878974                                                                      
+ 567354612                                                                      
+ 269734834                                                                      
+ 269734834                                                                      
+ 274878974                                                                      
+
+       EID                                                                      
+----------                                                                      
+ 550156548                                                                      
+
+12 rows selected.
+
+SQL> select eid,ename from employees where eid in(select eid from certified where aid in(select aid from aircraft where aname like 'boeing%');
+select eid,ename from employees where eid in(select eid from certified where aid in(select aid from aircraft where aname like 'boeing%')
+                                                                                                                                       *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> select eid,ename from employees where eid in(select eid from certified where aid in(select aid from aircraft where aname like 'boeing%'));
+
+       EID ENAME                                                                
+---------- --------------------------------------------------                   
+ 567354612 lisa walker                                                          
+ 552455318 larry west                                                           
+ 550156548 karen scott                                                          
+ 274878974 michael miller                                                       
+ 269734834 george wright                                                        
+ 242518965 james smith                                                          
+
+6 rows selected.
+
+SQL> select eid from employees where eid in(select eid from certified where aid in(select aid from aircraft where aname like 'boeing%'));
+
+       EID                                                                      
+----------                                                                      
+ 567354612                                                                      
+ 552455318                                                                      
+ 550156548                                                                      
+ 274878974                                                                      
+ 269734834                                                                      
+ 242518965                                                                      
+
+6 rows selected.
+
+SQL> select ename from employees where eid in(select eid from certified where aid in(select aid from aircraft where aname like 'boeing%'));
+
+ENAME                                                                           
+--------------------------------------------------                              
+lisa walker                                                                     
+larry west                                                                      
+karen scott                                                                     
+michael miller                                                                  
+george wright                                                                   
+james smith                                                                     
+
+6 rows selected.
+
+SQL> select distance from flights where f_from='bonn' and f_to='madras';
+
+no rows selected
+
+SQL> select aid from aircraft where cruisingrange=(select distance from flights where f_from='bonn' and f_to='madras';
+select aid from aircraft where cruisingrange=(select distance from flights where f_from='bonn' and f_to='madras'
+                                              *
+ERROR at line 1:
+ORA-00921: unexpected end of SQL command 
+
+
+SQL> select aid from aircraft where cruisingrange=(select distance from flights where f_from='bonn' and f_to='madras');
+
+no rows selected
+
+SQL> select eid from employees where salary>10000;
+
+       EID                                                                      
+----------                                                                      
+ 141582651                                                                      
+  11564812                                                                      
+ 567354612                                                                      
+ 552455318                                                                      
+ 550156548                                                                      
+ 390487451                                                                      
+ 274878974                                                                      
+ 254099823                                                                      
+ 356187925                                                                      
+ 355548984                                                                      
+ 310454876                                                                      
+
+       EID                                                                      
+----------                                                                      
+ 489456522                                                                      
+ 489221823                                                                      
+ 548977562                                                                      
+ 142519864                                                                      
+ 269734834                                                                      
+ 287321212                                                                      
+ 552455348                                                                      
+ 248965255                                                                      
+ 159542516                                                                      
+ 348121549                                                                      
+  90873519                                                                      
+
+       EID                                                                      
+----------                                                                      
+ 486512566                                                                      
+ 619023588                                                                      
+  15645489                                                                      
+ 556784565                                                                      
+ 573284895                                                                      
+ 574489456                                                                      
+ 242518965                                                                      
+
+29 rows selected.
+
+SQL> select eid from employees where salary>100000;
+
+       EID                                                                      
+----------                                                                      
+ 141582651                                                                      
+  11564812                                                                      
+ 567354612                                                                      
+ 552455318                                                                      
+ 550156548                                                                      
+ 390487451                                                                      
+ 355548984                                                                      
+ 310454876                                                                      
+ 489456522                                                                      
+ 142519864                                                                      
+ 269734834                                                                      
+
+       EID                                                                      
+----------                                                                      
+ 486512566                                                                      
+ 556784565                                                                      
+ 573284895                                                                      
+ 574489456                                                                      
+ 242518965                                                                      
+
+16 rows selected.
+
+SQL> select aid from certified where eid in(select eid from employees where salary>100000);
+
+       AID                                                                      
+----------                                                                      
+        10                                                                      
+         2                                                                      
+         1                                                                      
+        14                                                                      
+         2                                                                      
+        12                                                                      
+         1                                                                      
+        13                                                                      
+         3                                                                      
+        12                                                                      
+        11                                                                      
+
+       AID                                                                      
+----------                                                                      
+         3                                                                      
+        10                                                                      
+         2                                                                      
+
+14 rows selected.
+
+SQL> select aname from aircraft where aid in(select aid from certified where eid in(select eid from employees where salary>100000));
+
+ANAME                                                                           
+--------------------------------------------------                              
+boeing 747-400                                                                  
+boeing 737-800                                                                  
+boeing 757-300                                                                  
+airbus a319                                                                     
+boeing 767-400er                                                                
+airbus a340-300                                                                 
+airbus a320                                                                     
+boeing 777-300                                                                  
+
+8 rows selected.
+
+SQL> select aid from aircraft where cruisingrange>3000 and aname not like 'boeing%';
+
+       AID                                                                      
+----------                                                                      
+         3                                                                      
+         8                                                                      
+         9                                                                      
+
+SQL> select eid from certified where aid in(select aid from aircraft where cruisingrange>3000 and aname  not like 'boeing%';
+select eid from certified where aid in(select aid from aircraft where cruisingrange>3000 and aname  not like 'boeing%'
+                                                                                                                     *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> select eid from certified where aid in(select aid from aircraft where cruisingrange>3000 and aname  not like 'boeing%');
+
+       EID                                                                      
+----------                                                                      
+ 556784565                                                                      
+ 390487451                                                                      
+
+SQL> select ename from employees where eid in(select eid from certified where aid in(select aid from aircraft where cruisingrange>3000 and aname not like 'boeing%'));
+
+ENAME                                                                           
+--------------------------------------------------                              
+lawrence sperry                                                                 
+mark young                                                                      
+
+SQL> select eid ,max(salary) from employees;
+select eid ,max(salary) from employees
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> select eid from employees where eid=(select max(salary) from employees);
+
+no rows selected
+
+SQL> select eid from employees where salary=(select max(salary) from employees);
+
+       EID                                                                      
+----------                                                                      
+ 486512566                                                                      
+
+SQL> select eid from certified group by eid;
+
+       EID                                                                      
+----------                                                                      
+ 552455318                                                                      
+ 269734834                                                                      
+ 556784565                                                                      
+ 390487451                                                                      
+ 242518965                                                                      
+ 567354612                                                                      
+ 550156548                                                                      
+ 274878974                                                                      
+
+8 rows selected.
+
+SQL> select eid from certified group by eid having count(aid)=(select max(count(aid)) from certified group by aid);
+
+       EID                                                                      
+----------                                                                      
+ 567354612                                                                      
+
+SQL> select eid from certified group by eid having count(aid)=3;
+
+       EID                                                                      
+----------                                                                      
+ 567354612                                                                      
+
+SQL> select sum(salary) from employees;
+
+SUM(SALARY)                                                                     
+-----------                                                                     
+    4113831                                                                     
+
+SQL> create sequence employee_seq minvalue 1 start with 1 increment by 1;
+
+Sequence created.
+
+SQL> alter table employees add column age number(10);
+alter table employees add column age number(10)
+                          *
+ERROR at line 1:
+ORA-00904: : invalid identifier 
+
+
+SQL> alter table employees add  age number(10);
+
+Table altered.
+
+SQL> desc employees;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EID                                                NUMBER(20)
+ ENAME                                              VARCHAR2(50)
+ SALARY                                             NUMBER(20)
+ AGE                                                NUMBER(10)
+
+SQL> alter table flights add constraint pk_flights primary key(fno,departs);
+
+Table altered.
+
+SQL> alter table employees add sex varchar(10) default 'm';
+
+Table altered.
+
+SQL> create view flights_v1 as select fno,f_from,f_to from flights;
+
+View created.
+
+SQL> select * from flights_v1;
+
+       FNO F_FROM                         F_TO                                  
+---------- ------------------------------ --------------------                  
+        99 LOS ANGELES                    washington d.c.                       
+        13 LOS ANGELES                    CHICAGO                               
+       346 LOS ANGELES                    dallas                                
+       387 LOS ANGELES                    boston                                
+         7 LOS ANGELES                    sydney                                
+         2 LOS ANGELES                    tokyo                                 
+        33 LOS ANGELES                    honolulu                              
+        34 LOS ANGELES                    honolulu                              
+        76 chicago                        los angeles                           
+        76 chicago                        new york                              
+      7789 madison                        detroit                               
+
+       FNO F_FROM                         F_TO                                  
+---------- ------------------------------ --------------------                  
+       701 detroit                        new york                              
+       702 madison                        new york                              
+      4884 madison                        chicago                               
+      2223 madison                        pittsburgh                            
+      5694 madison                        minneapolis                           
+       304 minneapolis                    new york                              
+       149 pittsburgh                     new york                              
+
+18 rows selected.
+
+SQL> create index aname_index on aircraft(aname);
+
+Index created.
+
+SQL> select ename from emp where job='MANAGER';
+
+ENAME                                                                           
+----------                                                                      
+JONES                                                                           
+BLAKE                                                                           
+CLARK                                                                           
+
+SQL> select ename,deptno from emp group by deptno;
+select ename,deptno from emp group by deptno
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> select deptno from emp group by deptno;
+
+    DEPTNO                                                                      
+----------                                                                      
+        30                                                                      
+        20                                                                      
+         2                                                                      
+        10                                                                      
+        12                                                                      
+
+SQL> select max(sal) from emp group by deptno;
+
+  MAX(SAL)                                                                      
+----------                                                                      
+      2850                                                                      
+      3000                                                                      
+       400                                                                      
+      5000                                                                      
+                                                                                
+
+SQL> select ename from emp where sal in(select max(sal) from emp group by deptno);
+
+ENAME                                                                           
+----------                                                                      
+BLAKE                                                                           
+SCOTT                                                                           
+KING                                                                            
+FORD                                                                            
+kk                                                                              
+
+SQL> select ename,deptno from emp where sal in(select max(sal) from emp group by deptno);
+
+ENAME          DEPTNO                                                           
+---------- ----------                                                           
+BLAKE              30                                                           
+SCOTT              20                                                           
+KING               10                                                           
+FORD               20                                                           
+kk                  2                                                           
+
+SQL> SELECT ename from emp where mgr=(select empno from emp where ename='JONES');
+
+ENAME                                                                           
+----------                                                                      
+SCOTT                                                                           
+FORD                                                                            
+
+SQL> SELECT ename,(Select job) from emp where mgr=(select empno from emp where ename='JONES');
+SELECT ename,(Select job) from emp where mgr=(select empno from emp where ename='JONES')
+                        *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT ename,(select ENAME from emp where empno=(select empno from emp where ename='JONES')) AS MAANAGER from emp where mgr=(select empno from emp where ename='JONES');
+
+ENAME      MAANAGER                                                             
+---------- ----------                                                           
+SCOTT      JONES                                                                
+FORD       JONES                                                                
+
+SQL> SELECT A.EMPNO,A.ENAME,B.ENAME,B.EMPNO FROM EMP A,EMP B WHERE A.MGR=B.EMPNO UNION SELECT EMPNO,ENAME,'NO_MANAGER',00 FROM EMP WHERE MGR IS NULL;
+
+     EMPNO ENAME      ENAME           EMPNO                                     
+---------- ---------- ---------- ----------                                     
+      1200 priya      NO_MANAGER          0                                     
+      7499 alias      BLAKE            7698                                     
+      7521 WARD       BLAKE            7698                                     
+      7566 JONES      KING             7839                                     
+      7654 MARTIN     BLAKE            7698                                     
+      7698 BLAKE      KING             7839                                     
+      7782 CLARK      KING             7839                                     
+      7788 SCOTT      JONES            7566                                     
+      7839 KING       NO_MANAGER          0                                     
+      7844 TURNER     BLAKE            7698                                     
+      7876 ADAMS      SCOTT            7788                                     
+
+     EMPNO ENAME      ENAME           EMPNO                                     
+---------- ---------- ---------- ----------                                     
+      7900 JAMES      BLAKE            7698                                     
+      7902 FORD       JONES            7566                                     
+      7934 MILLER     CLARK            7782                                     
+
+14 rows selected.
+
+SQL> SELECT e.ENAME,d.dname,e.sal,nvl(e.comm,0) from emp e, dept d where e.deptno=d.deptno and e.sal between 2000 and 5000 and d.loc='CHICAGO';
+
+ENAME      DNAME                 SAL NVL(E.COMM,0)                              
+---------- -------------- ---------- -------------                              
+BLAKE      SALES                2850             0                              
+
+SQL> SPOOL OFF;

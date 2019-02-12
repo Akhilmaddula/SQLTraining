@@ -1,0 +1,300 @@
+SQL> select ename||You are hired on: from emp;
+SP2-0552: Bind variable "FROM" not declared.
+SQL> select ename||You are hired on from emp;
+select ename||You are hired on from emp
+                      *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> select ename||'You are hired on:' from emp;
+
+ENAME||'YOUAREHIREDON:'                                                         
+---------------------------                                                     
+aliasYou are hired on:                                                          
+WARDYou are hired on:                                                           
+JONESYou are hired on:                                                          
+MARTINYou are hired on:                                                         
+BLAKEYou are hired on:                                                          
+CLARKYou are hired on:                                                          
+SCOTTYou are hired on:                                                          
+KINGYou are hired on:                                                           
+TURNERYou are hired on:                                                         
+ADAMSYou are hired on:                                                          
+JAMESYou are hired on:                                                          
+
+ENAME||'YOUAREHIREDON:'                                                         
+---------------------------                                                     
+FORDYou are hired on:                                                           
+MILLERYou are hired on:                                                         
+priyaYou are hired on:                                                          
+kkYou are hired on:                                                             
+
+15 rows selected.
+
+SQL> select ename||' You are hired on:' from emp;
+
+ENAME||'YOUAREHIREDON:'                                                         
+----------------------------                                                    
+alias You are hired on:                                                         
+WARD You are hired on:                                                          
+JONES You are hired on:                                                         
+MARTIN You are hired on:                                                        
+BLAKE You are hired on:                                                         
+CLARK You are hired on:                                                         
+SCOTT You are hired on:                                                         
+KING You are hired on:                                                          
+TURNER You are hired on:                                                        
+ADAMS You are hired on:                                                         
+JAMES You are hired on:                                                         
+
+ENAME||'YOUAREHIREDON:'                                                         
+----------------------------                                                    
+FORD You are hired on:                                                          
+MILLER You are hired on:                                                        
+priya You are hired on:                                                         
+kk You are hired on:                                                            
+
+15 rows selected.
+
+SQL> select ename||' You are hired on:|| to_char('hiredate',day dd month year) from emp;
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> select ename||' You are hired on:|| to_char('hiredate','day dd month year') from emp;
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> select ename||' You are hired on:'|| to_char('hiredate','day dd month year') from emp;
+select ename||' You are hired on:'|| to_char('hiredate','day dd month year') from emp
+                                             *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> select ename||' You are hired on:'|| to_date('hiredate','day dd month year') from emp;
+select ename||' You are hired on:'|| to_date('hiredate','day dd month year') from emp
+                                                        *
+ERROR at line 1:
+ORA-01820: format code cannot appear in date input format 
+
+
+SQL> select ename||' You are hired on:'|| to_char(hiredate,'day dd month year') from emp;
+
+ENAME||'YOUAREHIREDON:'||TO_CHAR(HIREDATE,'DAYDDMONTHYEAR')                     
+--------------------------------------------------------------------------------
+alias You are hired on:friday    20 february  nineteen eighty-one               
+WARD You are hired on:sunday    22 february  nineteen eighty-one                
+JONES You are hired on:thursday  02 april     nineteen eighty-one               
+MARTIN You are hired on:monday    28 september nineteen eighty-one              
+BLAKE You are hired on:friday    01 may       nineteen eighty-one               
+CLARK You are hired on:tuesday   09 june      nineteen eighty-one               
+SCOTT You are hired on:thursday  09 december  nineteen eighty-two               
+KING You are hired on:tuesday   17 november  nineteen eighty-one                
+TURNER You are hired on:tuesday   08 september nineteen eighty-one              
+ADAMS You are hired on:wednesday 12 january   nineteen eighty-three             
+JAMES You are hired on:thursday  03 december  nineteen eighty-one               
+
+ENAME||'YOUAREHIREDON:'||TO_CHAR(HIREDATE,'DAYDDMONTHYEAR')                     
+--------------------------------------------------------------------------------
+FORD You are hired on:thursday  03 december  nineteen eighty-one                
+MILLER You are hired on:saturday  23 january   nineteen eighty-two              
+priya You are hired on:                                                         
+kk You are hired on:friday    15 december  twenty seventeen                     
+
+15 rows selected.
+
+SQL> select ename||' You are hired on:'|| to_char(hiredate,'day ',day' ddth 'of' month 'Month in the year of' year') from emp;
+select ename||' You are hired on:'|| to_char(hiredate,'day ',day' ddth 'of' month 'Month in the year of' year') from emp
+                                                                *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> select ename||' You are hired on:'|| to_char(hiredate,'day "day"ddth "f"month "Month the year of" year') from emp;
+
+ENAME||'YOUAREHIREDON:'||TO_CHAR(HIREDATE,'DAY"DAY"DDTH"F"MONTH"MONTHTHEYEAROF"Y
+--------------------------------------------------------------------------------
+alias You are hired on:friday    day20th ffebruary  Month the year of nineteen e
+ighty-one                                                                       
+                                                                                
+WARD You are hired on:sunday    day22nd ffebruary  Month the year of nineteen ei
+ghty-one                                                                        
+                                                                                
+JONES You are hired on:thursday  day02nd fapril     Month the year of nineteen e
+ighty-one                                                                       
+                                                                                
+MARTIN You are hired on:monday    day28th fseptember Month the year of nineteen 
+eighty-one                                                                      
+
+ENAME||'YOUAREHIREDON:'||TO_CHAR(HIREDATE,'DAY"DAY"DDTH"F"MONTH"MONTHTHEYEAROF"Y
+--------------------------------------------------------------------------------
+                                                                                
+BLAKE You are hired on:friday    day01st fmay       Month the year of nineteen e
+ighty-one                                                                       
+                                                                                
+CLARK You are hired on:tuesday   day09th fjune      Month the year of nineteen e
+ighty-one                                                                       
+                                                                                
+SCOTT You are hired on:thursday  day09th fdecember  Month the year of nineteen e
+ighty-two                                                                       
+                                                                                
+KING You are hired on:tuesday   day17th fnovember  Month the year of nineteen ei
+
+ENAME||'YOUAREHIREDON:'||TO_CHAR(HIREDATE,'DAY"DAY"DDTH"F"MONTH"MONTHTHEYEAROF"Y
+--------------------------------------------------------------------------------
+ghty-one                                                                        
+                                                                                
+TURNER You are hired on:tuesday   day08th fseptember Month the year of nineteen 
+eighty-one                                                                      
+                                                                                
+ADAMS You are hired on:wednesday day12th fjanuary   Month the year of nineteen e
+ighty-three                                                                     
+                                                                                
+JAMES You are hired on:thursday  day03rd fdecember  Month the year of nineteen e
+ighty-one                                                                       
+                                                                                
+
+ENAME||'YOUAREHIREDON:'||TO_CHAR(HIREDATE,'DAY"DAY"DDTH"F"MONTH"MONTHTHEYEAROF"Y
+--------------------------------------------------------------------------------
+FORD You are hired on:thursday  day03rd fdecember  Month the year of nineteen ei
+ghty-one                                                                        
+                                                                                
+MILLER You are hired on:saturday  day23rd fjanuary   Month the year of nineteen 
+eighty-two                                                                      
+                                                                                
+priya You are hired on:                                                         
+kk You are hired on:friday    day15th fdecember  Month the year of twenty sevent
+een                                                                             
+                                                                                
+
+15 rows selected.
+
+SQL> select ename||' You are hired on:'|| to_char(hiredate,'day " ,day "ddth " of "month "Month the year of" year') from emp;
+
+ENAME||'YOUAREHIREDON:'||TO_CHAR(HIREDATE,'DAY",DAY"DDTH"OF"MONTH"MONTHTHEYEAROF
+--------------------------------------------------------------------------------
+alias You are hired on:friday     ,day 20th  of february  Month the year of nine
+teen eighty-one                                                                 
+                                                                                
+WARD You are hired on:sunday     ,day 22nd  of february  Month the year of ninet
+een eighty-one                                                                  
+                                                                                
+JONES You are hired on:thursday   ,day 02nd  of april     Month the year of nine
+teen eighty-one                                                                 
+                                                                                
+MARTIN You are hired on:monday     ,day 28th  of september Month the year of nin
+eteen eighty-one                                                                
+
+ENAME||'YOUAREHIREDON:'||TO_CHAR(HIREDATE,'DAY",DAY"DDTH"OF"MONTH"MONTHTHEYEAROF
+--------------------------------------------------------------------------------
+                                                                                
+BLAKE You are hired on:friday     ,day 01st  of may       Month the year of nine
+teen eighty-one                                                                 
+                                                                                
+CLARK You are hired on:tuesday    ,day 09th  of june      Month the year of nine
+teen eighty-one                                                                 
+                                                                                
+SCOTT You are hired on:thursday   ,day 09th  of december  Month the year of nine
+teen eighty-two                                                                 
+                                                                                
+KING You are hired on:tuesday    ,day 17th  of november  Month the year of ninet
+
+ENAME||'YOUAREHIREDON:'||TO_CHAR(HIREDATE,'DAY",DAY"DDTH"OF"MONTH"MONTHTHEYEAROF
+--------------------------------------------------------------------------------
+een eighty-one                                                                  
+                                                                                
+TURNER You are hired on:tuesday    ,day 08th  of september Month the year of nin
+eteen eighty-one                                                                
+                                                                                
+ADAMS You are hired on:wednesday  ,day 12th  of january   Month the year of nine
+teen eighty-three                                                               
+                                                                                
+JAMES You are hired on:thursday   ,day 03rd  of december  Month the year of nine
+teen eighty-one                                                                 
+                                                                                
+
+ENAME||'YOUAREHIREDON:'||TO_CHAR(HIREDATE,'DAY",DAY"DDTH"OF"MONTH"MONTHTHEYEAROF
+--------------------------------------------------------------------------------
+FORD You are hired on:thursday   ,day 03rd  of december  Month the year of ninet
+een eighty-one                                                                  
+                                                                                
+MILLER You are hired on:saturday   ,day 23rd  of january   Month the year of nin
+eteen eighty-two                                                                
+                                                                                
+priya You are hired on:                                                         
+kk You are hired on:friday     ,day 15th  of december  Month the year of twenty 
+seventeen                                                                       
+                                                                                
+
+15 rows selected.
+
+SQL> select ename||' You are hired on:'|| to_char(hiredate,'day " ,day "ddth " of "month "Month the year of" year A.D' ) from emp;
+select ename||' You are hired on:'|| to_char(hiredate,'day " ,day "ddth " of "month "Month the year of" year A.D' ) from emp
+                                                      *
+ERROR at line 1:
+ORA-01821: date format not recognized 
+
+
+SQL> select ename||' You are hired on:'|| to_char(hiredate,'day " ,day "ddth " of "month "Month the year of" year A.D.' ) from emp;
+
+ENAME||'YOUAREHIREDON:'||TO_CHAR(HIREDATE,'DAY",DAY"DDTH"OF"MONTH"MONTHTHEYEAROF
+--------------------------------------------------------------------------------
+alias You are hired on:friday     ,day 20th  of february  Month the year of nine
+teen eighty-one A.D.                                                            
+                                                                                
+WARD You are hired on:sunday     ,day 22nd  of february  Month the year of ninet
+een eighty-one A.D.                                                             
+                                                                                
+JONES You are hired on:thursday   ,day 02nd  of april     Month the year of nine
+teen eighty-one A.D.                                                            
+                                                                                
+MARTIN You are hired on:monday     ,day 28th  of september Month the year of nin
+eteen eighty-one A.D.                                                           
+
+ENAME||'YOUAREHIREDON:'||TO_CHAR(HIREDATE,'DAY",DAY"DDTH"OF"MONTH"MONTHTHEYEAROF
+--------------------------------------------------------------------------------
+                                                                                
+BLAKE You are hired on:friday     ,day 01st  of may       Month the year of nine
+teen eighty-one A.D.                                                            
+                                                                                
+CLARK You are hired on:tuesday    ,day 09th  of june      Month the year of nine
+teen eighty-one A.D.                                                            
+                                                                                
+SCOTT You are hired on:thursday   ,day 09th  of december  Month the year of nine
+teen eighty-two A.D.                                                            
+                                                                                
+KING You are hired on:tuesday    ,day 17th  of november  Month the year of ninet
+
+ENAME||'YOUAREHIREDON:'||TO_CHAR(HIREDATE,'DAY",DAY"DDTH"OF"MONTH"MONTHTHEYEAROF
+--------------------------------------------------------------------------------
+een eighty-one A.D.                                                             
+                                                                                
+TURNER You are hired on:tuesday    ,day 08th  of september Month the year of nin
+eteen eighty-one A.D.                                                           
+                                                                                
+ADAMS You are hired on:wednesday  ,day 12th  of january   Month the year of nine
+teen eighty-three A.D.                                                          
+                                                                                
+JAMES You are hired on:thursday   ,day 03rd  of december  Month the year of nine
+teen eighty-one A.D.                                                            
+                                                                                
+
+ENAME||'YOUAREHIREDON:'||TO_CHAR(HIREDATE,'DAY",DAY"DDTH"OF"MONTH"MONTHTHEYEAROF
+--------------------------------------------------------------------------------
+FORD You are hired on:thursday   ,day 03rd  of december  Month the year of ninet
+een eighty-one A.D.                                                             
+                                                                                
+MILLER You are hired on:saturday   ,day 23rd  of january   Month the year of nin
+eteen eighty-two A.D.                                                           
+                                                                                
+priya You are hired on:                                                         
+kk You are hired on:friday     ,day 15th  of december  Month the year of twenty 
+seventeen A.D.                                                                  
+                                                                                
+
+15 rows selected.
+
+SQL> spool off;

@@ -1,0 +1,311 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang16393{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\f0\fs22 --\b PL/SQL Assignment 3 \b0\par
+\b 1. Write a database trigger halt the transaction between the the time 6pm to 10am on table emp \par
+A: \b0 create or replace trigger date_formate\par
+   before delete or insert or update \par
+   on emp\par
+   for each row\par
+   begin\par
+   if to_char(sysdate,'dd/mm/yyyy hh24')>18 or to_char(sysdate,'dd/mm/yyyy hh24')<10\par
+--   if 6>18 or 6<10\par
+   then\par
+   raise_application_error(-20220,'Cannot process your transaction between 6 p.m and 10 a.m');\par
+   end if;\par
+   end;\par
+   /\b\par
+\b0\par
+\b 2. WAP to accept the empno and update the employee row on the following \par
+If sal < 2600 then sal=sal+10% of sal make the changes in the emp table \par
+A: \b0 declare \par
+v_empno emp.empno%type :=&Enter_EmpNo;\par
+v_temp number(10);\par
+begin\par
+select empno into v_temp from emp where sal<2600 and empno=v_empno;\par
+if(v_temp <>0) then\par
+update EMP SET sal=(sal+(0.1*sal)) where empno=v_temp;\par
+DBMS_OUTPUT.PUT_LINE('Updated the salary of the employee by 10%');\par
+else\par
+dbms_output.put_line('Could not update as his salary is greater than 2600');\par
+end if;\par
+exception \par
+when no_data_found then\par
+dbms_output.put_line('No records are present under the given emp id');\par
+end;\par
+/\b\par
+\par
+3. Write a program to print the following series \par
+\b0 ----------1st pattern-------------\par
+1 2 3 4 5\par
+1 2 3 4 \par
+1 2 3 \par
+1 2 \par
+1 \par
+\b A:\b0  begin\par
+  for i  in reverse  1 .. 5\par
+  loop\par
+    for j in 1 .. i\par
+    loop\par
+      dbms_output.put(j || ' ');\par
+    end loop;\par
+    dbms_output.new_line;\par
+  end loop;\par
+end; \par
+\par
+-----------2 pattern-------------\par
+1 \par
+0 1 \par
+1 0 1 \par
+0 1 0 1 \par
+1 0 1 0 1 \par
+\b A:\b0  begin\par
+for i in 1..5\par
+loop\par
+for j in reverse 1..i\par
+loop\par
+if (mod(j,2)=0) then \par
+dbms_output.put(0 ||' ');\par
+else\par
+dbms_output.put(1||' ');\par
+end if;\par
+end loop;\par
+dbms_output.new_line;\par
+end loop;\par
+end;\par
+\b 4.  Write a program to accept the mgr number and return no of emp working at that mgr? \par
+A:  \b0 declare \par
+v_mgr number(4) :=&entermgrnumber;\par
+v_temp number(4);\par
+begin\par
+select count(empno) into v_temp from emp where mgr=v_mgr;\par
+if(v_temp <> 0) then\par
+dbms_output.put_line('Number of employees under the manager are :'|| v_temp);\par
+else\par
+dbms_output.put_line('There are no employees working under him!');\par
+end if;\par
+exception\par
+when no_data_found then\par
+dbms_output.put_line('There are no  such manager !');\par
+end;\par
+\par
+\b 5.\tab write a program for multiplication table \par
+A:   \b0 DECLARE\par
+A NUMBER(2):=&A;\par
+B NUMBER(2):=1;\par
+C NUMBER(3);\par
+BEGIN\par
+WHILE B <=10\par
+LOOP\par
+C:=A*B;\par
+DBMS_OUTPUT.PUT_LINE(A||'*'||B||'='||C);\par
+B:=B+1;\par
+END LOOP;\par
+END;\par
+/\par
+\b --(or)-----------------\b0\par
+declare \par
+a number(3) :=&a;\par
+b number(3) :=1;\par
+c number(4);\par
+begin\par
+for i in 1..10 loop\par
+c:=i*a;\par
+dbms_output.put_line(a||'*'||i||'='||c);\par
+end loop;\par
+end;\par
+/\par
+\par
+\b 6.\tab Write a program to accept a number and find the sum of the digits \par
+A:     \par
+ \b0 DECLARE\par
+N NUMBER(5):=&N;\par
+S NUMBER:=0;\par
+R NUMBER(2):=0;\par
+BEGIN\par
+WHILE N !=0\par
+LOOP\par
+R:=MOD(N,10);\par
+S:=S+R;\par
+N:=TRUNC(N/10);\par
+END LOOP;\par
+DBMS_OUTPUT.PUT_LINE('SUM OF DIGITS OF GIVEN NUMBER IS '||S);\par
+END;\par
+/\par
+\par
+\b 7.\tab WAP to accept a string and count how many vowels present in the string \par
+A:  \b0 declare\par
+v_str varchar2(20) :='&EnterString';\par
+v_temp number;\par
+begin\par
+select regexp_count(v_str ,'[aeiou]',1,'i') into v_temp from dual;\par
+DBMS_OUTPUT.PUT_LINE('The number of vowels in the given '||v_str||' string is '||v_temp);\par
+end;\par
+/\par
+\par
+\b 8.  WAP to generate the nos which are prime and odd between 1 and 100\par
+A:\b0  DECLARE\par
+    counter NUMBER;\par
+    k NUMBER;\par
+BEGIN\par
+  FOR n IN 2..100 LOOP   \par
+    counter := 0;\par
+    k := floor(n/2);\par
+    FOR i IN 2..k LOOP\par
+        IF (mod(n, i) = 0 ) THEN\par
+            counter := 1;\par
+        END IF;\par
+    END LOOP;\par
+    IF (counter = 0) THEN\par
+       DBMS_OUTPUT.PUT_LINE(n||' is prime number');\par
+    END IF;\par
+  END LOOP;\par
+  dbms_output.put_line('------------------------------------------------------------------');\par
+  for i in 1..100 loop\par
+if mod(i,2)<>0 then\par
+dbms_output.put_line(i ||'is an odd number');\par
+end if;\par
+end loop;\par
+END;\par
+\par
+\b\par
+9.  Write a procedure to accept a string and check whether it is palindrome or not? \par
+A: \b0 DECLARE\par
+Str VARCHAR2(10):='&Enter_String';\par
+L VARCHAR2(20);\par
+TEMP VARCHAR2(10);\par
+BEGIN\par
+FOR I IN REVERSE 1..LENGTH(Str)\par
+LOOP\par
+L:=SUBSTR(Str,I,1);\par
+TEMP:=TEMP||L;\par
+END LOOP;\par
+IF TEMP=Str THEN\par
+DBMS_OUTPUT.PUT_LINE(TEMP ||''||' IS PALINDROME');\par
+ELSE\par
+DBMS_OUTPUT.PUT_LINE(TEMP ||''||' IS NOT PALINDROME');\par
+END IF;\par
+END;\par
+/\par
+\b\par
+10. Write a program accept the value of A,B&C display which is greater?\par
+A: \b0 declare \par
+v_number1 number:=&number1;\par
+v_number2 number:=&number2;\par
+v_number3 number:=&number3;\par
+begin\par
+if (v_number1>v_number2) and (v_number1>v_number3)  then\par
+dbms_output.put_line('The greatest number is :'||v_number1);\par
+else \par
+if(v_number2>v_number3) and (v_number2>v_number1) then\par
+dbms_output.put_line('The greatest number is:'||v_number2);\par
+else\par
+dbms_output.put_line('the greatest numbver is:'||v_number3);\par
+end if;\par
+end if;\par
+end;\par
+/\par
+\par
+\par
+\par
+\b 11. Write a program to accept a year and display the emps belongs to that year? \par
+A: \b0 declare \par
+CURSOR year_cur is select empno,ename from emp where to_char(hiredate,'yyyy')=&year;\par
+--v_empno EMP.EMPNO%type;\par
+--v_ename emp.ename%type;\par
+begin\par
+for i in year_cur\par
+loop\par
+dbms_output.put_line(i.empno||' '||i.ename);\par
+end loop;\par
+exception\par
+when others then\par
+dbms_output.put_line('There are no employees under the given year');\par
+end;\par
+/\par
+\par
+\b 12. Write a program to accept a deptno and display who are working in that dept? \par
+A: \b0 declare \par
+cursor emp_cur is select empno,ename,job,mgr,sal from emp where deptno=&deptno;\par
+--v_empVar emp%rowtype;\par
+begin\par
+for i in emp_cur\par
+loop\par
+dbms_output.put_line('Employee number'||i.empno);\par
+dbms_output.put_line('Employee name'||i.ename);\par
+dbms_output.put_line('Employee job'||i.job);\par
+dbms_output.put_line('Employee mgr'||i.mgr);\par
+dbms_output.put_line('Employee Salary'||i.sal);\par
+dbms_output.put_line('.........................');\par
+end loop;\par
+end;\par
+/\par
+\par
+\b 13. Write a query to find if the given year is leap year.\par
+A: \b0 DECLARE\par
+V_YEAR NUMBER:=&ENTER_YEAR;\par
+BEGIN\par
+IF MOD(V_YEAR,4)=0 THEN\par
+\tab IF MOD(V_YEAR,100)<>0 THEN\par
+\tab DBMS_OUTPUT.PUT_LINE(V_YEAR||' IS A LEAP YEAR');\par
+\tab ELSE\par
+\tab\tab IF MOD(V_YEAR,400)=0 THEN\par
+\tab\tab DBMS_OUTPUT.PUT_LINE(V_YEAR||' IS A LEAP YEAR');\par
+\tab\tab ELSE\par
+\tab\tab DBMS_OUTPUT.PUT_LINE(V_YEAR||' IS NOT A LEAP YEAR');\par
+\tab\tab END IF;\par
+\tab END IF;\par
+ELSE\par
+DBMS_OUTPUT.PUT_LINE(V_YEAR||' IS NOT A LEAP YEAR');\par
+END IF;\par
+END;\par
+------(OR)-------\par
+\par
+DECLARE\par
+Y NUMBER:=&Y;\par
+R NUMBER;\par
+BEGIN\par
+IF MOD(Y,4)=0 AND MOD(Y,100)!=0 OR MOD(Y,400)=0\par
+THEN\par
+DBMS_OUTPUT.PUT_LINE(Y ||' IS A LEAP YEAR');\par
+ELSE\par
+DBMS_OUTPUT.PUT_LINE(Y ||' IS NOT A LEAP YEAR');\par
+END IF;\par
+END;\par
+/\par
+\par
+\b 14. WAP to accept a empno and display empno,based on experience calculate the bonus and store it into the bonus table \par
+If exp > 5 years then bonus is 1 month salary \par
+If exp between 5 and 9 years then bonus is 20% of annual salary \par
+If exp more than 9 years then bonus is 1 month sal plus 25% of annual salary\par
+Note : create bonus table(empno , bonus) and use emp table for this program.\par
+A:  \b0 create or replace procedure empBonus(v_empno emp.empno %type)\par
+is \par
+v_bonus number(20,5);\par
+v_exp number(10);\par
+v_sal EMP.SAL%type;\par
+begin\par
+select to_char(sysdate,'yyyy')-to_char(hiredate,'yyyy') into v_exp from emp where empno=v_empno;\par
+select sal into v_sal from emp where empno=v_empno;\par
+if(v_exp>9) then\par
+v_bonus :=v_sal+(0.25*(12*v_sal));\par
+insert into bonus(empno,bonus) values(v_empno,v_bonus);\par
+dbms_output.put_line('Updated the salary and inserted into bonus table');\par
+else if (v_exp>5 and v_exp<9) then \par
+v_bonus :=0.2*(12*v_sal);\par
+insert into bonus(empno,bonus) values(v_empno,v_bonus);\par
+dbms_output.put_line('Updated the salary and inserted into bonus table');\par
+else if (v_exp>5) then \par
+v_bonus :=v_sal;\par
+insert into bonus(empno,bonus) values(v_empno,v_bonus);\par
+dbms_output.put_line('Updated the salary and inserted into bonus table');\par
+end if;\par
+end if;\par
+end if;\par
+end;\par
+/\par
+\par
+\par
+exec empBonus(7499);\b\par
+\b0\par
+\par
+}
+ 

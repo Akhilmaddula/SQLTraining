@@ -1,0 +1,66 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang16393{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Symbol;}}
+{\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\b\f0\fs28 Assignment -2\b0\fs22\par
+\b\fs28 Q) What is the difference between Truncate and Delete?\par
+Truncate:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\b0\fs22 The truncate table statement is used to remove all the records from the table which is similar to delete, but without a where clause.\par
+{\pntext\f1\'B7\tab}If you truncate a table, the TRUNCATE TABLE statement cannot be rolled back.\par
+{\pntext\f1\'B7\tab}If you truncate a table you cannot get back the records by using rollback clause.\par
+{\pntext\f1\'B7\tab}In Oracle, truncate statement is the fastest way to remove all the data from the table.\par
+{\pntext\f1\'B7\tab}If we truncate a table it won't affect any of the table structure, schema, indexes.\par
+{\pntext\f1\'B7\tab}Truncating a table is also a lot easier than dropping the table and recreating it.\par
+{\pntext\f1\'B7\tab}SYNTAX: truncate table table_name;\par
+\pard\sa200\sl276\slmult1\b\fs28 Delete:\b0\fs22\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 The delete statement is used to remove one or more statements from the table with the help of where clause.\par
+{\pntext\f1\'B7\tab}The where clause is optional. If we don't mention where clause, the statement will delete all the records from the table.\par
+{\pntext\f1\'B7\tab}We can get back the data by using rollback clause when working with the delete statement.\par
+{\pntext\f1\'B7\tab}SYNTAX: delete from table_name; (or)\par
+{\pntext\f1\'B7\tab}Delete from table_name where condition; (This deletes the records based on the condition)\par
+\pard\sa200\sl276\slmult1\b\fs28 Q) Differences between char(),nchar(),varchar2()and varchar() \par
+CHAR ():\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\b0\fs22  The char data type stores fixed alphabets size. When you create a table of char data type column, the length must be between 1 and 255. The default size is 1 byte.\par
+{\pntext\f1\'B7\tab}  This data type has the fixed length i.e. during the time of creation if we mention the column size to be 20, while we insert or update the column in a row if the size of the user string is only 10 alphabets, char() occupies the remaining 10 bytes of space also.\par
+{\pntext\f1\'B7\tab} If we insert a value with blanks, the blanks are trimmed from the value to the fixed length.\par
+{\pntext\f1\'B7\tab} If the user enters a value more than the mentioned size(i.e. at the time of creation) Oracle throws an error.\par
+\pard\sa200\sl276\slmult1\b\fs28 VARCHAR 2():\b0\fs22\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 Varchar 2 data type stores variable-length character strings. When you create a table of varchar2 data type column, the length must be between 1 and 2000. \par
+{\pntext\f1\'B7\tab} This data type has variable-length i.e. during the time of creation if we mention the column size to be 50, while we insert or update the column in a row and however if the size of the user string is only 10 alphabets, varchar2() does not occupy the remaining unused 40 bytes of space. \par
+{\pntext\f1\'B7\tab}If the user enters a value more than the mentioned size(i.e. at the time of creation) Oracle throws an error.\par
+\pard\sa200\sl276\slmult1\b\fs28 VARCHAR():\b0\fs22\par
+The VARCHAR datatype is synonymous with the VARCHAR2 datatype. To avoid possible changes in behavior, always use the VARCHAR2 datatype to store variable-length character strings.\par
+\b\fs28 NCHAR():\b0\fs22\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 Nchar data type stores Unicode character data.  Nchar stores national character set and which must be in the Unicode specified format of AL16UTF16 or UTF8 .\par
+{\pntext\f1\'B7\tab}The NCHAR datatype stores fixed-length character strings that correspond to the national character set.\par
+{\pntext\f1\'B7\tab}The maximum size of nchar which can store characters is up to 2000 bytes.\par
+\pard\sa200\sl276\slmult1\b\fs28 Q) List of the different data types in Oracle database which was not covered in class.\par
+LONG:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\b0\fs22 Columns which are defined with data type LONG can store variable-length character data. The maximum size up to which it can hold the data is 2 GB.\par
+{\pntext\f1\'B7\tab}LONG data is text data that is to be appropriately converted when moving among different systems.\par
+{\pntext\f1\'B7\tab}Oracle suggests that use LOB column(CLOB, NCLOB) instead of LONG data type as they have fewer restrictions.\par
+\pard\sa200\sl276\slmult1\b\fs28 LOB (CLOB, NCLOB):\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\b0\fs22 LOB data type is used to store character data type. The size of up to which it can store the data is 8 terabytes.\par
+{\pntext\f1\'B7\tab}CLOB is used to store character data, whereas NCLOB is used to store national character set data.\par
+\pard\sa200\sl276\slmult1\b\fs28 FLOATING POINT NUMBERS:\par
+\b0\fs22 Oracle includes two floating point numbers.\par
+\pard{\pntext\f0 1.\tab}{\*\pn\pnlvlbody\pnf0\pnindent0\pnstart1\pndec{\pntxta.}}
+\fi-360\li720\sa200\sl276\slmult1 BINARY_FLOAT Datatype\par
+{\pntext\f0 2.\tab}BINARY_DOUBLE Datatype\par
+\pard\sa200\sl276\slmult1 The floating point numbers ensure the basic functionality which is provided by NUMBER. However, number data type uses decimal precision, while floating point numbers use binary precision. the advantage of floating point numbers is that it enables faster arithmetic calculations and reduces storage requirements.\par
+\b BINARY_FLOAT Datatype :\b0\par
+BINARY_FLOAT is a 32-bit, single-precision floating-point number datatype. Each BINARY_FLOAT value requires 5 bytes, including a length byte.\par
+\b BINARY_DOUBLE Datatype:\b0\par
+BINARY_DOUBLE is a 64-bit, double-precision floating-point number datatype. Each BINARY_DOUBLE value requires 9 bytes, including a length byte.\par
+\b\fs28 RAW AND LONG RAW:\b0\fs22\par
+These are the older version of the data types, which are now been replaced by a LOB. Their functionality is same as like LOB data type, but LOB has fewer restrictions over raw and long raw. These datatypes are intended for binary data or byte strings. For example, LONG RAW can be used to store graphics, sound, documents, or arrays of binary data. RAW is a variable-length datatype like the VARCHAR2 character datatype. When Oracle converts raw or long raw data to char data type, the binary data is represented in hexadecimal form. For example, Raw data with bits  11001011 is converted and entered as 'CB'.\par
+\b\fs28 ROWID AND UROWID:\b0\fs22\par
+\b\fs28 RowId:\b0\fs22\par
+Oracle database uses this datatype to store the addresses of every row in the database. It has two types.\par
+\fs28 Physical rowId: \fs22 store the addresses of rows in ordinary tables (excluding index-organized tables), clustered tables, table partitions and subpartitions, indexes, and index partitions and subpartitions.\par
+\fs28 Logical rowId:\fs22  store the addresses of rows in index-organized tables.\par
+\b\fs28 Urowid:\b0\fs22\par
+This data type supports both the physical and logical rowid.\par
+\b\fs28 XML :\b0\fs22\par
+This data type works same as like a user-defined data type. By using this data type we store the data in tables and views. This data type is highly useful for PL/SQL, Java,JDBC etc operations.\par
+\b\fs28 URI:\b0\fs22\par
+URI or uniform resource identifier is generally used to point or refer to some other part of the document or a link. By using this data type we can create columns which refer to the data inside or outside of the database.\par
+}
+ 

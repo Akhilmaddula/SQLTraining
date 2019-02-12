@@ -1,0 +1,680 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang16393{\fonttbl{\f0\froman\fprq2\fcharset0 Times New Roman;}{\f1\fnil\fcharset0 Calibri;}}
+{\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\lang1023\f0\fs24  \tab\tab\tab\tab\b\fs28 Flights Table\b0\fs24\par
+\b\fs28\par
+\b0\fs24 flights(fno: integer, from: string, to: string, distance: integer,departs: time, arrives: time, price: real)\par
+aircraft(aid: integer, aname: string, cruisingrange: integer)\par
+certifed(eid: integer, aid: integer)\par
+employees(eid: integer, ename: string, salary: integer)\par
+\par
+\b\i flights\par
+\b0\i0\par
+\trowd\trgaph10\trleft140\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx732\clvertalb\cellx2232\clvertalb\cellx4129\clvertalb\cellx5111\clvertalb\cellx6570\clvertalb\cellx8017\clvertalb\cellx9136\pard\intbl\qr 99\cell\pard\intbl los angeles\cell washington d.c.\cell\pard\intbl\qr 2308\cell 4/12/2005 9:30\cell 4/12/2005 21:40\cell 235.98\cell\row\trowd\trgaph10\trleft140\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx732\clvertalb\cellx2232\clvertalb\cellx4129\clvertalb\cellx5111\clvertalb\cellx6570\clvertalb\cellx8017\clvertalb\cellx9136\pard\intbl\qr 13\cell\pard\intbl los angeles\cell chicago\cell\pard\intbl\qr 1749\cell 4/12/2005 8:45\cell 4/12/2005 20:45\cell 220.98\cell\row\trowd\trgaph10\trleft140\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx732\clvertalb\cellx2232\clvertalb\cellx4129\clvertalb\cellx5111\clvertalb\cellx6570\clvertalb\cellx8017\clvertalb\cellx9136\pard\intbl\qr 346\cell\pard\intbl los angeles\cell dallas\cell\pard\intbl\qr 1251\cell 4/12/2005 11:50\cell 4/12/2005 19:05\cell 225.43\cell\row\trowd\trgaph10\trleft140\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx732\clvertalb\cellx2232\clvertalb\cellx4129\clvertalb\cellx5111\clvertalb\cellx6570\clvertalb\cellx8017\clvertalb\cellx9136\pard\intbl\qr 387\cell\pard\intbl los angeles\cell boston\cell\pard\intbl\qr 2606\cell 4/12/2005 7:03\cell 04/12/05 17:03\cell 261.56\cell\row\trowd\trgaph10\trleft140\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx732\clvertalb\cellx2232\clvertalb\cellx4129\clvertalb\cellx5111\clvertalb\cellx6570\clvertalb\cellx8017\clvertalb\cellx9136\pard\intbl\qr 7\cell\pard\intbl los angeles\cell sydney\cell\pard\intbl\qr 7487\cell 4/12/2005 22:30\cell 4/14/2005 6:10\cell 1278.56\cell\row\trowd\trgaph10\trleft140\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx732\clvertalb\cellx2232\clvertalb\cellx4129\clvertalb\cellx5111\clvertalb\cellx6570\clvertalb\cellx8017\clvertalb\cellx9136\pard\intbl\qr 2\cell\pard\intbl los angeles\cell tokyo\cell\pard\intbl\qr 5478\cell 4/12/2005 12:30\cell 4/13/2005 15:55\cell 780.99\cell\row\trowd\trgaph10\trleft140\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx732\clvertalb\cellx2232\clvertalb\cellx4129\clvertalb\cellx5111\clvertalb\cellx6570\clvertalb\cellx8017\clvertalb\cellx9136\pard\intbl\qr 33\cell\pard\intbl los angeles\cell honolulu\cell\pard\intbl\qr 2551\cell 4/12/2005 9:15\cell 4/12/2005 11:15\cell 375.23\cell\row\trowd\trgaph10\trleft140\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx732\clvertalb\cellx2232\clvertalb\cellx4129\clvertalb\cellx5111\clvertalb\cellx6570\clvertalb\cellx8017\clvertalb\cellx9136\pard\intbl\qr 34\cell\pard\intbl los angeles\cell honolulu\cell\pard\intbl\qr 2551\cell 4/12/2005 12:45\cell 4/12/2005 15:18\cell 425.98\cell\row\trowd\trgaph10\trleft140\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx732\clvertalb\cellx2232\clvertalb\cellx4129\clvertalb\cellx5111\clvertalb\cellx6570\clvertalb\cellx8017\clvertalb\cellx9136\pard\intbl\qr 76\cell\pard\intbl chicago\cell los angeles\cell\pard\intbl\qr 1749\cell 4/12/2005 8:32\cell 4/12/2005 10:03\cell 220.98\cell\row\trowd\trgaph10\trleft140\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx732\clvertalb\cellx2232\clvertalb\cellx4129\clvertalb\cellx5111\clvertalb\cellx6570\clvertalb\cellx8017\clvertalb\cellx9136\pard\intbl\qr 68\cell\pard\intbl chicago\cell new york\cell\pard\intbl\qr 802\cell 4/12/2005 9:00\cell 4/12/2005 12:02\cell 202.45\cell\row\trowd\trgaph10\trleft140\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx732\clvertalb\cellx2232\clvertalb\cellx4129\clvertalb\cellx5111\clvertalb\cellx6570\clvertalb\cellx8017\clvertalb\cellx9136\pard\intbl\qr 7789\cell\pard\intbl madison\cell detroit\cell\pard\intbl\qr 319\cell 4/12/2005 6:15\cell 4/12/2005 8:19\cell 120.33\cell\row\trowd\trgaph10\trleft140\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx732\clvertalb\cellx2232\clvertalb\cellx4129\clvertalb\cellx5111\clvertalb\cellx6570\clvertalb\cellx8017\clvertalb\cellx9136\pard\intbl\qr 701\cell\pard\intbl detroit\cell new york\cell\pard\intbl\qr 470\cell 4/12/2005 8:55\cell 4/12/2005 10:26\cell 180.56\cell\row\trowd\trgaph10\trleft140\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx732\clvertalb\cellx2232\clvertalb\cellx4129\clvertalb\cellx5111\clvertalb\cellx6570\clvertalb\cellx8017\clvertalb\cellx9136\pard\intbl\qr 702\cell\pard\intbl madison\cell new york\cell\pard\intbl\qr 789\cell 4/12/2005 7:05\cell 4/12/2005 10:12\cell 202.34\cell\row\trowd\trgaph10\trleft140\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx732\clvertalb\cellx2232\clvertalb\cellx4129\clvertalb\cellx5111\clvertalb\cellx6570\clvertalb\cellx8017\clvertalb\cellx9136\pard\intbl\qr 4884\cell\pard\intbl madison\cell chicago\cell\pard\intbl\qr 84\cell 4/12/2005 22:12\cell 4/12/2005 23:02\cell 112.45\cell\row\trowd\trgaph10\trleft140\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx732\clvertalb\cellx2232\clvertalb\cellx4129\clvertalb\cellx5111\clvertalb\cellx6570\clvertalb\cellx8017\clvertalb\cellx9136\pard\intbl\qr 2223\cell\pard\intbl madison\cell pittsburgh\cell\pard\intbl\qr 517\cell 4/12/2005 8:02\cell 4/12/2005 10:01\cell 189.98\cell\row\trowd\trgaph10\trleft140\trrh525\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx732\clvertalb\cellx2232\clvertalb\cellx4129\clvertalb\cellx5111\clvertalb\cellx6570\clvertalb\cellx8017\clvertalb\cellx9136\pard\intbl\qr 5694\cell\pard\intbl madison\cell minneapolis\cell\pard\intbl\qr 247\cell 4/12/2005 8:32\cell 4/12/2005 9:33\cell 120.11\cell\row\trowd\trgaph10\trleft140\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx732\clvertalb\cellx2232\clvertalb\cellx4129\clvertalb\cellx5111\clvertalb\cellx6570\clvertalb\cellx8017\clvertalb\cellx9136\pard\intbl\qr 304\cell\pard\intbl minneapolis\cell new york\cell\pard\intbl\qr 991\cell 4/12/2005 10:00\cell 4/12/2005 1:39\cell 101.56\cell\row\trowd\trgaph10\trleft140\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx732\clvertalb\cellx2232\clvertalb\cellx4129\clvertalb\cellx5111\clvertalb\cellx6570\clvertalb\cellx8017\clvertalb\cellx9136\pard\intbl\qr 149\cell\pard\intbl pittsburgh\cell new york\cell\pard\intbl\qr 303\cell 4/12/2005 9:42\cell 4/12/2005 12:09\cell 116.5\cell\row\pard\par
+\par
+\par
+\par
+aircraft(aid: integer, aname: string, cruisingrange: integer)\par
+\par
+\trowd\trgaph10\trleft301\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx1243\clvertalb\cellx3588\clvertalb\cellx4497\pard\intbl\qr\b\par
+\par
+\b0 1\cell\pard\intbl\i boeing 747-400\cell\pard\intbl\qr\i0 8430\cell\row\trowd\trgaph10\trleft301\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx1243\clvertalb\cellx3588\clvertalb\cellx4497\pard\intbl\qr 2\cell\pard\intbl\i boeing 737-800\cell\pard\intbl\qr\i0 3383\cell\row\trowd\trgaph10\trleft301\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx1243\clvertalb\cellx3588\clvertalb\cellx4497\pard\intbl\qr 3\cell\pard\intbl\i airbus a340-300\cell\pard\intbl\qr\i0 7120\cell\row\trowd\trgaph10\trleft301\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx1243\clvertalb\cellx3588\clvertalb\cellx4497\pard\intbl\qr 4\cell\pard\intbl\i british aerospace jetstream 41\cell\pard\intbl\qr\i0 1502\cell\row\trowd\trgaph10\trleft301\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx1243\clvertalb\cellx3588\clvertalb\cellx4497\pard\intbl\qr 5\cell\pard\intbl\i embraer erj-145\cell\pard\intbl\qr\i0 1530\cell\row\trowd\trgaph10\trleft301\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx1243\clvertalb\cellx3588\clvertalb\cellx4497\pard\intbl\qr 6\cell\pard\intbl\i saab 340\cell\pard\intbl\qr\i0 2128\cell\row\trowd\trgaph10\trleft301\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx1243\clvertalb\cellx3588\clvertalb\cellx4497\pard\intbl\qr 7\cell\pard\intbl\i piper archer iii\cell\pard\intbl\qr\i0 520\cell\row\trowd\trgaph10\trleft301\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx1243\clvertalb\cellx3588\clvertalb\cellx4497\pard\intbl\qr 8\cell\pard\intbl\i tupolev 154\cell\pard\intbl\qr\i0 4103\cell\row\trowd\trgaph10\trleft301\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx1243\clvertalb\cellx3588\clvertalb\cellx4497\pard\intbl\qr 16\cell\pard\intbl\i schwitzer 2-33\cell\pard\intbl\qr\i0 30\cell\row\trowd\trgaph10\trleft301\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx1243\clvertalb\cellx3588\clvertalb\cellx4497\pard\intbl\qr 9\cell\pard\intbl\i lockheed l1011\cell\pard\intbl\qr\i0 6900\cell\row\trowd\trgaph10\trleft301\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx1243\clvertalb\cellx3588\clvertalb\cellx4497\pard\intbl\qr 10\cell\pard\intbl\i boeing 757-300\cell\pard\intbl\qr\i0 4010\cell\row\trowd\trgaph10\trleft301\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx1243\clvertalb\cellx3588\clvertalb\cellx4497\pard\intbl\qr 11\cell\pard\intbl\i boeing 777-300\cell\pard\intbl\qr\i0 6441\cell\row\trowd\trgaph10\trleft301\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx1243\clvertalb\cellx3588\clvertalb\cellx4497\pard\intbl\qr 12\cell\pard\intbl\i boeing 767-400er\cell\pard\intbl\qr\i0 6475\cell\row\trowd\trgaph10\trleft301\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx1243\clvertalb\cellx3588\clvertalb\cellx4497\pard\intbl\qr 13\cell\pard\intbl\i airbus a320\cell\pard\intbl\qr\i0 2605\cell\row\trowd\trgaph10\trleft301\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx1243\clvertalb\cellx3588\clvertalb\cellx4497\pard\intbl\qr 14\cell\pard\intbl\i airbus a319\cell\pard\intbl\qr\i0 1805\cell\row\trowd\trgaph10\trleft301\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx1243\clvertalb\cellx3588\clvertalb\cellx4497\pard\intbl\qr 15\cell\pard\intbl\i boeing 727\cell\pard\intbl\qr\i0 1504\cell\row\pard\par
+\par
+\par
+\par
+\par
+\par
+\b Certified:\par
+\b0 certifed(eid: integer, aid: integer)\par
+\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx6168\clvertalb\cellx9628\pard\intbl\qr 567354612\cell 1\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx6168\clvertalb\cellx9628\pard\intbl\qr 567354612\cell 2\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx6168\clvertalb\cellx9628\pard\intbl\qr 567354612\cell 10\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx6168\clvertalb\cellx9628\pard\intbl\qr 552455318\cell 2\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx6168\clvertalb\cellx9628\pard\intbl\qr 552455318\cell 14\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx6168\clvertalb\cellx9628\pard\intbl\qr 550156548\cell 1\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx6168\clvertalb\cellx9628\pard\intbl\qr 550156548\cell 12\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx6168\clvertalb\cellx9628\pard\intbl\qr 390487451\cell 3\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx6168\clvertalb\cellx9628\pard\intbl\qr 390487451\cell 13\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx6168\clvertalb\cellx9628\pard\intbl\qr 274878974\cell 10\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx6168\clvertalb\cellx9628\pard\intbl\qr 274878974\cell 12\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx6168\clvertalb\cellx9628\pard\intbl\qr 269734834\cell 11\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx6168\clvertalb\cellx9628\pard\intbl\qr 269734834\cell 12\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx6168\clvertalb\cellx9628\pard\intbl\qr 556784565\cell 3\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx6168\clvertalb\cellx9628\pard\intbl\qr 242518965\cell 2\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx6168\clvertalb\cellx9628\pard\intbl\qr 242518965\cell 10\cell\row\pard\par
+\b\par
+employees(eid: integer, ename: string, salary: integer)\b0\par
+\b employees;\b0\par
+\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 242518965\cell\pard\intbl james smith\cell\pard\intbl\qr 120433\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 141582651\cell\pard\intbl mary johnson\cell\pard\intbl\qr 178345\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 11564812\cell\pard\intbl john williams\cell\pard\intbl\qr 153972\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 567354612\cell\pard\intbl lisa walker\cell\pard\intbl\qr 256481\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 552455318\cell\pard\intbl larry west\cell\pard\intbl\qr 101745\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 550156548\cell\pard\intbl karen scott\cell\pard\intbl\qr 205187\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 390487451\cell\pard\intbl lawrence sperry\cell\pard\intbl\qr 212156\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 274878974\cell\pard\intbl michael miller\cell\pard\intbl\qr 99890\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 254099823\cell\pard\intbl patricia jones\cell\pard\intbl\qr 24450\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 356187925\cell\pard\intbl robert brown\cell\pard\intbl\qr 44740\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 355548984\cell\pard\intbl angela martinez\cell\pard\intbl\qr 212156\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 310454876\cell\pard\intbl joseph thompson\cell\pard\intbl\qr 212156\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 489456522\cell\pard\intbl linda davis\cell\pard\intbl\qr 127984\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 489221823\cell\pard\intbl richard jackson\cell\pard\intbl\qr 23980\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 548977562\cell\pard\intbl william ward\cell\pard\intbl\qr 84476\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 310454877\cell\pard\intbl chad stewart\cell\pard\intbl\qr 33546\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 142519864\cell\pard\intbl betty adams\cell\pard\intbl\qr 227489\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 269734834\cell\pard\intbl george wright\cell\pard\intbl\qr 289950\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 287321212\cell\pard\intbl michael miller\cell\pard\intbl\qr 48090\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 552455348\cell\pard\intbl dorthy lewis\cell\pard\intbl\qr 92013\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 248965255\cell\pard\intbl barbara wilson\cell\pard\intbl\qr 43723\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 159542516\cell\pard\intbl william moore\cell\pard\intbl\qr 48250\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 348121549\cell\pard\intbl haywood kelly\cell\pard\intbl\qr 32899\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 90873519\cell\pard\intbl elizabeth taylor\cell\pard\intbl\qr 32021\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 486512566\cell\pard\intbl david anderson\cell\pard\intbl\qr 743001\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 619023588\cell\pard\intbl jennifer thomas\cell\pard\intbl\qr 54921\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 15645489\cell\pard\intbl donald king\cell\pard\intbl\qr 18050\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 556784565\cell\pard\intbl mark young\cell\pard\intbl\qr 205187\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 573284895\cell\pard\intbl eric cooper\cell\pard\intbl\qr 114323\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 574489456\cell\pard\intbl william jones\cell\pard\intbl\qr 105743\cell\row\trowd\trgaph10\trleft-25\trrh300\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\cellx3283\clvertalb\cellx7322\clvertalb\cellx9628\pard\intbl\qr 574489457\cell\pard\intbl milo brooks\cell\pard\intbl\qr 20\cell\row\pard\par
+\b\par
+\b0 1. find the names of aircraft such that all pilots certified to operate them have salaries more than $80,000.\par
+\par
+A -SELECT A.ANAME,E.ENAME,E.SALARY,C.AID FROM AIRCRAFT A,CERTIFIED C,EMPLOYEES E WHERE E.EID=C.EID AND C.AID=A.AID AND E.SALARY>80000;\par
+\par
+\par
+ANAME ENAME SALARY\par
+\par
+------------------------------ ------------------------------ ----------\par
+\par
+AID\par
+\par
+----------\par
+\par
+BOEING 747-400 lisa walker 256481\par
+\par
+1\par
+\par
+BOEING 737-800 lisa walker 256481\par
+\par
+2\par
+\par
+boeing 757-300 lisa walker 256481\par
+\par
+10\par
+\par
+ANAME ENAME SALARY\par
+\par
+------------------------------ ------------------------------ ----------\par
+\par
+AID\par
+\par
+----------\par
+\par
+BOEING 737-800 larry west 101745\par
+\par
+2\par
+\par
+airbus a319 larry west 101745\par
+\par
+14\par
+\par
+BOEING 747-400 karen scott 205187\par
+\par
+1\par
+\par
+ANAME ENAME SALARY\par
+\par
+------------------------------ ------------------------------ ----------\par
+\par
+AID\par
+\par
+----------\par
+\par
+boeing 767-400er karen scott 205187\par
+\par
+12\par
+\par
+AIRBUS A340-300 lawrence sperry 212156\par
+\par
+3\par
+\par
+airbus a320 lawrence sperry 212156\par
+\par
+13\par
+\par
+ANAME ENAME SALARY\par
+\par
+------------------------------ ------------------------------ ----------\par
+\par
+AID\par
+\par
+----------\par
+\par
+boeing 757-300 michael miller 99890\par
+\par
+10\par
+\par
+boeing 767-400er michael miller 99890\par
+\par
+12\par
+\par
+boeing 777-300 george wright 289950\par
+\par
+11\par
+\par
+ANAME ENAME SALARY\par
+\par
+------------------------------ ------------------------------ ----------\par
+\par
+AID\par
+\par
+----------\par
+\par
+boeing 767-400er george wright 289950\par
+\par
+12\par
+\par
+AIRBUS A340-300 mark young 205187\par
+\par
+3\par
+\par
+BOEING 737-800 mark young 205187\par
+\par
+2\par
+\par
+ANAME ENAME SALARY\par
+\par
+------------------------------ ------------------------------ ----------\par
+\par
+AID\par
+\par
+----------\par
+\par
+boeing 757-300 james smith 120433\par
+\par
+10\par
+\par
+16 rows selected.\par
+\par
+2. for each pilot who is certified for more than three aircraft, find the eid and the maximum cruising range of the aircraft for which she or he is certified.\par
+\par
+A -SELECT C.EID,A.CRUISINGRANGE FROM CERTIFIED C,AIRCRAFT A WHERE A.AID=C.AID AND C.EID IN(SELECT C.EID FROM CERTIFIED C GROUP BY C.EID HAVING COUNT(C.AID)>3);\par
+\par
+\par
+no rows selected\par
+\par
+3. find the names of pilots whose salary is less than the price of the cheapest route from los angeles to honolulu.\par
+\par
+A -SELECT ENAME FROM EMPLOYEES WHERE SALARY<(SELECT MIN(PRICE) FROM\par
+\par
+FLIGHTS WHERE F_FROM='LOS ANGELES' AND F_TO='HONOLULU');\par
+\par
+\par
+ENAME\par
+\par
+------------------------------\par
+\par
+milo brooks\par
+\par
+4. for all aircraft with cruising range over 1000 miles, find the name of the aircraft and the average salary of all pilots certified for this aircraft.\par
+\par
+A -SELECT A.ANAME ,A.CRUISINGRANGE,AVG_SAL FROM AIRCRAFT A JOIN (SELECT C.AID AS A_ID, AVG(E.SALARY) AS AVG_SAL FROM EMPLOYEES E,CERTIFIED C WHERE E.EID=C.EID GROUP BY C.AID) X ON A.AID=X.A_ID WHERE CRUISINGRANGE>1000;\par
+\par
+\par
+ANAME CRUISINGRANGE AVG_SAL\par
+\par
+------------------------------ ------------- ----------\par
+\par
+airbus a319 1805 101745\par
+\par
+airbus a320 2605 212156\par
+\par
+boeing 777-300 6441 289950\par
+\par
+AIRBUS A340-300 7120 208671.5\par
+\par
+boeing 757-300 4010 158934.667\par
+\par
+boeing 767-400er 6475 198342.333\par
+\par
+BOEING 737-800 3383 187804.333\par
+\par
+BOEING 747-400 8430 230834\par
+\par
+8 rows selected.\par
+\par
+5. find the names of pilots certified for some boeing aircraft.\par
+\par
+A -SELECT E.ENAME FROM EMPLOYEES E,AIRCRAFT A,CERTIFIED C WHERE A.AID=C.AID AND E.EID=C.EID AND A.ANAME LIKE 'BOEING%';\par
+\par
+\par
+ENAME\par
+\par
+------------------------------\par
+\par
+lisa walker\par
+\par
+lisa walker\par
+\par
+larry west\par
+\par
+karen scott\par
+\par
+mark young\par
+\par
+6. find the aids of all aircraft that can be used on routes from los angeles to chicago.\par
+\par
+A-SELECT AID FROM AIRCRAFT WHERE CRUISINGRANGE>(SELECT DISTANCE FROM FLIGHTS WHERE F_FROM='LOS ANGELES' AND F_TO='CHICAGO');\par
+\par
+\par
+AID\par
+\par
+----------\par
+\par
+1\par
+\par
+2\par
+\par
+3\par
+\par
+6\par
+\par
+8\par
+\par
+9\par
+\par
+10\par
+\par
+11\par
+\par
+12\par
+\par
+13\par
+\par
+14\par
+\par
+11 rows selected.\par
+\par
+7. identify the routes that can be piloted by every pilot who makes more than $100,000.\par
+\par
+A -SELECT F_FROM,F_TO FROM FLIGHTS WHERE DISTANCE<=(SELECT MIN(CRUISINGRANGE) FROM AIRCRAFT WHERE AID IN(SELECT AID FROM CERTIFIED WHERE EID IN(SELECT EID FROM EMPLOYEES WHERE SALARY>100000)));\par
+\par
+\par
+F_FROM F_TO\par
+\par
+------------------------------ ------------------------------\par
+\par
+LOS ANGELES CHICAGO\par
+\par
+LOS ANGELES DALLAS\par
+\par
+CHICAGO LOS ANGELES\par
+\par
+CHICAGO NEW YORK\par
+\par
+MADISON DETROIT\par
+\par
+DETROIT NEWYORK\par
+\par
+MADISON NEWYORK\par
+\par
+MADISON CHICAGO\par
+\par
+MADISON PITTSBURGH\par
+\par
+MADISON MINNEAPOLIS\par
+\par
+MINNEAPOLIS NEW YORK\par
+\par
+F_FROM F_TO\par
+\par
+------------------------------ ------------------------------\par
+\par
+PITTSBURGH NEW YORK\par
+\par
+12 rows selected.\par
+\par
+8. print the enames of pilots who can operate planes with cruisingrange greater than 3000 miles but are not certified on any boeing aircraft.\par
+\par
+A-SELECT E.ENAME ,A.AID FROM EMPLOYEES E,CERTIFIED C,AIRCRAFT A WHERE A.AID=C.AID AND E.EID=C.EID AND A.ANAME IN(SELECT ANAME FROM AIRCRAFT WHERE CRUISINGRANGE>3000 AND lower(ANAME) NOT LIKE 'boeing%');\par
+\par
+\par
+ENAME AID\par
+\par
+------------------------------ ----------\par
+\par
+mark young 3\par
+\par
+lawrence sperry 3\par
+\par
+9. a customer wants to travel from madison to new york with no more than two changes of flight. list the choice of departure times from madison if the customer wants to arrive in new york by 6 p.m.\par
+\par
+ANS-\par
+\par
+\par
+10. compute the deference between the average salary of a pilot and the average salary of all employees (including pilots).\par
+\par
+A -SELECT ((SELECT AVG(E.SALARY) FROM EMPLOYEES E ,CERTIFIED C WHERE E.EID=C.EID)-(SELECT AVG(SALARY) FROM EMPLOYEES)) AS DIFFERENCE FROM DUAL;\par
+\par
+\par
+DIFFERENCE\par
+\par
+----------\par
+\par
+59702.825\par
+\par
+11. print the name and salary of every nonpilot whose salary is more than the average salary for pilots.\par
+\par
+A- SELECT ENAME ,SALARY FROM EMPLOYEES WHERE EID NOT IN(SELECT EID FROM CERTIFIED) AND SALARY>(SELECT AVG(SALARY) FROM EMPLOYEES E,CERTIFIED C WHERE E.EID=C.EID);\par
+\par
+ENAME SALARY\par
+\par
+------------------------------ ----------\par
+\par
+angela martinez 212156\par
+\par
+betty adams 227489\par
+\par
+joseph thompson 212156\par
+\par
+david anderson 743001\b\tab\par
+\pard\fi-360\li360\b0 12.\tab print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles.\par
+A: SQL> select ename from employees where eid in(select eid from certified where aid in(select aid from certified where aid in(select aid from aircraft where cruisingrange>1000)));\par
+\par
+ENAME                                                                           \par
+--------------------------------------------------                              \par
+lisa walker                                                                     \par
+larry west                                                                      \par
+karen scott                                                                     \par
+lawrence sperry                                                                 \par
+michael miller                                                                  \par
+george wright                                                                   \par
+mark young                                                                      \par
+james smith                                                                     \par
+\par
+8 rows selected.\par
+\pard\b\par
+\pard\fi-360\li360\b0 13.\tab print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles, but on at least two such aircrafts.\par
+A: SQL> SELECT E.ENAME FROM EMPLOYEES E,AIRCRAFT A,CERTIFIED C WHERE A.AID=C.AID AND C.EID=E.EID AND A.CRUISINGRANGE>1000 GROUP BY E.ENAME HAVING COUNT(A.AID)>=2;\par
+\par
+ENAME                                                                           \par
+--------------------------------------------------                              \par
+george wright                                                                   \par
+karen scott                                                                     \par
+michael miller                                                                  \par
+lisa walker                                                                     \par
+lawrence sperry                                                                 \par
+larry west                                                                      \par
+james smith                                                                     \par
+\par
+7 rows selected.\par
+\pard\b\par
+\pard\fi-360\li360\b0 14.\tab print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles and who are certified on some boeing aircraft.\par
+A: SQL> select distinct  e.ename from employees e,aircraft a,certified c where a.aid=c.aid and c.eid=e.eid and a.cruisingrange>1000 and aname like 'boeing%';\par
+\par
+ENAME                                                                           \par
+--------------------------------------------------                              \par
+george wright                                                                   \par
+karen scott                                                                     \par
+michael miller                                                                  \par
+lisa walker                                                                     \par
+larry west                                                                      \par
+james smith                                                                     \par
+\par
+6 rows selected.\par
+\pard\b\par
+\b0\par
+\pard\fi-360\li360 15.\tab find the eids of pilots certified for some boeing aircraft.\par
+A: SQL> select eid from employees where eid in(select eid from certified where aid in(select aid from aircraft where aname like 'boeing%'));\par
+\par
+       EID                                                                      \par
+----------                                                                      \par
+ 567354612                                                                      \par
+ 552455318                                                                      \par
+ 550156548                                                                      \par
+ 274878974                                                                      \par
+ 269734834                                                                      \par
+ 242518965                                                                      \par
+\par
+6 rows selected.\par
+\pard\b\par
+\pard\fi-360\li360\b0 16.\tab find the names of pilots certified for some boeing aircraft.\par
+A: SQL> select ename from employees where eid in(select eid from certified where aid in(select aid from aircraft where aname like 'boeing%'));\par
+\par
+ENAME                                                                           \par
+--------------------------------------------------                              \par
+lisa walker                                                                     \par
+larry west                                                                      \par
+karen scott                                                                     \par
+michael miller                                                                  \par
+george wright                                                                   \par
+james smith                                                                     \par
+\par
+6 rows selected.\par
+\pard\b\par
+\pard\fi-360\li360\b0 17.\tab find the aids of all aircraft that can be used on non-stop flights from bonn to madras.\par
+\pard\b A: \b0 SQL> select aid from aircraft where cruisingrange=(select distance from flights where f_from='bonn' and f_to='madras');\par
+\par
+no rows selected\par
+\par
+\pard\fi-360\li360 18.\tab identify the  flights that can be piloted by every pilot whose salary is more than $100,000.\par
+A: SQL> select aname from aircraft where aid in(select aid from certified where eid in(select eid from employees where salary>100000));\par
+\par
+ANAME                                                                           \par
+--------------------------------------------------                              \par
+boeing 747-400                                                                  \par
+boeing 737-800                                                                  \par
+boeing 757-300                                                                  \par
+airbus a319                                                                     \par
+boeing 767-400er                                                                \par
+airbus a340-300                                                                 \par
+airbus a320                                                                     \par
+boeing 777-300                                                                  \par
+\par
+8 rows selected.\par
+\pard\b\par
+\pard\fi-360\li360\b0 19.\tab find the names of pilots who can operate planes with a range greater than 3,000 miles but are not credited on any boeing aircraft.\par
+\par
+A:SQL> select ename from employees where eid in(select eid from certified where aid in(select aid from aircraft where cruisingrange>3000 and aname not like 'boeing%'));\par
+\par
+ENAME                                                                           \par
+--------------------------------------------------                              \par
+lawrence sperry                                                                 \par
+mark young                 \par
+\pard\b\par
+\pard\fi-360\li360\b0 20.\tab find the eids of employees who make the highest salary.\par
+A: \par
+SQL> select eid from employees where salary=(select max(salary) from employees);\par
+\par
+       EID                                                                      \par
+----------                                                                      \par
+ 486512566     \par
+\pard\b\tab\par
+\pard\fi-360\li360\b0 21.\tab find the eids of employees who make the second highest salary.\par
+\pard A: \par
+\par
+\pard\fi-360\li360 22.\tab find the eids of employees who are credited for the largest number of aircraft.\par
+A: SQL> select eid from certified group by eid having count(aid)=(select max(count(aid)) from certified group by aid);\par
+\par
+       EID                                                                      \par
+----------                                                                      \par
+ 567354612   \par
+\pard\b\par
+\pard\fi-360\li360\b0 23.\tab find the eids of employees who are credited for exactly three aircraft.\par
+A: SQL> select eid from certified group by eid having count(aid)=3;\par
+\par
+       EID                                                                      \par
+----------                                                                      \par
+ 567354612        \par
+\pard\b\tab\par
+\pard\fi-360\li360\b0 24.\tab find the total amount paid to employees as salaries.\par
+A: SQL> select sum(salary) from employees;\par
+\par
+SUM(SALARY)                                                                     \par
+-----------                                                                     \par
+    4113831      \par
+\pard\b\tab\par
+\pard\fi-360\li360\b0 25.\tab create a sequence\par
+\b A: \b0 SQL> create sequence employee_seq minvalue 1 start with 1 increment by 1;\par
+\par
+Sequence created.\b\par
+\b0 26.\tab add a column age to the employees table.\par
+A:SQL> alter table employees add  age number(10);\par
+\par
+Table altered.\par
+\par
+SQL> desc employees;\par
+ Name                                      Null?    Type\par
+ ----------------------------------------- -------- ----------------------------\par
+ EID                                                NUMBER(20)\par
+ ENAME                                              VARCHAR2(50)\par
+ SALARY                                             NUMBER(20)\par
+ AGE                                                NUMBER(10)\par
+\pard\b\tab\par
+\pard\fi-360\li360\b0 27.\tab change the primary key column on flights table from fno to fno and departs column (composite).\par
+A:SQL> alter table flights add constraint pk_flights primary key(fno,departs);\par
+\par
+Table altered.\par
+\pard\tab\par
+\pard\fi-360\li360 28.\tab add a not null column sex to the employee table with default value as \lquote m\rquote .\par
+A: SQL> alter table employees add sex varchar(10) default 'm';\par
+\par
+Table altered.\par
+\pard\b\tab\par
+\pard\fi-360\li360\b0 29.\tab create a view as flights_v1 with fname , from columns\par
+A: SQL> create view flights_v1 as select fno,f_from,f_to from flights;\par
+\par
+View created.\par
+\par
+SQL> select * from flights_v1;\par
+\par
+       FNO F_FROM                         F_TO                                  \par
+---------- ------------------------------ --------------------                  \par
+        99 LOS ANGELES                    washington d.c.                       \par
+        13 LOS ANGELES                    CHICAGO                               \par
+       346 LOS ANGELES                    dallas                                \par
+       387 LOS ANGELES                    boston                                \par
+         7 LOS ANGELES                    sydney                                \par
+         2 LOS ANGELES                    tokyo                                 \par
+        33 LOS ANGELES                    honolulu                              \par
+        34 LOS ANGELES                    honolulu                              \par
+        76 chicago                        los angeles                           \par
+        76 chicago                        new york                              \par
+      7789 madison                        detroit                               \par
+\par
+       FNO F_FROM                         F_TO                                  \par
+---------- ------------------------------ --------------------                  \par
+       701 detroit                        new york                              \par
+       702 madison                        new york                              \par
+      4884 madison                        chicago                               \par
+      2223 madison                        pittsburgh                            \par
+      5694 madison                        minneapolis                           \par
+       304 minneapolis                    new york                              \par
+       149 pittsburgh                     new york                              \par
+\par
+18 rows selected.\par
+\pard\b\tab\par
+\pard\fi-360\li360\b0 30.\tab create a index on aname of aircraft table.\par
+A: SQL> create index aname_index on aircraft(aname);\par
+\par
+Index created.\par
+\pard\tab\par
+\pard\fi-360\li360 31.\tab  \lang255 display the manager names.\par
+A: SQL> select ename from emp where job='MANAGER';\par
+\par
+ENAME                                                                           \par
+----------                                                                      \par
+JONES                                                                           \par
+BLAKE                                                                           \par
+CLARK                                                                           \lang1023\par
+\pard\par
+\pard\fi-360\li360 32.\tab  \lang255 display the names of employees who earn  highest salaries respective departments.\lang1023\par
+\pard A: SQL> select ename,deptno from emp where sal in(select max(sal) from emp group by deptno);\par
+\par
+ENAME          DEPTNO                                                           \par
+---------- ----------                                                           \par
+BLAKE              30                                                           \par
+SCOTT              20                                                           \par
+KING               10                                                           \par
+FORD               20                                                           \par
+kk                  2                                                           \par
+\par
+\pard\fi-360\li360 33.\tab\lang255 display the employees whose manager is jones and display manager name also in result. \par
+A: SQL> SELECT ename,(select ENAME from emp where empno=(select empno from emp where ename='JONES')) AS MAANAGER from emp where mgr=(select empno from emp where ename='JONES');\par
+\par
+ENAME      MAANAGER                                                             \par
+---------- ----------                                                           \par
+SCOTT      JONES                                                                \par
+FORD       JONES                                                                \lang1023\par
+\pard\par
+\pard\fi-360\li360 34.\tab  display the all employees information(name, job , his manager) , if employee dont have a manager then display his manager information as no manager.\par
+A: SQL> SELECT A.EMPNO,A.ENAME,B.ENAME,B.EMPNO FROM EMP A,EMP B WHERE A.MGR=B.EMPNO UNION SELECT EMPNO,ENAME,'NO_MANAGER',00 FROM EMP WHERE MGR IS NULL;\par
+\par
+     EMPNO ENAME      ENAME           EMPNO                                     \par
+---------- ---------- ---------- ----------                                     \par
+      1200 priya      NO_MANAGER          0                                     \par
+      7499 alias      BLAKE            7698                                     \par
+      7521 WARD       BLAKE            7698                                     \par
+      7566 JONES      KING             7839                                     \par
+      7654 MARTIN     BLAKE            7698                                     \par
+      7698 BLAKE      KING             7839                                     \par
+      7782 CLARK      KING             7839                                     \par
+      7788 SCOTT      JONES            7566                                     \par
+      7839 KING       NO_MANAGER          0                                     \par
+      7844 TURNER     BLAKE            7698                                     \par
+      7876 ADAMS      SCOTT            7788                                     \par
+\par
+     EMPNO ENAME      ENAME           EMPNO                                     \par
+---------- ---------- ---------- ----------                                     \par
+      7900 JAMES      BLAKE            7698                                     \par
+      7902 FORD       JONES            7566                                     \par
+      7934 MILLER     CLARK            7782                                     \par
+\par
+14 rows selected.\par
+\pard\b\par
+\pard\fi-360\li360\b0 35.\tab   display employee name,dept name,salary,and commission for those sal in between 2000 to 5000 while location is chicago.\par
+\pard\b\par
+\b0\tab note: note use emp  , dept , salgrade  tables for 31 to 35.\par
+A: SQL> SELECT e.ENAME,d.dname,e.sal,nvl(e.comm,0) from emp e, dept d where e.deptno=d.deptno and e.sal between 2000 and 5000 and d.loc='CHICAGO';\par
+\par
+ENAME      DNAME                 SAL NVL(E.COMM,0)                              \par
+---------- -------------- ---------- -------------                              \par
+BLAKE      SALES                2850             0                              \par
+\b\par
+\pard\sa200\sl276\slmult1\lang9\b0\f1\fs22\par
+}
+ 

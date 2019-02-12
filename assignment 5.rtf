@@ -1,0 +1,728 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang16393{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\b\f0\fs28                           \fs32 ASSIGNMENT-5\par
+\fs24 1)\tab Display the all  details of  Driver , Car , Accident ,  Claim_insurance ( Use individual Statements)\par
+A: \b0 SQL> select * from driver;\par
+\par
+DRIVER_LICENSE_ID NAME                                                          \par
+----------------- --------------------------------------------------            \par
+ADDRESS                                                   AGE                   \par
+-------------------------------------------------- ----------                   \par
+             1001 Peter                                                         \par
+Newyork                                                    30                   \par
+                                                                                \par
+             1002 John                                                          \par
+Boston                                                     26                   \par
+                                                                                \par
+             1003 Clark                                                         \par
+Omaha                                                      29                   \par
+                                                                                \par
+\par
+DRIVER_LICENSE_ID NAME                                                          \par
+----------------- --------------------------------------------------            \par
+ADDRESS                                                   AGE                   \par
+-------------------------------------------------- ----------                   \par
+             1004 Steve                                                         \par
+Denver                                                     25                   \par
+                                                                                \par
+             1005 Johnson                                                       \par
+Boston                                                     36                   \par
+                                                                                \par
+             1006 Williams                                                      \par
+Omaha                                                      39                   \par
+                                                                                \par
+\par
+DRIVER_LICENSE_ID NAME                                                          \par
+----------------- --------------------------------------------------            \par
+ADDRESS                                                   AGE                   \par
+-------------------------------------------------- ----------                   \par
+             1007 Davis                                                         \par
+California                                                 19                   \par
+                                                                                \par
+             1008 James                                                         \par
+Dallas                                                     21                   \par
+                                                                                \par
+             1009 Robert                                                        \par
+Newyork                                                    29                   \par
+                                                                                \par
+\par
+DRIVER_LICENSE_ID NAME                                                          \par
+----------------- --------------------------------------------------            \par
+ADDRESS                                                   AGE                   \par
+-------------------------------------------------- ----------                   \par
+             1010 Martin                                                        \par
+California                                                 32                   \par
+                                                                                \par
+\par
+10 rows selected.\par
+\par
+SQL> select * from car;\par
+\par
+   REG_NUM       YEAR CAR_MODEL                                                 \par
+---------- ---------- --------------------------------------------------        \par
+       201       1998 Maruti800                                                 \par
+       202       2005 Tata Indica                                               \par
+       203       2010 Maruti Swift                                              \par
+       204       2011 Mercedes Benz                                             \par
+       205       2003 Alto                                                      \par
+       206       2006 Toyota Innova                                             \par
+       207       2010 Tata Nano                                                 \par
+       208       2006 Hyundai i10                                               \par
+       209       2009 Hyundai i20                                               \par
+\par
+9 rows selected.\par
+\par
+SQL> select * from accident;\par
+\par
+REPORT_NUM DAY_DATE  LOCATION                                                   \par
+---------- --------- --------------------------------------------------         \par
+      3001 18-MAR-10 Boston                                                     \par
+      3002 16-AUG-06 Denver                                                     \par
+      3003 04-NOV-08 Dallas                                                     \par
+      3004 07-JUL-11 Chicago                                                    \par
+      3005 04-APR-01 Detroit                                                    \par
+      3006 24-DEC-10 Dallas                                                     \par
+      3007 24-MAR-09 Las Vegas                                                  \par
+      3008 16-DEC-11 Boston                                                     \par
+      3009 18-APR-04 California                                                 \par
+\par
+9 rows selected.\par
+\par
+SQL> select * from claim_insurance;\par
+\par
+REPORT_NUM DRIVER_LICENSE_ID    REG_NUM DAMAGE_AMOUNT                           \par
+---------- ----------------- ---------- -------------                           \par
+      3006              1010        208         20000                           \par
+      3009              1007        209         45000                           \par
+      3004              1004        207          4000                           \par
+      3001              1005        208          2000                           \par
+      3002              1010        202         10000                           \par
+      3008              1003        207          6000                           \par
+\par
+6 rows selected.\b\par
+2)\tab Display the details of dirvers those who stays in Newyork.\par
+A: \b0 SQL> select * from driver where address='Newyork';\par
+\par
+DRIVER_LICENSE_ID NAME                                                          \par
+----------------- --------------------------------------------------            \par
+ADDRESS                                                   AGE                   \par
+-------------------------------------------------- ----------                   \par
+             1001 Peter                                                         \par
+Newyork                                                    30                   \par
+                                                                                \par
+             1009 Robert                                                        \par
+Newyork                                                    29                   \par
+                                                                  \b\par
+3)\tab Display the Details of cars whose Car_model second letter is 'a'\par
+A: \b0 SQL> select * from car where car_model like'_a%';\par
+\par
+   REG_NUM       YEAR CAR_MODEL                                                 \par
+---------- ---------- --------------------------------------------------        \par
+       201       1998 Maruti800                                                 \par
+       202       2005 Tata Indica                                               \par
+       203       2010 Maruti Swift                                              \par
+       207       2010 Tata Nano               \b\par
+4)\tab Display the details of report number , location and the damage amount of car\par
+A: \b0 SQL> select c.report_num,r.location,c.damage_amount from claim_insurance c,accident r where c.report_num=r.report_num;\par
+\par
+REPORT_NUM LOCATION                                           DAMAGE_AMOUNT     \par
+---------- -------------------------------------------------- -------------     \par
+      3006 Dallas                                                     20000     \par
+      3009 California                                                 45000     \par
+      3004 Chicago                                                     4000     \par
+      3001 Boston                                                      2000     \par
+      3002 Denver                                                     10000     \par
+      3008 Boston                                                      6000     \par
+\par
+6 rows selected.\b\par
+5)\tab Display the details of driver those who have are done more than one accident.\par
+A: \b0 SQL> select * from driver where driver_license_id=(select driver_license_id from claim_insurance group by driver_license_id having count(driver_license_id) >1);\par
+\par
+DRIVER_LICENSE_ID NAME                                                          \par
+----------------- --------------------------------------------------            \par
+ADDRESS                                                   AGE                   \par
+-------------------------------------------------- ----------                   \par
+             1010 Martin                                                        \par
+California                                                 32            \b\par
+6)\tab Display the car details which are participated in more than one accident.\par
+A: \b0 SQL> select * from car where reg_num in(select reg_num from claim_insurance group by reg_num having count(reg_num)>1);\par
+\par
+   REG_NUM       YEAR CAR_MODEL                                                 \par
+---------- ---------- --------------------------------------------------        \par
+       207       2010 Tata Nano                                                 \par
+       208       2006 Hyundai i10            \b\par
+7)\tab Display the driver id , reg num , and report num of car such that, the accident happend in Dallas city.\par
+A: \b0 SQL> select c.report_num,c.driver_license_id,c.reg_num from claim_insurance c, accident a where a.report_num=c.report_num and a.location='Dallas';\par
+\par
+REPORT_NUM DRIVER_LICENSE_ID    REG_NUM                                         \par
+---------- ----------------- ----------                                         \par
+      3006              1010        208    \b\par
+\par
+8)\tab Find the accident details(Report num , dirver id , dirver name , reg num , car model) of cars which are happend 400 days ago.\par
+A: \b0 SQL> select c.report_num,c.driver_license_id,d.name,c.reg_num,ca.car_model from claim_insurance c,accident a,car ca,driver d where c.driver_license_id=d.driver_license_id and c.reg_num=ca.reg_num and a.report_num=c.report_num and (sysdate-a.day_date) >400;\par
+\par
+REPORT_NUM DRIVER_LICENSE_ID NAME                                               \par
+---------- ----------------- -------------------------------------------------- \par
+   REG_NUM CAR_MODEL                                                            \par
+---------- --------------------------------------------------                   \par
+      3006              1010 Martin                                             \par
+       208 Hyundai i10                                                          \par
+                                                                                \par
+      3009              1007 Davis                                              \par
+       209 Hyundai i20                                                          \par
+                                                                                \par
+      3004              1004 Steve                                              \par
+       207 Tata Nano                                                            \par
+                                                                                \par
+\par
+REPORT_NUM DRIVER_LICENSE_ID NAME                                               \par
+---------- ----------------- -------------------------------------------------- \par
+   REG_NUM CAR_MODEL                                                            \par
+---------- --------------------------------------------------                   \par
+      3001              1005 Johnson                                            \par
+       208 Hyundai i10                                                          \par
+                                                                                \par
+      3002              1010 Martin                                             \par
+       202 Tata Indica                                                          \par
+                                                                                \par
+      3008              1003 Clark                                              \par
+       207 Tata Nano                                                            \par
+                                                                                \par
+\par
+6 rows selected.\b\par
+9)\tab Find out the details (driver id  , dirver name , regnum , report num) of car of higest damage amount.\par
+A:\b0 SQL> select d.driver_license_id,d.name,c.reg_num,c.report_num from claim_insurance c,driver d where d.driver_license_id=c.driver_license_id and c.damage_amount= (select max(damage_amount) from claim_insurance);\par
+\par
+DRIVER_LICENSE_ID NAME                                                  REG_NUM \par
+----------------- -------------------------------------------------- ---------- \par
+REPORT_NUM                                                                      \par
+----------                                                                      \par
+             1007 Davis                                                     209 \par
+      3009                                                                      \b\par
+10)\tab Display the details of claim insurance those damage amount is equal to the average damage amount.\par
+A: \b0 SQL> select * from claim_insurance where damage_amount=(select avg(damage_amount) from claim_insurance);\par
+\par
+no rows selected\b\par
+11)\tab  Display the details of claim insurance those damage amount is equal to the lowest damage amount.\par
+A: \b0 SQL> select * from claim_insurance where damage_amount=(select min(damage_amount) from claim_insurance);\par
+\par
+REPORT_NUM DRIVER_LICENSE_ID    REG_NUM DAMAGE_AMOUNT                           \par
+---------- ----------------- ---------- -------------                           \par
+      3001              1005        208          2000    \b\par
+12)\tab Display the details of accident that accident is made by the driver called  Johnson.\par
+A: \b0\par
+SQL> select a.* from accident a,claim_insurance c,driver d where a.report_num=c.report_num and d.driver_license_id=c.driver_license_id and d.name='Johnson';\par
+\par
+REPORT_NUM DAY_DATE  LOCATION                                                   \par
+---------- --------- --------------------------------------------------         \par
+      3001 18-MAR-10 Boston                                                     \b\par
+13)\tab Remove the primary key from Drivers table\par
+A: \b0 SQL> alter table driver drop constraint driver_pk;\par
+alter table driver drop constraint driver_pk\par
+                                   *\par
+ERROR at line 1:\par
+ORA-02273: this unique/primary key is referenced by some foreign keys \b\par
+14)\tab Add Not null constraint to Driver id of claim insurance table.\par
+A:\b0 SQL> alter table claim_insurance modify  driver_license_id number(10) not null;\par
+\par
+Table altered.\b\par
+15)\tab Create a view as car_v1 on Cars table that containg reg_num , car model columns.\par
+A: \b0 SQL> create view car_v1 as select reg_num,car_model from car;\par
+\par
+View created.\par
+\par
+SQL> select * from car_v1;\par
+\par
+   REG_NUM CAR_MODEL                                                            \par
+---------- --------------------------------------------------                   \par
+       201 Maruti800                                                            \par
+       202 Tata Indica                                                          \par
+       203 Maruti Swift                                                         \par
+       204 Mercedes Benz                                                        \par
+       205 Alto                                                                 \par
+       206 Toyota Innova                                                        \par
+       207 Tata Nano                                                            \par
+       208 Hyundai i10                                                          \par
+       209 Hyundai i20                                                          \par
+\par
+9 rows selected.\b\par
+16)\tab Add a dob column to dirver table.\par
+A: \b0 SQL> alter table driver add  dob date;\par
+\par
+Table altered.\b\par
+17)\tab Add year column to car_v1\par
+A: \b0 SQL> create or replace view car_v1 as select * from car;\par
+\par
+View created.\par
+\par
+SQL> select * from car_v1;\par
+\par
+   REG_NUM       YEAR CAR_MODEL                                                 \par
+---------- ---------- --------------------------------------------------        \par
+       201       1998 Maruti800                                                 \par
+       202       2005 Tata Indica                                               \par
+       203       2010 Maruti Swift                                              \par
+       204       2011 Mercedes Benz                                             \par
+       205       2003 Alto                                                      \par
+       206       2006 Toyota Innova                                             \par
+       207       2010 Tata Nano                                                 \par
+       208       2006 Hyundai i10                                               \par
+       209       2009 Hyundai i20                                               \par
+\par
+9 rows selected.\b\par
+18)\tab Create a sequence as Driver_seq.\par
+A:\b0 SQL> create sequence driver_seq minvalue 1 start with 1 increment by 1 ;\par
+\par
+Sequence created.\b\par
+19)\tab Find the last day of the month.\par
+A: \b0 SQL> select last_day(sysdate) from dual;\par
+\par
+LAST_DAY(                                                                       \par
+---------                                                                       \par
+31-MAY-18   \b\par
+20)\tab Print the current date as 15th  march nineteen eighty seven.\par
+A: \b0 SQL> select to_char(sysdate,'ddth month year') from dual;\par
+\par
+TO_CHAR(SYSDATE,'DDTHMONTHYEAR')                                                \par
+---------------------------------------------------------                       \par
+29th may       twenty eighteen             \b\par
+21)\tab Dispaly all the Driver names with prefixing 'HANDLER'\par
+A: \b0 SQL> select concat('HANDLER ',NAME) FROM DRIVER;\par
+\par
+CONCAT('HANDLER',NAME)                                                          \par
+----------------------------------------------------------                      \par
+HANDLER Peter                                                                   \par
+HANDLER John                                                                    \par
+HANDLER Clark                                                                   \par
+HANDLER Steve                                                                   \par
+HANDLER Johnson                                                                 \par
+HANDLER Williams                                                                \par
+HANDLER Davis                                                                   \par
+HANDLER James                                                                   \par
+HANDLER Robert                                                                  \par
+HANDLER Martin                                                                  \par
+\par
+10 rows selected.\b\par
+22)\tab Display the last three characters of Address of all drivers.\par
+A: \b0 SQL> select substr(address,-3) from driver;\par
+\par
+SUB                                                                             \par
+---                                                                             \par
+ork                                                                             \par
+ton                                                                             \par
+aha                                                                             \par
+ver                                                                             \par
+ton                                                                             \par
+aha                                                                             \par
+nia                                                                             \par
+las                                                                             \par
+ork                                                                             \par
+nia                                                                             \par
+\par
+10 rows selected.\b\par
+23)\tab Display the detailes of all drivers , if a address city contains more than one driver.\par
+A:\b0  SQL> SELECT d.address,d.NAME from driver d,driver d1 where  d.address=d1.address group by d.address,d.name,d1.address having count(d1.address)>1;\par
+(or)\par
+SQL>  select address,name from driver where address in(select address from driver group by address having count(address)>1);\par
+\par
+\par
+ADDRESS                                                                         \par
+--------------------------------------------------                              \par
+NAME                                                                            \par
+--------------------------------------------------                              \par
+Boston                                                                          \par
+Johnson                                                                         \par
+                                                                                \par
+Newyork                                                                         \par
+Robert                                                                          \par
+                                                                                \par
+Boston                                                                          \par
+John                                                                            \par
+                                                                                \par
+\par
+ADDRESS                                                                         \par
+--------------------------------------------------                              \par
+NAME                                                                            \par
+--------------------------------------------------                              \par
+California                                                                      \par
+Martin                                                                          \par
+                                                                                \par
+Omaha                                                                           \par
+Williams                                                                        \par
+                                                                                \par
+Omaha                                                                           \par
+Clark                                                                           \par
+                                                                                \par
+\par
+ADDRESS                                                                         \par
+--------------------------------------------------                              \par
+NAME                                                                            \par
+--------------------------------------------------                              \par
+Newyork                                                                         \par
+Peter                                                                           \par
+                                                                                \par
+California                                                                      \par
+Davis                                                                           \par
+                                                                                \par
+\par
+8 rows selected.\par
+\par
+SQL>  select address,name from driver where address in(select address from driver group by address having count(address)>1);\par
+\par
+ADDRESS                                                                         \par
+--------------------------------------------------                              \par
+NAME                                                                            \par
+--------------------------------------------------                              \par
+Newyork                                                                         \par
+Robert                                                                          \par
+                                                                                \par
+Newyork                                                                         \par
+Peter                                                                           \par
+                                                                                \par
+Boston                                                                          \par
+Johnson                                                                         \par
+                                                                                \par
+\par
+ADDRESS                                                                         \par
+--------------------------------------------------                              \par
+NAME                                                                            \par
+--------------------------------------------------                              \par
+Boston                                                                          \par
+John                                                                            \par
+                                                                                \par
+California                                                                      \par
+Martin                                                                          \par
+                                                                                \par
+California                                                                      \par
+Davis                                                                           \par
+                                                                                \par
+\par
+ADDRESS                                                                         \par
+--------------------------------------------------                              \par
+NAME                                                                            \par
+--------------------------------------------------                              \par
+Omaha                                                                           \par
+Williams                                                                        \par
+                                                                                \par
+Omaha                                                                           \par
+Clark                                                                           \par
+                                                                                \par
+\par
+8 rows selected.\b\par
+24)\tab Display the details (diver id , driver name regnum , car model ,report num , locatin ) those damage amount is more than 10000.\par
+A:\b0  SQL> select c.driver_license_id,d.name,c.reg_num,ca.car_model,c.report_num,a.location  from claim_insurance c,accident a ,car ca, driver d where c.report_num=a.report_num and d.driver_license_id=c.driver_license_id and c.reg_num=ca.reg_num and c.damage_amount>10000;\par
+\par
+DRIVER_LICENSE_ID NAME                                                  REG_NUM \par
+----------------- -------------------------------------------------- ---------- \par
+CAR_MODEL                                          REPORT_NUM                   \par
+-------------------------------------------------- ----------                   \par
+LOCATION                                                                        \par
+--------------------------------------------------                              \par
+             1010 Martin                                                    208 \par
+Hyundai i10                                              3006                   \par
+Dallas                                                                          \par
+                                                                                \par
+             1007 Davis                                                     209 \par
+Hyundai i20                                              3009                   \par
+California                                                                      \par
+\par
+DRIVER_LICENSE_ID NAME                                                  REG_NUM \par
+----------------- -------------------------------------------------- ---------- \par
+CAR_MODEL                                          REPORT_NUM                   \par
+-------------------------------------------------- ----------                   \par
+LOCATION                                                                        \par
+--------------------------------------------------                              \par
+                                                                                \b\par
+25)\tab Display the total damage amount.\par
+A: \b0 SQL> select sum(damage_amount) from claim_insurance;\par
+\par
+SUM(DAMAGE_AMOUNT)                                                              \par
+------------------                                                              \par
+             87000             \b\par
+26)\tab Display the carwise damage amount\par
+A: \b0 SQL> select ca.reg_num,c.damage_amount from claim_insurance c,car ca where ca.reg_num=c.reg_num(+) order by(reg_num);\par
+\par
+   REG_NUM DAMAGE_AMOUNT                                                        \par
+---------- -------------                                                        \par
+       201                                                                      \par
+       202         10000                                                        \par
+       203                                                                      \par
+       204                                                                      \par
+       205                                                                      \par
+       206                                                                      \par
+       207          4000                                                        \par
+       207          6000                                                        \par
+       208          2000                                                        \par
+       208         20000                                                        \par
+       209         45000                                                        \par
+\par
+11 rows selected.\b\par
+27)\tab Find the next value of Driver_seq sequence .\par
+A: \b0 SQL> select driver_seq.nextval from dual;\par
+\par
+   NEXTVAL                                                                      \par
+----------                                                                      \par
+         1                                                                      \par
+\par
+SQL> select driver_seq.nextval from dual;\par
+\par
+   NEXTVAL                                                                      \par
+----------                                                                      \par
+         2        \b\par
+28)\tab Find the current value of Driver_seq.\par
+A: \b0 SQL> select driver_seq.currval from dual;\par
+\par
+   CURRVAL                                                                      \par
+----------                                                                      \par
+         2                                                                      \b\par
+29)\tab Display the next day of today.\par
+A:\b0  SQL> select to_char(sysdate+1,'day') from dual;\par
+\par
+TO_CHAR(S                                                                       \par
+---------                                                                       \par
+thursday                                                                        \b\par
+30)\tab Display the day of today(like monday or tuesday etc..)\par
+A: \b0 SQL> select to_char(sysdate,'day') from dual;\par
+\par
+TO_CHAR(S                                                                       \par
+---------                                                                       \par
+tuesday                                                                         \b\par
+31)\tab Create a table driver_dup from driver table.\par
+A:\b0  SQL> create table driver_dup as select * from driver;\par
+\par
+Table created.\par
+\par
+SQL> select * from driver_dup;\par
+\par
+DRIVER_LICENSE_ID NAME                                                          \par
+----------------- --------------------------------------------------            \par
+ADDRESS                                                   AGE DOB               \par
+-------------------------------------------------- ---------- ---------         \par
+             1001 Peter                                                         \par
+Newyork                                                    30                   \par
+                                                                                \par
+             1002 John                                                          \par
+Boston                                                     26                   \par
+                                                                                \par
+             1003 Clark                                                         \par
+Omaha                                                      29                   \par
+                                                                                \par
+\par
+DRIVER_LICENSE_ID NAME                                                          \par
+----------------- --------------------------------------------------            \par
+ADDRESS                                                   AGE DOB               \par
+-------------------------------------------------- ---------- ---------         \par
+             1004 Steve                                                         \par
+Denver                                                     25                   \par
+                                                                                \par
+             1005 Johnson                                                       \par
+Boston                                                     36                   \par
+                                                                                \par
+             1006 Williams                                                      \par
+Omaha                                                      39                   \par
+                                                                                \par
+\par
+DRIVER_LICENSE_ID NAME                                                          \par
+----------------- --------------------------------------------------            \par
+ADDRESS                                                   AGE DOB               \par
+-------------------------------------------------- ---------- ---------         \par
+             1007 Davis                                                         \par
+California                                                 19                   \par
+                                                                                \par
+             1008 James                                                         \par
+Dallas                                                     21                   \par
+                                                                                \par
+             1009 Robert                                                        \par
+Newyork                                                    29                   \par
+                                                                                \par
+\par
+DRIVER_LICENSE_ID NAME                                                          \par
+----------------- --------------------------------------------------            \par
+ADDRESS                                                   AGE DOB               \par
+-------------------------------------------------- ---------- ---------         \par
+             1010 Martin                                                        \par
+California                                                 32                   \par
+                                                                                \par
+\par
+10 rows selected.\b\par
+32)\tab Create a table Acc_tab with the same structure of accident table.\par
+A: \b0 SQL> create table acc_tab as select * from accident where 1=0;\par
+\par
+Table created.\b\par
+33)\tab Display all  the names of drivers in lower case.\par
+A: \b0 SQL> select lower(name) from driver;\par
+LOWER(NAME)                                                                     \par
+--------------------------------------------------                              \par
+peter                                                                           \par
+john                                                                            \par
+clark                                                                           \par
+steve                                                                           \par
+johnson                                                                         \par
+williams                                                                        \par
+davis                                                                           \par
+james                                                                           \par
+robert                                                                          \par
+martin                                                                          \par
+\par
+10 rows selected.\b\par
+34)\tab Display all the car models as First letter of the word should be capital.\par
+A: \b0 SQL> select initcap(car_model) from car;\par
+\par
+INITCAP(CAR_MODEL)                                                              \par
+--------------------------------------------------                              \par
+Maruti800                                                                       \par
+Tata Indica                                                                     \par
+Maruti Swift                                                                    \par
+Mercedes Benz                                                                   \par
+Alto                                                                            \par
+Toyota Innova                                                                   \par
+Tata Nano                                                                       \par
+Hyundai I10                                                                     \par
+Hyundai I20                                                                     \par
+\par
+9 rows selected.\b\par
+35)\tab Insert a record into car_v1.\par
+A: \b0 SQL> insert into car_v1 values(210,2018,'ferrari');\par
+\par
+1 row created.\b\par
+36)\tab Show the difference  between truncate and drop.\par
+A: \b0 SQL> truncate table driver_dup;\par
+\par
+Table truncated.\par
+\par
+SQL> select * from driver_dup;\par
+\par
+no rows selected\par
+\par
+SQL> drop table driver_dup;\\\par
+  2  \par
+SQL> drop table driver_dup;\par
+\par
+Table dropped.\par
+\par
+SQL> select * from driver_dup;\par
+select * from driver_dup\par
+              *\par
+ERROR at line 1:\par
+ORA-00942: table or view does not exist \par
+\b\par
+37)\tab Add a column to driver table , and rename a column of driver table.\par
+A: \b0 SQL> alter table driver add  aadhar_no number(20);\par
+\par
+Table altered.\par
+\par
+SQL> alter table driver rename column aadhar_no to aadharNo;\par
+\par
+Table altered.\b\par
+38)\tab Find the position of Second 'a' in "Las vegas".\par
+A: \b0  SQL> select instr('las vegas','a',1,2) from dual;\par
+\par
+INSTR('LASVEGAS','A',1,2)                                                       \par
+-------------------------                                                       \par
+                        8     \b\par
+39)\tab Add a check constraing to the damage amount column( damage amount should not be morethan 50000 and should not be less than 1000)\par
+A: \b0 SQL> alter table claim_insurance add constraint chk_damage check(damage_amount between 1000 and 50000);\par
+Table altered.\b\par
+40)\tab Update driver name steve to stephen.\par
+A: \b0 SQL> update  driver set name='Stephen' where name='Steve';\par
+\par
+1 row updated.\b\par
+41)\tab  Display the Manager Names.\par
+A:\b0 SQL> select ename from emp where job='MANAGER';\par
+\par
+ENAME                                                                           \par
+----------                                                                      \par
+JONES                                                                           \par
+BLAKE                                                                           \par
+CLARK   \b\par
+42)\tab  Display the names of employees who earn  Highest salaries respective departments.\par
+A: \b0 SQL> select ename,deptno,sal from emp where sal in(select max(sal) from emp group by deptno);\par
+\par
+ENAME          DEPTNO        SAL                                                \par
+---------- ---------- ----------                                                \par
+BLAKE              30       2850                                                \par
+SCOTT              20       3000                                                \par
+KING               10       5000                                                \par
+FORD               20       3000                                                \par
+kk                  2        400        \b\par
+43)\tab  Display the Employees whose manager is Jones and Display manager name also in Result. \par
+A: \b0 SQL>  select b.ename from employee_hema a, employee_hema b where a.ename='JONES' and a.empno=b.mgr;\par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+SCOTT                                                                           \par
+FORD   \b\par
+44)\tab  Display the all employees information(name, job , his manager) , if employee dont have a manager then display his manager information as NO MANAGER.\par
+A: \b0 SQL> select e.empno,e.ename,e1.ename as manager_name ,e1.empno as manager_num from employee_hema e,employee_hema e1 where e.mgr=e1.empno\par
+  2  union\par
+  3  select empno,ename,'no manager',0 from employee_hema where mgr is null;\par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+MANAGER_NAME                             MANAGER_NUM                            \par
+---------------------------------------- -----------                            \par
+      1200 priya                                                                \par
+no manager                                         0                            \par
+                                                                                \par
+      7499 alias                                                                \par
+BLAKE                                           7698                            \par
+                                                                                \par
+      7521 WARD                                                                 \par
+BLAKE                                           7698                            \par
+                                                                                \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+MANAGER_NAME                             MANAGER_NUM                            \par
+---------------------------------------- -----------                            \par
+      7566 JONES                                                                \par
+KING                                            7839                            \par
+                                                                                \par
+      7654 MARTIN                                                               \par
+BLAKE                                           7698                            \par
+                                                                                \par
+      7698 BLAKE                                                                \par
+KING                                            7839                            \par
+                                                                                \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+MANAGER_NAME                             MANAGER_NUM                            \par
+---------------------------------------- -----------                            \par
+      7782 CLARK                                                                \par
+KING                                            7839                            \par
+                                                                                \par
+      7788 SCOTT                                                                \par
+JONES                                           7566                            \par
+                                                                                \par
+      7839 KING                                                                 \par
+no manager                                         0                            \par
+                                                                                \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+MANAGER_NAME                             MANAGER_NUM                            \par
+---------------------------------------- -----------                            \par
+      7844 TURNER                                                               \par
+BLAKE                                           7698                            \par
+                                                                                \par
+      7876 ADAMS                                                                \par
+SCOTT                                           7788                            \par
+                                                                                \par
+      7900 JAMES                                                                \par
+BLAKE                                           7698                            \par
+                                                                                \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+MANAGER_NAME                             MANAGER_NUM                            \par
+---------------------------------------- -----------                            \par
+      7902 FORD                                                                 \par
+JONES                                           7566                            \par
+                                                                                \par
+      7934 MILLER                                                               \par
+CLARK                                           7782                            \par
+                                                                                \par
+\par
+14 rows selected.\fs32\par
+}
+ 

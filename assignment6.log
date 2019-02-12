@@ -1,0 +1,634 @@
+SQL> select * from courses;
+
+no rows selected
+
+SQL> select * from courses;
+
+NAME                 COURSE                                                     
+-------------------- ------------------------------                             
+A                    Oracle                                                     
+b                    Oracle                                                     
+c                    Oracle                                                     
+p                    D6i                                                        
+q                    D6i                                                        
+r                    D6i                                                        
+x                    Unix                                                       
+y                    Unix                                                       
+z                    Unix                                                       
+a                    Unix                                                       
+p                    Unix                                                       
+
+NAME                 COURSE                                                     
+-------------------- ------------------------------                             
+a                    D6i                                                        
+x                    D6i                                                        
+p                    Oracle                                                     
+b                    D6i                                                        
+q                    Oracle                                                     
+y                    Oracle                                                     
+
+17 rows selected.
+
+SQL> select name from courses where count(course)=3;
+select name from courses where count(course)=3
+                               *
+ERROR at line 1:
+ORA-00934: group function is not allowed here 
+
+
+SQL> select name,course from courses group by name,course having count(course)=3;
+
+no rows selected
+
+SQL> select name from courses group by name having count(name)=3;
+
+NAME                                                                            
+--------------------                                                            
+p                                                                               
+
+SQL> select name from courses group by name having count(course)=3;
+
+NAME                                                                            
+--------------------                                                            
+p                                                                               
+
+SQL> select name from courses group by name,course having count(course)=3;
+
+no rows selected
+
+SQL> select name from courses group by name having count(course)=3;
+
+NAME                                                                            
+--------------------                                                            
+p                                                                               
+
+SQL> select name from courses group by name having count(course)=3;
+
+NAME                                                                            
+--------------------                                                            
+p                                                                               
+x                                                                               
+
+SQL> select name from courses group by name having count(course)=(select count(*) from courses);
+
+no rows selected
+
+SQL> select name from courses group by name having count(course)=(select count(course) from courses group by course);
+select name from courses group by name having count(course)=(select count(course) from courses group by course)
+                                                             *
+ERROR at line 1:
+ORA-01427: single-row subquery returns more than one row 
+
+
+SQL> select name from courses group by name having count(course)=(select count(*) from (select count(course) from courses group by course));
+
+NAME                                                                            
+--------------------                                                            
+p                                                                               
+x                                                                               
+
+SQL> select name from courses group by name having count(course) >=1;
+
+NAME                                                                            
+--------------------                                                            
+q                                                                               
+z                                                                               
+r                                                                               
+b                                                                               
+p                                                                               
+a                                                                               
+c                                                                               
+A                                                                               
+x                                                                               
+y                                                                               
+
+10 rows selected.
+
+SQL> select name from courses group by name having count(course) =1;
+
+NAME                                                                            
+--------------------                                                            
+z                                                                               
+r                                                                               
+c                                                                               
+A                                                                               
+
+SQL> select name from courses where course='Oracle' group by name having count(course) =1;
+
+NAME                                                                            
+--------------------                                                            
+q                                                                               
+b                                                                               
+p                                                                               
+c                                                                               
+A                                                                               
+y                                                                               
+x                                                                               
+
+7 rows selected.
+
+SQL> select name from courses  group by name having count(course) =1 and course='Oracle';
+select name from courses  group by name having count(course) =1 and course='Oracle'
+                                                                    *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> select name from courses  group by name having count(course) =1 and having  course='Oracle';
+select name from courses  group by name having count(course) =1 and having  course='Oracle'
+                                                                    *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> select name from courses  group by name having count(course) =1 and having  course='Oracle';
+select name from courses  group by name having count(course) =1 and having  course='Oracle'
+                                                                    *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> select name from courses  group by name where name in( select name from courses group by name having count(course) =1) and  course='Oracle';
+select name from courses  group by name where name in( select name from courses group by name having count(course) =1) and  course='Oracle'
+                                        *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> select name from courses p by name where name in( select name from courses group by name having count(course) =1) and  course='Oracle';
+select name from courses p by name where name in( select name from courses group by name having count(course) =1) and  course='Oracle'
+                           *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> select name from courses  name where name in( select name from courses group by name having count(course) =1) and  course='Oracle';
+
+NAME                                                                            
+--------------------                                                            
+A                                                                               
+c                                                                               
+
+SQL> select name from courses   where name in( select name from courses group by name having count(course) =1) and  course='Oracle';
+
+NAME                                                                            
+--------------------                                                            
+A                                                                               
+c                                                                               
+
+SQL> select name from courses   where name in( select name from courses group by name having count(course) =1) and  course='Oracle';
+
+NAME                                                                            
+--------------------                                                            
+A                                                                               
+c                                                                               
+
+SQL> select name from courses   where name in( select name from courses group by name having count(course) =2) and  course='Oracle' and course='D6i';
+
+no rows selected
+
+SQL> select name from courses where name in(select name from courses where course='Oracle' and course='D6i');
+
+no rows selected
+
+SQL> select name fom courses where course='Oracle' and course='D6i';
+select name fom courses where course='Oracle' and course='D6i'
+                *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> select name from courses where course='Oracle' and course='D6i';
+
+no rows selected
+
+SQL> select name from courses where course='Oracle' intersect select name from courses where course='D6i';
+
+NAME                                                                            
+--------------------                                                            
+b                                                                               
+p                                                                               
+q                                                                               
+x                                                                               
+
+SQL> select name from courses where course in('Oracle','D6i');
+
+NAME                                                                            
+--------------------                                                            
+A                                                                               
+b                                                                               
+c                                                                               
+p                                                                               
+q                                                                               
+r                                                                               
+a                                                                               
+x                                                                               
+p                                                                               
+b                                                                               
+q                                                                               
+
+NAME                                                                            
+--------------------                                                            
+y                                                                               
+x                                                                               
+
+13 rows selected.
+
+SQL> create table student_marks(rollno number(10),maths number(10),physics number(10),chemistry  number(10));
+create table student_marks(rollno number(10),maths number(10),physics number(10),chemistry  number(10))
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> create table student_Marks(rollno number(10),maths number(10),physics number(10),chemistry  number(10));
+create table student_Marks(rollno number(10),maths number(10),physics number(10),chemistry  number(10))
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> create table stud_Marks(rollno number(10),maths number(10),physics number(10),chemistry  number(10));
+
+Table created.
+
+SQL> insert into stud_marks values(1,20,18,17);
+
+1 row created.
+
+SQL> insert into stud_marks values(2,25,22,23);
+
+1 row created.
+
+SQL> insert into stud_marks values(3,25,20,22);
+
+1 row created.
+
+SQL> insert into stud_marks values(4,25,21,21);
+
+1 row created.
+
+SQL> insert into stud_marks values(5,20,18,17);
+
+1 row created.
+
+SQL> insert into stud_marks values(6,16,11,12);
+
+1 row created.
+
+SQL> select * from stud_marks;
+
+    ROLLNO      MATHS    PHYSICS  CHEMISTRY                                     
+---------- ---------- ---------- ----------                                     
+         1         20         18         17                                     
+         2         25         22         23                                     
+         3         25         20         22                                     
+         4         25         21         21                                     
+         5         20         18         17                                     
+         6         16         11         12                                     
+
+6 rows selected.
+
+SQL> select rollno,dense_rank() over(order by(maths+physics+chemistry) desc, maths desc,physics desc,chemistry desc) as rank from stud_marks;
+
+    ROLLNO       RANK                                                           
+---------- ----------                                                           
+         2          1                                                           
+         4          2                                                           
+         3          3                                                           
+         1          4                                                           
+         5          4                                                           
+         6          5                                                           
+
+6 rows selected.
+
+SQL> select initcap(substr(hema Priya,-3,3)||substr(4239,-2,2)||substr(to_char('15-11-2017','yyyy'),-2,2)) as password from dual;
+select initcap(substr(hema Priya,-3,3)||substr(4239,-2,2)||substr(to_char('15-11-2017','yyyy'),-2,2)) as password from dual
+                           *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_char('15-11-2017','yyyy'),-2,2)) as password from dual;
+select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_char('15-11-2017','yyyy'),-2,2)) as password from dual
+                                                                            *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_char(15-11-2017,'yyyy'),-2,2)) as password from dual;
+select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_char(15-11-2017,'yyyy'),-2,2)) as password from dual
+                                                                                       *
+ERROR at line 1:
+ORA-01481: invalid number format model 
+
+
+SQL> select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_char(sysdate,'yyyy'),-2,2)) as password from dual;
+
+PASSWOR                                                                         
+-------                                                                         
+Iya3918                                                                         
+
+SQL> select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_date('15-11-2017','yyyy'),-2,2)) as password from dual;
+select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_date('15-11-2017','yyyy'),-2,2)) as password from dual
+                                                                            *
+ERROR at line 1:
+ORA-01830: date format picture ends before converting entire input string 
+
+
+SQL> select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_char('15-11-2017','dd-mm-yyyy'),-2,2)) as password from dual;
+select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_char('15-11-2017','dd-mm-yyyy'),-2,2)) as password from dual
+                                                                            *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_char('15-11-2017','yyyy'),-2,2)) as password from dual;
+select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_char('15-11-2017','yyyy'),-2,2)) as password from dual
+                                                                            *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_char('15-11-2017','ddmmyy'),-2,2)) as password from dual;
+select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_char('15-11-2017','ddmmyy'),-2,2)) as password from dual
+                                                                            *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_char('15-11-2017','ddmmyyyy'),-2,2)) as password from dual;
+select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_char('15-11-2017','ddmmyyyy'),-2,2)) as password from dual
+                                                                            *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_date('15-11-2017'),-2,2)) as password from dual;
+select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_date('15-11-2017'),-2,2)) as password from dual
+                                                                            *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_date(sysdate,'15-11-2017'),-2,2)) as password from dual;
+select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_date(sysdate,'15-11-2017'),-2,2)) as password from dual
+                                                                                    *
+ERROR at line 1:
+ORA-01821: date format not recognized 
+
+
+SQL> select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_date('15-11-2017',sysdate),-2,2)) as password from dual;
+select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_date('15-11-2017',sysdate),-2,2)) as password from dual
+                                                                                         *
+ERROR at line 1:
+ORA-00932: inconsistent datatypes: expected DATE got DATE 
+
+
+SQL> select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_date('15-11-2017','dd-mm-yyyy),-2,2) as password from dual;
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_date('15-11-2017','dd-mm-yyyy'),-2,2) as password from dual;
+select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_date('15-11-2017','dd-mm-yyyy'),-2,2) as password from dual
+                                                                                                             *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_date('15-11-2017','dd-mm-yyyy'),-2,2)) as password from dual;
+
+PASSWOR                                                                         
+-------                                                                         
+Iya3917                                                                         
+
+SQL> select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_char('15-11-2017','dd-mm-yyyy'),-2,2)) as password from dual;
+select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_char('15-11-2017','dd-mm-yyyy'),-2,2)) as password from dual
+                                                                            *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> select initcap(substr('hema Priya',-3,3)||substr(4239,-2,2)||substr(to_date('15-11-2017','dd-mm-yyyy'),-2,2)) as password from dual;
+
+PASSWOR                                                                         
+-------                                                                         
+Iya3917                                                                         
+
+SQL> select * from orders;
+
+  ORDER_ID    CUST_ID ORDER_DAT DELIVERY_                                       
+---------- ---------- --------- ---------                                       
+      1001        101 29-MAR-96 20-APR-96                                       
+      1002        102 28-MAR-96 19-APR-96                                       
+      1003        103 27-MAR-96 18-APR-96                                       
+      1004        104 26-MAR-96 17-APR-96                                       
+      1005        105 25-MAR-96 16-APR-96                                       
+      1006        106 25-MAR-17 16-APR-17                                       
+
+6 rows selected.
+
+SQL> select * from order;
+select * from order
+              *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> select * from order_details;
+
+  ORDER_ID ITEM                                                 QUANTITY        
+---------- -------------------------------------------------- ----------        
+      1001 notebook                                                    2        
+      1002 pencil                                                      2        
+      1003 pen                                                         2        
+      1004 notebook                                                    2        
+
+SQL> select * from item;
+select * from item
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> create table order(order_id number(10),customer_id number(10),delivery_status varchar(5));
+create table order(order_id number(10),customer_id number(10),delivery_status varchar(5))
+             *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> create  order(order_id number(10),customer_id number(10),delivery_status varchar(5));
+create  order(order_id number(10),customer_id number(10),delivery_status varchar(5))
+        *
+ERROR at line 1:
+ORA-00901: invalid CREATE command 
+
+
+SQL> create table order(order_id number(10),customer_id number(10),delivery_status varchar(5));
+create table order(order_id number(10),customer_id number(10),delivery_status varchar(5))
+             *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> create table orderss(order_id number(10),customer_id number(10),delivery_status varchar(5));
+
+Table created.
+
+SQL> insert into orderss values(100,10,'y');
+
+1 row created.
+
+SQL> insert into orderss values(101,11,'y');
+
+1 row created.
+
+SQL> insert into orderss values(102,10,'n');
+
+1 row created.
+
+SQL> select * from orderss;
+
+  ORDER_ID CUSTOMER_ID DELIV                                                    
+---------- ----------- -----                                                    
+       100          10 y                                                        
+       101          11 y                                                        
+       102          10 n                                                        
+
+SQL> create table orderData(order_id number(10), item_id number(10),quantity number(5));
+
+Table created.
+
+SQL> insert into orderData values(100,1,2);
+
+1 row created.
+
+SQL> insert into orderData values(101,1,3);
+
+1 row created.
+
+SQL> insert into orderData values(101,2,1);
+
+1 row created.
+
+SQL> insert into orderData values(102,2,3);
+
+1 row created.
+
+SQL> insert into orderData values(102,3,4);
+
+1 row created.
+
+SQL> select * from orderData;
+
+  ORDER_ID    ITEM_ID   QUANTITY                                                
+---------- ---------- ----------                                                
+       100          1          2                                                
+       101          1          3                                                
+       101          2          1                                                
+       102          2          3                                                
+       102          3          4                                                
+
+SQL> create table item(item_id number(5),item_name varchar(15),price number(5));
+
+Table created.
+
+SQL> imnsert into item values( 1,'pen',10);
+SP2-0734: unknown command beginning "imnsert in..." - rest of line ignored.
+SQL> insert into item values( 1,'pen',10);
+
+1 row created.
+
+SQL> insert into item values( 2,'pencil',5);
+
+1 row created.
+
+SQL> insert into item values( 3,'notebook',15);
+
+1 row created.
+
+SQL> select * from item;
+
+   ITEM_ID ITEM_NAME            PRICE                                           
+---------- --------------- ----------                                           
+         1 pen                     10                                           
+         2 pencil                   5                                           
+         3 notebook                15                                           
+
+SQL> select o.order_id from orderss where d.delivery_status='n';
+select o.order_id from orderss where d.delivery_status='n'
+                                     *
+ERROR at line 1:
+ORA-00904: "D"."DELIVERY_STATUS": invalid identifier 
+
+
+SQL> select o.order_id from orderss o where o.delivery_status='n';
+
+  ORDER_ID                                                                      
+----------                                                                      
+       102                                                                      
+
+SQL> select o.order_id,or.item_id from orderss o ,orderData or,item i where o.delivery_status='n';
+select o.order_id,or.item_id from orderss o ,orderData or,item i where o.delivery_status='n'
+                  *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> select o.order_id, or.item_id from orderss o ,orderData or,item i where o.delivery_status='n';
+select o.order_id, or.item_id from orderss o ,orderData or,item i where o.delivery_status='n'
+                   *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> select o.order_id, or.item_id from orderss o ,orderData or,item i where o.delivery_status='n' and o.order_id=or.order_id;
+select o.order_id, or.item_id from orderss o ,orderData or,item i where o.delivery_status='n' and o.order_id=or.order_id
+                   *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> select o.order_id, ord.item_id from orderss o ,orderData ord,item i where o.delivery_status='n' and o.order_id=ord.order_id;
+
+  ORDER_ID    ITEM_ID                                                           
+---------- ----------                                                           
+       102          2                                                           
+       102          2                                                           
+       102          2                                                           
+       102          3                                                           
+       102          3                                                           
+       102          3                                                           
+
+6 rows selected.
+
+SQL> select o.order_id, ord.item_id from orderss o ,orderData ord,item i where o.delivery_status='n' and o.order_id=ord.order_id and ord.item_id=i.item_id;
+
+  ORDER_ID    ITEM_ID                                                           
+---------- ----------                                                           
+       102          2                                                           
+       102          3                                                           
+
+SQL> select o.order_id, sum(ord.quantity*i.price) as bill_amount from orderss o ,orderData ord,item i where o.delivery_status='n' and o.order_id=ord.order_id and ord.item_id=i.item_id;
+select o.order_id, sum(ord.quantity*i.price) as bill_amount from orderss o ,orderData ord,item i where o.delivery_status='n' and o.order_id=ord.order_id and ord.item_id=i.item_id
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> select o.order_id, sum(ord.quantity*i.price) as bill_amount from orderss o ,orderData ord,item i where o.delivery_status='n' and o.order_id=ord.order_id and ord.item_id=i.item_id and o.customer_id=10 ;
+select o.order_id, sum(ord.quantity*i.price) as bill_amount from orderss o ,orderData ord,item i where o.delivery_status='n' and o.order_id=ord.order_id and ord.item_id=i.item_id and o.customer_id=10 
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> select o.order_id, sum(ord.quantity*i.price) as bill_amount from orderss o ,orderData ord,item i where o.delivery_status='n' and o.order_id=ord.order_id and ord.item_id=i.item_id and o.customer_id=10 group by o.order_id;
+
+  ORDER_ID BILL_AMOUNT                                                          
+---------- -----------                                                          
+       102          75                                                          
+
+SQL> spool off;

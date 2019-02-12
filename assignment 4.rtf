@@ -1,0 +1,1927 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang16393{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\b\f0\fs32 ASSIGNMENT-4 \par
+\pard\lang1023\fs28 1.Display the total salary and total commission to all employees \par
+A: \b0 SQL> select sum(sal), sum(comm) from employee_hema;\par
+\par
+  SUM(SAL)  SUM(COMM)                                                           \par
+---------- ----------                                                           \par
+    458625       5812         \b\par
+2.Display the maximum salary from emp table \par
+A: \b0 select max(sal) from employee_hema;\par
+\par
+  MAX(SAL)                                                                      \par
+----------                                                                      \par
+    200000    \b\par
+3.Display the minimum salary from emp table \par
+A: \b0 SQL> select min(sal) from employee_hema;\par
+\par
+  MIN(SAL)                                                                      \par
+----------                                                                      \par
+       400      \b\par
+4.Display the average salary from emp table \par
+A: \b0 SQL> select avg(sal) from employee_hema;\par
+\par
+  AVG(SAL)                                                                      \par
+----------                                                                      \par
+24138.1579      \b\par
+5 Display the maximum salary being paid to CLERK. \par
+A: \b0 SQL> select max(sal) from employee_hema where job='CLERK' or job='Clerk' or job='clerk';\par
+\par
+  MAX(SAL)                                                                      \par
+----------                                                                      \par
+      1300      \b\par
+6.Display the maximum salary being paid in dept no 20 \par
+A :\b0  SQL>  select max(sal) from employee_hema where deptno=20;\par
+\par
+  MAX(SAL)                                                                      \par
+----------                                                                      \par
+     50000      \b\par
+7.Display the minimum salary being paid to any SALESMAN \par
+A: \b0 SQL> select min(sal) from employee_hema where job='SALESMAN' OR job='Salesman' or job='salesman';\par
+\par
+  MIN(SAL)                                                                      \par
+----------                                                                      \par
+      1250       \b\par
+8.Display the average salary drawn by managers \par
+A: \b0 SQL> select avg(sal) from employee_hema where job='MANAGER' or job='Manager' or job='manager';\par
+\par
+  AVG(SAL)                                                                      \par
+----------                                                                      \par
+  27068.75     \b\par
+9.Display the total salary drawn by analyst working in dept no 40 \par
+A: \b0 SQL> select (sal+comm) as total_salary from employee_hema where job='ANALYST' AND  deptno=40;\par
+\par
+no rows selected\b\par
+10. Display Department numbers and total number of employees working in each Department? \par
+A: \b0 SQL> select job,count(job) from employee_hema group by(job);\par
+(or)\par
+select deptno,count(deptno) from emp group by(deptno);\par
+\par
+JOB                                      COUNT(JOB)                             \par
+---------------------------------------- ----------                             \par
+db                                                1                             \par
+Manager                                           1                             \par
+                                                  0                             \par
+software Employee                                 1                             \par
+SALESMAN                                          4                             \par
+CLERK                                             3                             \par
+kkto                                              1                             \par
+testing                                           1                             \par
+PRESIDENT                                         1                             \par
+Developer                                         1                             \par
+MANAGER                                           3                             \par
+\par
+JOB                                      COUNT(JOB)                             \par
+---------------------------------------- ----------                             \par
+ANALYST                                           2                             \par
+\par
+12 rows selected.\b\par
+11. Display the various jobs and total number of employees working in each job group? \par
+A: \b0 SQL> select deptno,sum(sal) from employee_hema group by(deptno ,sal);\par
+(or)\par
+select job,count(job) from emp group by(job);\par
+    DEPTNO   SUM(SAL)                                                           \par
+---------- ----------                                                           \par
+        20      50000                                                           \par
+         2        400                                                           \par
+        10      30000                                                           \par
+        10       5000                                                           \par
+        30      50000                                                           \par
+        20       2975                                                           \par
+        50     100000                                                           \par
+        10       2450                                                           \par
+        30       2500                                                           \par
+        20       6000                                                           \par
+        30        950                                                           \par
+\par
+    DEPTNO   SUM(SAL)                                                           \par
+---------- ----------                                                           \par
+        12                                                                      \par
+        20       1100                                                           \par
+        10       1300                                                           \par
+        40     200000                                                           \par
+        30       1600                                                           \par
+        30       2850                                                           \par
+        30       1500                                                           \par
+\par
+18 rows selected.\b\par
+12.Display department numbers and Total Salary for each Department? \par
+A: \b0 SQL> select deptno,sum(sal) from employee_hema group by deptno,sal ;\par
+\par
+    DEPTNO   SUM(SAL)                                                           \par
+---------- ----------                                                           \par
+        20      50000                                                           \par
+         2        400                                                           \par
+        10      30000                                                           \par
+        10       5000                                                           \par
+        30      50000                                                           \par
+        20       2975                                                           \par
+        50     100000                                                           \par
+        10       2450                                                           \par
+        30       2500                                                           \par
+        20       6000                                                           \par
+        30        950                                                           \par
+\par
+    DEPTNO   SUM(SAL)                                                           \par
+---------- ----------                                                           \par
+        12                                                                      \par
+        20       1100                                                           \par
+        10       1300                                                           \par
+        40     200000                                                           \par
+        30       1600                                                           \par
+        30       2850                                                           \par
+        30       1500                                                           \par
+\par
+18 rows selected.\b\line 13.Display department numbers and Maximum Salary from each Department? \par
+A:\b0  SQL> select deptno,MAX(sal) from employee_hema group by deptno;\par
+\par
+    DEPTNO   MAX(SAL)                                                           \par
+---------- ----------                                                           \par
+        30      50000                                                           \par
+        20      50000                                                           \par
+         2        400                                                           \par
+        40     200000                                                           \par
+        50     100000                                                           \par
+        10      30000                                                           \par
+        12                                                                      \par
+\par
+7 rows selected.\par
+\b 14.Display various jobs and Total Salary for each job? \par
+A: \b0 SQL> select job,sum(sal+ nvl(comm,0)) from employee_hema group by(job);\par
+\par
+JOB                                      SUM(SAL+NVL(COMM,0))                   \par
+---------------------------------------- --------------------                   \par
+db                                                     201011                   \par
+Manager                                                101213                   \par
+                                                                                \par
+software Employee                                       30123                   \par
+SALESMAN                                                 7800                   \par
+CLERK                                                    3350                   \par
+kkto                                                      420                   \par
+testing                                                 50789                   \par
+PRESIDENT                                                5000                   \par
+Developer                                               50456                   \par
+MANAGER                                                  8275                   \par
+\par
+JOB                                      SUM(SAL+NVL(COMM,0))                   \par
+---------------------------------------- --------------------                   \par
+ANALYST                                                  6000                   \par
+\par
+12 rows selected.\b\par
+15.Display each job along with min of salary being paid in each job group? \par
+A: \b0 SQL> select job,min(sal) from employee_hema group by(job);\par
+\par
+JOB                                        MIN(SAL)                             \par
+---------------------------------------- ----------                             \par
+db                                           200000                             \par
+Manager                                      100000                             \par
+                                                                                \par
+software Employee                             30000                             \par
+SALESMAN                                       1250                             \par
+CLERK                                           950                             \par
+kkto                                            400                             \par
+testing                                       50000                             \par
+PRESIDENT                                      5000                             \par
+Developer                                     50000                             \par
+MANAGER                                        2450                             \par
+\par
+JOB                                        MIN(SAL)                             \par
+---------------------------------------- ----------                             \par
+ANALYST                                        3000                             \par
+\par
+12 rows selected.\b\par
+16. Display the department Number with more than three employees in each department? \par
+A:\b0 SQL> select deptno from employee_hema group by(deptno) having count(deptno)>3;\par
+\par
+    DEPTNO                                                                      \par
+----------                                                                      \par
+        30                                                                      \par
+        20                                                                      \par
+        10       \b\par
+17. Display various jobs along with total salary for each of the job where total salary is greater than 40000? \par
+A:\b0  SQL> select job,sum(sal+nvl(comm,0))  from employee_hema group by(job) having sum(sal+nvl(comm,0)) >40000;\par
+\par
+JOB                                      SUM(SAL+NVL(COMM,0))                   \par
+---------------------------------------- --------------------                   \par
+db                                                     201011                   \par
+Manager                                                101213                   \par
+testing                                                 50789                   \par
+Developer                                               50456                 \b\par
+18. Display the various jobs along with total number of employees in each job.The \par
+output should contain only those jobs with more than three employees? \par
+A: \b0 SQL> select job,count(job) from employee_hema group by(job) having count(job) >3;\par
+\par
+JOB                                      COUNT(JOB)                             \par
+---------------------------------------- ----------                             \par
+SALESMAN                                          4      \b\par
+19. Display the name of employees who earn Highest Salary? \par
+A: \b0 SQL> select ename from employee_hema where sal=(select max(sal) from employee_hema);\par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+madhavi           \b\par
+20. Display the employee Number and name for employee working as clerk and earning highest salary among the clerks? \par
+A: \b0 SQL> select ename,empno from employee_hema where job='CLERK' AND sal=(select max(sal) from employee_hema where job='CLERK');\par
+\par
+ENAME                                         EMPNO                             \par
+---------------------------------------- ----------                             \par
+MILLER                                         7934        \par
+\b 21. Display the names of mployees in Upper Case? \par
+A: \b0 SQL> SELECT UPPER(ENAME) from employee_hema;\par
+\par
+UPPER(ENAME)                                                                    \par
+----------------------------------------                                        \par
+ADAMS                                                                           \par
+BLAKE                                                                           \par
+CLARK                                                                           \par
+FORD                                                                            \par
+HEMA PRIYA                                                                      \par
+JAMES                                                                           \par
+JONES                                                                           \par
+KING                                                                            \par
+KULLU                                                                           \par
+MARTIN                                                                          \par
+MILLER                                                                          \par
+\par
+UPPER(ENAME)                                                                    \par
+----------------------------------------                                        \par
+SCOTT                                                                           \par
+TURNER                                                                          \par
+WARD                                                                            \par
+ALIAS                                                                           \par
+CHAITANYA                                                                       \par
+KALYANI                                                                         \par
+KK                                                                              \par
+MADHAVI                                                                         \par
+PRIYA                                                                           \par
+\par
+20 rows selected.\par
+\b 22. Display the names of employees in Lower Case? \par
+A: \b0 SQL> select lower(ename) from employee_hema;\par
+\par
+LOWER(ENAME)                                                                    \par
+----------------------------------------                                        \par
+adams                                                                           \par
+blake                                                                           \par
+clark                                                                           \par
+ford                                                                            \par
+hema priya                                                                      \par
+james                                                                           \par
+jones                                                                           \par
+king                                                                            \par
+kullu                                                                           \par
+martin                                                                          \par
+miller                                                                          \par
+\par
+LOWER(ENAME)                                                                    \par
+----------------------------------------                                        \par
+scott                                                                           \par
+turner                                                                          \par
+ward                                                                            \par
+alias                                                                           \par
+chaitanya                                                                       \par
+kalyani                                                                         \par
+kk                                                                              \par
+madhavi                                                                         \par
+priya                                                                           \par
+\par
+20 rows selected.\b\par
+23. Display the names of employees in Proper case? \par
+A: \b0 SQL> select initcap(ename) from employee_hema;\par
+\par
+INITCAP(ENAME)                                                                  \par
+----------------------------------------                                        \par
+Adams                                                                           \par
+Blake                                                                           \par
+Clark                                                                           \par
+Ford                                                                            \par
+Hema Priya                                                                      \par
+James                                                                           \par
+Jones                                                                           \par
+King                                                                            \par
+Kullu                                                                           \par
+Martin                                                                          \par
+Miller                                                                          \par
+\par
+INITCAP(ENAME)                                                                  \par
+----------------------------------------                                        \par
+Scott                                                                           \par
+Turner                                                                          \par
+Ward                                                                            \par
+Alias                                                                           \par
+Chaitanya                                                                       \par
+Kalyani                                                                         \par
+Kk                                                                              \par
+Madhavi                                                                         \par
+Priya                                                                           \par
+\par
+20 rows selected.\b\par
+24. Find the length of your name using Appropriate Function? \par
+A: \b0 SQL> select length('Hema Priya') from dual;\par
+\par
+LENGTH('HEMAPRIYA')                                                             \par
+-------------------                                                             \par
+                 10            \b\par
+25. Display the length of all the employee names? \par
+A: \b0 SQL> select length(ename) from employee_hema;\par
+\par
+LENGTH(ENAME)                                                                   \par
+-------------                                                                   \par
+            5                                                                   \par
+            5                                                                   \par
+            5                                                                   \par
+            4                                                                   \par
+           10                                                                   \par
+            5                                                                   \par
+            5                                                                   \par
+            4                                                                   \par
+            5                                                                   \par
+            6                                                                   \par
+            6                                                                   \par
+\par
+LENGTH(ENAME)                                                                   \par
+-------------                                                                   \par
+            5                                                                   \par
+            6                                                                   \par
+            4                                                                   \par
+            5                                                                   \par
+            9                                                                   \par
+            7                                                                   \par
+            2                                                                   \par
+            7                                                                   \par
+            5                                                                   \par
+\par
+20 rows selected.\b\par
+26. Display the name of employee Concatinate with Employee Number? \par
+A: \b0 SQL> select concat(ename,empno) from employee_hema;\par
+\par
+CONCAT(ENAME,EMPNO)                                                             \par
+--------------------------------------------------------------------------------\par
+Hema Priya101                                                                   \par
+kalyani102                                                                      \par
+chaitanya103                                                                    \par
+madhavi104                                                                      \par
+Kullu105                                                                        \par
+alias7499                                                                       \par
+WARD7521                                                                        \par
+JONES7566                                                                       \par
+MARTIN7654                                                                      \par
+BLAKE7698                                                                       \par
+CLARK7782                                                                       \par
+\par
+CONCAT(ENAME,EMPNO)                                                             \par
+--------------------------------------------------------------------------------\par
+SCOTT7788                                                                       \par
+KING7839                                                                        \par
+TURNER7844                                                                      \par
+ADAMS7876                                                                       \par
+JAMES7900                                                                       \par
+FORD7902                                                                        \par
+MILLER7934                                                                      \par
+priya1200                                                                       \par
+kk12                                                                            \par
+\par
+20 rows selected.\b\par
+27. Use appropriate function and extract 3 characters starting from 2 characters from the following string 'Oracle' i.e., the out put should be ac? \par
+A: \b0 SQL> select substr('oracle',3,2) from dual;\par
+\par
+SU                                                                              \par
+--                                                                              \par
+ac    \b\par
+28. Find the first occurance of character a from the following string Computer Maintenance Corporation? \par
+A: \b0 SQL> select instr('Computer Maintenance Corporation','a',1,1) from dual;\par
+\par
+INSTR('COMPUTERMAINTENANCECORPORATION','A',1,1)                                 \par
+-----------------------------------------------                                 \par
+                                             11          \b\par
+29. Display the information from the employee table . where ever job Manager is found it should be displayed as Boss? \par
+A: \b0 SQL> select replace(job,'MANAGER','BOSS') from employee_hema;\par
+\par
+REPLACE(JOB,'MANAGER','BOSS')                                                   \par
+--------------------------------------------------------------------------------\par
+software Employee                                                               \par
+Developer                                                                       \par
+testing                                                                         \par
+db                                                                              \par
+Manager                                                                         \par
+SALESMAN                                                                        \par
+SALESMAN                                                                        \par
+BOSS                                                                            \par
+SALESMAN                                                                        \par
+BOSS                                                                            \par
+BOSS                                                                            \par
+\par
+REPLACE(JOB,'MANAGER','BOSS')                                                   \par
+--------------------------------------------------------------------------------\par
+ANALYST                                                                         \par
+PRESIDENT                                                                       \par
+SALESMAN                                                                        \par
+CLERK                                                                           \par
+CLERK                                                                           \par
+ANALYST                                                                         \par
+CLERK                                                                           \par
+                                                                                \par
+kkto                                                                            \par
+\par
+20 rows selected.\b\par
+30. Display empno,ename,deptno from tvsemp table. Instead of display department numbers \par
+display the related department name(Use decode function)? \par
+A: \b0 SQL> select empno,ename,deptno, decode(deptno,10,'ACCOUNTING',20,'RESEARCH',30,'SALES',40,'OPERATIONS') "DEPT_NAME" FROM employee_hema;\par
+\par
+     EMPNO ENAME                                        DEPTNO DEPT_NAME        \par
+---------- ---------------------------------------- ---------- ----------       \par
+       101 Hema Priya                                       10 ACCOUNTING       \par
+       102 kalyani                                          20 RESEARCH         \par
+       103 chaitanya                                        30 SALES            \par
+       104 madhavi                                          40 OPERATIONS       \par
+       105 Kullu                                            50                  \par
+      7499 alias                                            30 SALES            \par
+      7521 WARD                                             30 SALES            \par
+      7566 JONES                                            20 RESEARCH         \par
+      7654 MARTIN                                           30 SALES            \par
+      7698 BLAKE                                            30 SALES            \par
+      7782 CLARK                                            10 ACCOUNTING       \par
+\par
+     EMPNO ENAME                                        DEPTNO DEPT_NAME        \par
+---------- ---------------------------------------- ---------- ----------       \par
+      7788 SCOTT                                            20 RESEARCH         \par
+      7839 KING                                             10 ACCOUNTING       \par
+      7844 TURNER                                           30 SALES            \par
+      7876 ADAMS                                            20 RESEARCH         \par
+      7900 JAMES                                            30 SALES            \par
+      7902 FORD                                             20 RESEARCH         \par
+      7934 MILLER                                           10 ACCOUNTING       \par
+      1200 priya                                            12                  \par
+        12 kk                                                2                  \par
+\par
+20 rows selected.\b\par
+31. Display your Age in Days? \par
+A: \b0 SQL> SELECT SYSDATE-TO_DATE('29-03-1996','DD-MM-YYYY') FROM DUAL;\par
+\par
+SYSDATE-TO_DATE('29-03-1996','DD-MM-YYYY')\par
+------------------------------------------\par
+                                 8095.6651\par
+\b 32. Display your Age in Months? \par
+A: \b0 SQL> select months_between(sysdate,'29-mar-96') from dual;\par
+\par
+MONTHS_BETWEEN(SYSDATE,'29-MAR-96')                                             \par
+-----------------------------------                                             \par
+                         265.858714     \b\par
+33. Display current date as 15th August Friday Nineteen Nienty Seven? \par
+A: \b0 SQL> select to_char(sysdate,'ddth month day year') from dual;\par
+\par
+TO_CHAR(SYSDATE,'DDTHMONTHDAYYEAR')                                             \par
+-------------------------------------------------------------------             \par
+24th may       thursday  twenty eighteen                                        \b\par
+34. Scott has joined the company on 13th August ninteen ninety? \par
+A: \b0 SQL> select to_char(hiredate,'ddth month year') from employee_hema where ename='SCOTT';\par
+\par
+TO_CHAR(HIREDATE,'DDTHMONTHYEAR')                                               \par
+---------------------------------------------------------                       \par
+09th december  nineteen eighty-two     \b\par
+35. Find the nearest Saturday after Current date? \par
+A: \b0 SQL> SELECT NEXT_DAY(SYSDATE,'SATURDAY') FROM DUAL;\par
+\par
+NEXT_DAY(                                                                       \par
+---------                                                                       \par
+02-JUN-18    \b\par
+36. Display the current time? \par
+A: \b0 SQL> select to_char(sysdate,'hh:mm:ss') from dual;\par
+\par
+TO_CHAR(                                                                        \par
+--------                                                                        \par
+06:05:02       \b\par
+37. Display the date three months before the Current date? \par
+A: \b0 SQL> SELECT add_months(sysdate,3) from dual; --> forward \par
+SELECT add_months(sysdate,-3) from dual; -->backward\par
+\par
+ADD_MONTH                                                                       \par
+---------                                                                       \par
+24-AUG-18   \b\par
+38. Display the details of those employees who do not have any person working under him? \par
+A: \b0 SQL> select e.ename from emp,emp e where emp.mgr=e.empno group by e.ename having count(*)=1;\par
+(or)\par
+SELECT * FROM EMP WHERE EMPNO NOT IN (SELECT MGR FROM EMP WHERE MGR IS NOT NULL); \par
+\par
+ENAME                                                                           \par
+----------                                                                      \par
+CLARK                                                                           \par
+SCOTT    \b\par
+39. Display the details of those employees who are in sales department and grade is 3? \par
+A: \b0 SQL> select * from employee_hema where deptno=(select deptno from dept where dname='SALES') AND SAL BETWEEN (select losal from salgrade where grade=3) and (select hisal from salgrade where grade=3);\par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO                                                           \par
+---------- ----------                                                           \par
+      7499 alias                                                                \par
+SALESMAN                                       7698 20-FEB-81       1600        \par
+       300         30                                                           \par
+                                                                                \par
+      7844 TURNER                                                               \par
+SALESMAN                                       7698 08-SEP-81       1500        \par
+         0         30                                                           \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO                                                           \par
+---------- ----------                     \b\par
+40. Display ename who are working in sales department? \par
+A: \b0 SQL> select ename from employee_hema where deptno=(select deptno from dept where dname='SALES');\par
+(OR)\par
+SELECT e.ename from emp e,dept d where e.deptno=d.deptno and d.dname='SALES';\par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+chaitanya                                                                       \par
+alias                                                                           \par
+WARD                                                                            \par
+MARTIN                                                                          \par
+BLAKE                                                                           \par
+TURNER                                                                          \par
+JAMES                                                                           \par
+\par
+7 rows selected.\b\par
+41. Display employee name,dept name,salary,and commission for those sal in between 2000 \par
+to 5000 while location is Chicago? \par
+A: \b0 SQL> SELECT e.ename,e.sal,e.comm,d.dname from dept d , employee_hema e where d.deptno=e.deptno and e.sal between 2000 and 5000 and d.loc='CHICAGO';\par
+\par
+ENAME                                           SAL       COMM DNAME            \par
+---------------------------------------- ---------- ---------- --------------   \par
+BLAKE                                          2850            SALES            \b\par
+42. Display those employees whose salary is greater than his managers salary? \par
+A: \b0 SQL> select * from employee_hema a where sal >(select b.sal  from employee_hema b where  b.empno=a.mgr);\par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO                                                           \par
+---------- ----------                                                           \par
+      7788 SCOTT                                                                \par
+ANALYST                                        7566 09-DEC-82       3000        \par
+                   20                                                           \par
+                                                                                \par
+      7902 FORD                                                                 \par
+ANALYST                                        7566 03-DEC-81       3000        \par
+                   20                                                           \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO                                                           \par
+---------- ----------                                                           \par
+                          \b\par
+43. Display those employees who are working in the same dept where his manager is work? \par
+A;\b0  SQL> select e.ename,e.job,d.dname,d.loc from employee_hema e,dept d where e.deptno=d.deptno;\par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+Hema Priya                                                                      \par
+software Employee                        ACCOUNTING     NEW YORK                \par
+                                                                                \par
+kalyani                                                                         \par
+Developer                                RESEARCH       DALLAS                  \par
+                                                                                \par
+chaitanya                                                                       \par
+testing                                  SALES          CHICAGO                 \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+madhavi                                                                         \par
+db                                       OPERATIONS     BOSTON                  \par
+                                                                                \par
+alias                                                                           \par
+SALESMAN                                 SALES          CHICAGO                 \par
+                                                                                \par
+WARD                                                                            \par
+SALESMAN                                 SALES          CHICAGO                 \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+JONES                                                                           \par
+MANAGER                                  RESEARCH       DALLAS                  \par
+                                                                                \par
+MARTIN                                                                          \par
+SALESMAN                                 SALES          CHICAGO                 \par
+                                                                                \par
+BLAKE                                                                           \par
+MANAGER                                  SALES          CHICAGO                 \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+CLARK                                                                           \par
+MANAGER                                  ACCOUNTING     NEW YORK                \par
+                                                                                \par
+SCOTT                                                                           \par
+ANALYST                                  RESEARCH       DALLAS                  \par
+                                                                                \par
+KING                                                                            \par
+PRESIDENT                                ACCOUNTING     NEW YORK                \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+TURNER                                                                          \par
+SALESMAN                                 SALES          CHICAGO                 \par
+                                                                                \par
+ADAMS                                                                           \par
+CLERK                                    RESEARCH       DALLAS                  \par
+                                                                                \par
+JAMES                                                                           \par
+CLERK                                    SALES          CHICAGO                 \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+FORD                                                                            \par
+ANALYST                                  RESEARCH       DALLAS                  \par
+                                                                                \par
+MILLER                                                                          \par
+CLERK                                    ACCOUNTING     NEW YORK                \par
+                                                                                \par
+\par
+17 rows selected.\b\par
+44. Display employee name ,job,deptname,loc for all who are working as manager? \par
+A: \b0 SQL> select e.ename,e.job,d.dname,d.loc from employee_hema e,dept d where mgr is not null;\par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+Hema Priya                                                                      \par
+software Employee                        ACCOUNTING     NEW YORK                \par
+                                                                                \par
+kalyani                                                                         \par
+Developer                                ACCOUNTING     NEW YORK                \par
+                                                                                \par
+chaitanya                                                                       \par
+testing                                  ACCOUNTING     NEW YORK                \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+madhavi                                                                         \par
+db                                       ACCOUNTING     NEW YORK                \par
+                                                                                \par
+Kullu                                                                           \par
+Manager                                  ACCOUNTING     NEW YORK                \par
+                                                                                \par
+alias                                                                           \par
+SALESMAN                                 ACCOUNTING     NEW YORK                \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+WARD                                                                            \par
+SALESMAN                                 ACCOUNTING     NEW YORK                \par
+                                                                                \par
+JONES                                                                           \par
+MANAGER                                  ACCOUNTING     NEW YORK                \par
+                                                                                \par
+MARTIN                                                                          \par
+SALESMAN                                 ACCOUNTING     NEW YORK                \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+BLAKE                                                                           \par
+MANAGER                                  ACCOUNTING     NEW YORK                \par
+                                                                                \par
+CLARK                                                                           \par
+MANAGER                                  ACCOUNTING     NEW YORK                \par
+                                                                                \par
+SCOTT                                                                           \par
+ANALYST                                  ACCOUNTING     NEW YORK                \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+TURNER                                                                          \par
+SALESMAN                                 ACCOUNTING     NEW YORK                \par
+                                                                                \par
+ADAMS                                                                           \par
+CLERK                                    ACCOUNTING     NEW YORK                \par
+                                                                                \par
+JAMES                                                                           \par
+CLERK                                    ACCOUNTING     NEW YORK                \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+FORD                                                                            \par
+ANALYST                                  ACCOUNTING     NEW YORK                \par
+                                                                                \par
+MILLER                                                                          \par
+CLERK                                    ACCOUNTING     NEW YORK                \par
+                                                                                \par
+kk                                                                              \par
+kkto                                     ACCOUNTING     NEW YORK                \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+Hema Priya                                                                      \par
+software Employee                        RESEARCH       DALLAS                  \par
+                                                                                \par
+kalyani                                                                         \par
+Developer                                RESEARCH       DALLAS                  \par
+                                                                                \par
+chaitanya                                                                       \par
+testing                                  RESEARCH       DALLAS                  \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+madhavi                                                                         \par
+db                                       RESEARCH       DALLAS                  \par
+                                                                                \par
+Kullu                                                                           \par
+Manager                                  RESEARCH       DALLAS                  \par
+                                                                                \par
+alias                                                                           \par
+SALESMAN                                 RESEARCH       DALLAS                  \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+WARD                                                                            \par
+SALESMAN                                 RESEARCH       DALLAS                  \par
+                                                                                \par
+JONES                                                                           \par
+MANAGER                                  RESEARCH       DALLAS                  \par
+                                                                                \par
+MARTIN                                                                          \par
+SALESMAN                                 RESEARCH       DALLAS                  \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+BLAKE                                                                           \par
+MANAGER                                  RESEARCH       DALLAS                  \par
+                                                                                \par
+CLARK                                                                           \par
+MANAGER                                  RESEARCH       DALLAS                  \par
+                                                                                \par
+SCOTT                                                                           \par
+ANALYST                                  RESEARCH       DALLAS                  \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+TURNER                                                                          \par
+SALESMAN                                 RESEARCH       DALLAS                  \par
+                                                                                \par
+ADAMS                                                                           \par
+CLERK                                    RESEARCH       DALLAS                  \par
+                                                                                \par
+JAMES                                                                           \par
+CLERK                                    RESEARCH       DALLAS                  \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+FORD                                                                            \par
+ANALYST                                  RESEARCH       DALLAS                  \par
+                                                                                \par
+MILLER                                                                          \par
+CLERK                                    RESEARCH       DALLAS                  \par
+                                                                                \par
+kk                                                                              \par
+kkto                                     RESEARCH       DALLAS                  \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+Hema Priya                                                                      \par
+software Employee                        SALES          CHICAGO                 \par
+                                                                                \par
+kalyani                                                                         \par
+Developer                                SALES          CHICAGO                 \par
+                                                                                \par
+chaitanya                                                                       \par
+testing                                  SALES          CHICAGO                 \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+madhavi                                                                         \par
+db                                       SALES          CHICAGO                 \par
+                                                                                \par
+Kullu                                                                           \par
+Manager                                  SALES          CHICAGO                 \par
+                                                                                \par
+alias                                                                           \par
+SALESMAN                                 SALES          CHICAGO                 \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+WARD                                                                            \par
+SALESMAN                                 SALES          CHICAGO                 \par
+                                                                                \par
+JONES                                                                           \par
+MANAGER                                  SALES          CHICAGO                 \par
+                                                                                \par
+MARTIN                                                                          \par
+SALESMAN                                 SALES          CHICAGO                 \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+BLAKE                                                                           \par
+MANAGER                                  SALES          CHICAGO                 \par
+                                                                                \par
+CLARK                                                                           \par
+MANAGER                                  SALES          CHICAGO                 \par
+                                                                                \par
+SCOTT                                                                           \par
+ANALYST                                  SALES          CHICAGO                 \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+TURNER                                                                          \par
+SALESMAN                                 SALES          CHICAGO                 \par
+                                                                                \par
+ADAMS                                                                           \par
+CLERK                                    SALES          CHICAGO                 \par
+                                                                                \par
+JAMES                                                                           \par
+CLERK                                    SALES          CHICAGO                 \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+FORD                                                                            \par
+ANALYST                                  SALES          CHICAGO                 \par
+                                                                                \par
+MILLER                                                                          \par
+CLERK                                    SALES          CHICAGO                 \par
+                                                                                \par
+kk                                                                              \par
+kkto                                     SALES          CHICAGO                 \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+Hema Priya                                                                      \par
+software Employee                        OPERATIONS     BOSTON                  \par
+                                                                                \par
+kalyani                                                                         \par
+Developer                                OPERATIONS     BOSTON                  \par
+                                                                                \par
+chaitanya                                                                       \par
+testing                                  OPERATIONS     BOSTON                  \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+madhavi                                                                         \par
+db                                       OPERATIONS     BOSTON                  \par
+                                                                                \par
+Kullu                                                                           \par
+Manager                                  OPERATIONS     BOSTON                  \par
+                                                                                \par
+alias                                                                           \par
+SALESMAN                                 OPERATIONS     BOSTON                  \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+WARD                                                                            \par
+SALESMAN                                 OPERATIONS     BOSTON                  \par
+                                                                                \par
+JONES                                                                           \par
+MANAGER                                  OPERATIONS     BOSTON                  \par
+                                                                                \par
+MARTIN                                                                          \par
+SALESMAN                                 OPERATIONS     BOSTON                  \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+BLAKE                                                                           \par
+MANAGER                                  OPERATIONS     BOSTON                  \par
+                                                                                \par
+CLARK                                                                           \par
+MANAGER                                  OPERATIONS     BOSTON                  \par
+                                                                                \par
+SCOTT                                                                           \par
+ANALYST                                  OPERATIONS     BOSTON                  \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+TURNER                                                                          \par
+SALESMAN                                 OPERATIONS     BOSTON                  \par
+                                                                                \par
+ADAMS                                                                           \par
+CLERK                                    OPERATIONS     BOSTON                  \par
+                                                                                \par
+JAMES                                                                           \par
+CLERK                                    OPERATIONS     BOSTON                  \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                      DNAME          LOC                     \par
+---------------------------------------- -------------- -------------           \par
+FORD                                                                            \par
+ANALYST                                  OPERATIONS     BOSTON                  \par
+                                                                                \par
+MILLER                                                                          \par
+CLERK                                    OPERATIONS     BOSTON                  \par
+                                                                                \par
+kk                                                                              \par
+kkto                                     OPERATIONS     BOSTON      \b\par
+45. Display those employees whose manager name is jones and also display their manager \par
+name? \par
+A: \b0 SQL> select a.ename from employee_hema a, employee_hema b where a.ename='JONES' and a.empno=b.mgr;\par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JONES                                                                           \par
+JONES  \b\par
+46. Display name and salary of ford if his salary is equal to hisal of his grade? \par
+A: \b0 SQL> select e.ename,e.sal,grade from employee_hema e,salgrade where e.sal between losal and hisal and  e.ename='FORD' AND hisal=sal;\par
+\par
+ENAME                                           SAL      GRADE                  \par
+---------------------------------------- ---------- ----------                  \par
+FORD                                           3000          4      \b\par
+47. Display employee name ,job,deptname,his manager name ,his grade and make an \par
+under department wise? \par
+A:\b0 SQL> SELECT E.ENAME,E.JOB,DNAME,EMP.ENAME,GRADE FROM EMP,EMP E,SALGRADE,DEPT WHERE EMP.SAL BETWEEN LOSAL AND HISAL AND EMP.EMPNO=E.MGR AND EMP.DEPTNO=DEPT.DEPTNO ORDER BY DNAME;\par
+\par
+ENAME      JOB       DNAME          ENAME           GRADE                       \par
+---------- --------- -------------- ---------- ----------                       \par
+MILLER     CLERK     ACCOUNTING     CLARK               4                       \par
+BLAKE      MANAGER   ACCOUNTING     KING                5                       \par
+CLARK      MANAGER   ACCOUNTING     KING                5                       \par
+JONES      MANAGER   ACCOUNTING     KING                5                       \par
+SCOTT      ANALYST   RESEARCH       JONES               4                       \par
+ADAMS      CLERK     RESEARCH       SCOTT               4                       \par
+FORD       ANALYST   RESEARCH       JONES               4                       \par
+alias      SALESMAN  SALES          BLAKE               4                       \par
+WARD       SALESMAN  SALES          BLAKE               4                       \par
+MARTIN     SALESMAN  SALES          BLAKE               4                       \par
+JAMES      CLERK     SALES          BLAKE               4                       \par
+\par
+ENAME      JOB       DNAME          ENAME           GRADE                       \par
+---------- --------- -------------- ---------- ----------                       \par
+TURNER     SALESMAN  SALES          BLAKE               4                       \par
+\par
+12 rows selected.\b\par
+48. List out all the employee names ,job,salary,grade and deptname for every one in a company except 'CLERK' . Sort on salary display the highest salary? \par
+A:\b0 SQL> SELECT ENAME,JOB,DNAME,SAL,GRADE FROM EMP,SALGRADE,DEPT WHERE SAL BETWEEN LOSAL AND HISAL AND EMP.DEPTNO=DEPT.DEPTNO AND JOB NOT IN('CLERK')ORDER BY SAL ASC;\par
+\par
+ENAME      JOB       DNAME                 SAL      GRADE                       \par
+---------- --------- -------------- ---------- ----------                       \par
+WARD       SALESMAN  SALES                1250          2                       \par
+MARTIN     SALESMAN  SALES                1250          2                       \par
+TURNER     SALESMAN  SALES                1500          3                       \par
+alias      SALESMAN  SALES                1600          3                       \par
+CLARK      MANAGER   ACCOUNTING           2450          4                       \par
+BLAKE      MANAGER   SALES                2850          4                       \par
+JONES      MANAGER   RESEARCH             2975          4                       \par
+FORD       ANALYST   RESEARCH             3000          4                       \par
+SCOTT      ANALYST   RESEARCH             3000          4                       \par
+KING       PRESIDENT ACCOUNTING           5000          5                       \par
+\par
+10 rows selected.\b\par
+49. Display employee name,job and his manager .Display also employees who are with out \par
+managers? \par
+A:\b0 SQL> select e.ename,e.job,b.ename from employee_hema b,employee_hema e where b.empno=e.mgr;\par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                                                             \par
+----------------------------------------                                        \par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+FORD                                                                            \par
+ANALYST                                                                         \par
+JONES                                                                           \par
+                                                                                \par
+SCOTT                                                                           \par
+ANALYST                                                                         \par
+JONES                                                                           \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                                                             \par
+----------------------------------------                                        \par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+                                                                                \par
+JAMES                                                                           \par
+CLERK                                                                           \par
+BLAKE                                                                           \par
+                                                                                \par
+TURNER                                                                          \par
+SALESMAN                                                                        \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                                                             \par
+----------------------------------------                                        \par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+BLAKE                                                                           \par
+                                                                                \par
+MARTIN                                                                          \par
+SALESMAN                                                                        \par
+BLAKE                                                                           \par
+                                                                                \par
+WARD                                                                            \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                                                             \par
+----------------------------------------                                        \par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+SALESMAN                                                                        \par
+BLAKE                                                                           \par
+                                                                                \par
+alias                                                                           \par
+SALESMAN                                                                        \par
+BLAKE                                                                           \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                                                             \par
+----------------------------------------                                        \par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+MILLER                                                                          \par
+CLERK                                                                           \par
+CLARK                                                                           \par
+                                                                                \par
+ADAMS                                                                           \par
+CLERK                                                                           \par
+SCOTT                                                                           \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                                                             \par
+----------------------------------------                                        \par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+                                                                                \par
+CLARK                                                                           \par
+MANAGER                                                                         \par
+KING                                                                            \par
+                                                                                \par
+BLAKE                                                                           \par
+MANAGER                                                                         \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                                                             \par
+----------------------------------------                                        \par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+KING                                                                            \par
+                                                                                \par
+JONES                                                                           \par
+MANAGER                                                                         \par
+KING                                                                            \par
+                                                                                \par
+\par
+12 rows selected.\b\par
+50. Display Top 5 employee of a Company? \par
+A:\b0 SQL> select distinct e.ename,e.sal from employee_hema e where 5>=(select count(distinct sal) from employee_hema a where a.sal>e.sal) order by sal desc;\par
+\par
+ENAME                                           SAL                             \par
+---------------------------------------- ----------                             \par
+priya                                                                           \par
+madhavi                                      200000                             \par
+Kullu                                        100000                             \par
+kalyani                                       50000                             \par
+chaitanya                                     50000                             \par
+Hema Priya                                    30000                             \par
+KING                                           5000                             \par
+SCOTT                                          3000                             \par
+FORD                                           3000                             \par
+\par
+9 rows selected.\b\par
+51. Select count of employees in each department where count >3? \par
+A:\b0 SQL> select count(deptno) from employee_hema group by deptno having count(deptno)>3;\par
+\par
+COUNT(DEPTNO)                                                                   \par
+-------------                                                                   \par
+            7                                                                   \par
+            5                                                                   \par
+            4        \b\par
+52. Display dname where atleast three are working and display only deptname? \par
+A:\b0 SQL> select d.dname,count(e.deptno) from dept d,EMPLOYEE_HEMA e where e.deptno=d.deptno  group by d.deptno,d.dname having count(e.deptno)>3;\par
+\par
+DNAME          COUNT(E.DEPTNO)                                                  \par
+-------------- ---------------                                                  \par
+ACCOUNTING                   4                                                  \par
+RESEARCH                     5                                                  \par
+SALES                        7      \b\par
+53. Display those employees whose salary contains atleast 3 digits? \par
+A: \b0 SQL> select * from employee_hema e where length(sal)>=3;\par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO                                                           \par
+---------- ----------                                                           \par
+       101 Hema Priya                                                           \par
+software Employee                              1234 15-OCT-17      30000        \par
+       123         10                                                           \par
+                                                                                \par
+       102 kalyani                                                              \par
+Developer                                       456 15-OCT-17      50000        \par
+       456         20                                                           \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO                                                           \par
+---------- ----------                                                           \par
+                                                                                \par
+       103 chaitanya                                                            \par
+testing                                         789 15-OCT-17      50000        \par
+       789         30                                                           \par
+                                                                                \par
+       104 madhavi                                                              \par
+db                                             1011 15-OCT-17     200000        \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO                                                           \par
+---------- ----------                                                           \par
+      1011         40                                                           \par
+                                                                                \par
+       105 Kullu                                                                \par
+Manager                                        1213 15-OCT-17     100000        \par
+      1213         50                                                           \par
+                                                                                \par
+      7499 alias                                                                \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO                                                           \par
+---------- ----------                                                           \par
+SALESMAN                                       7698 20-FEB-81       1600        \par
+       300         30                                                           \par
+                                                                                \par
+      7521 WARD                                                                 \par
+SALESMAN                                       7698 22-FEB-81       1250        \par
+       500         30                                                           \par
+                                                                                \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO                                                           \par
+---------- ----------                                                           \par
+      7566 JONES                                                                \par
+MANAGER                                        7839 02-APR-81       2975        \par
+                   20                                                           \par
+                                                                                \par
+      7654 MARTIN                                                               \par
+SALESMAN                                       7698 28-SEP-81       1250        \par
+      1400         30                                                           \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO                                                           \par
+---------- ----------                                                           \par
+                                                                                \par
+      7698 BLAKE                                                                \par
+MANAGER                                        7839 01-MAY-81       2850        \par
+                   30                                                           \par
+                                                                                \par
+      7782 CLARK                                                                \par
+MANAGER                                        7839 09-JUN-81       2450        \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO                                                           \par
+---------- ----------                                                           \par
+                   10                                                           \par
+                                                                                \par
+      7788 SCOTT                                                                \par
+ANALYST                                        7566 09-DEC-82       3000        \par
+                   20                                                           \par
+                                                                                \par
+      7839 KING                                                                 \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO                                                           \par
+---------- ----------                                                           \par
+PRESIDENT                                           17-NOV-81       5000        \par
+                   10                                                           \par
+                                                                                \par
+      7844 TURNER                                                               \par
+SALESMAN                                       7698 08-SEP-81       1500        \par
+         0         30                                                           \par
+                                                                                \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO                                                           \par
+---------- ----------                                                           \par
+      7876 ADAMS                                                                \par
+CLERK                                          7788 12-JAN-83       1100        \par
+                   20                                                           \par
+                                                                                \par
+      7900 JAMES                                                                \par
+CLERK                                          7698 03-DEC-81        950        \par
+                   30                                                           \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO                                                           \par
+---------- ----------                                                           \par
+                                                                                \par
+      7902 FORD                                                                 \par
+ANALYST                                        7566 03-DEC-81       3000        \par
+                   20                                                           \par
+                                                                                \par
+      7934 MILLER                                                               \par
+CLERK                                          7782 23-JAN-82       1300        \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO                                                           \par
+---------- ----------                                                           \par
+                   10                                                           \par
+                                                                                \par
+        12 kk                                                                   \par
+kkto                                             83 15-DEC-17        400        \par
+        20          2                                                           \par
+                                                                                \par
+\par
+19 rows selected.\b\par
+54. Display those employees who joined in the company in the month of Dec? \par
+A: \b0 SQL> select * from employee_hema where to_char(hiredate,'mon')='dec';\par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO                                                           \par
+---------- ----------                                                           \par
+      7788 SCOTT                                                                \par
+ANALYST                                        7566 09-DEC-82       3000        \par
+                   20                                                           \par
+                                                                                \par
+      7900 JAMES                                                                \par
+CLERK                                          7698 03-DEC-81        950        \par
+                   30                                                           \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO                                                           \par
+---------- ----------                                                           \par
+                                                                                \par
+      7902 FORD                                                                 \par
+ANALYST                                        7566 03-DEC-81       3000        \par
+                   20                                                           \par
+                                                                                \par
+        12 kk                                                                   \par
+kkto                                             83 15-DEC-17        400        \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO                                                           \par
+---------- ----------                                                           \par
+        20          2                                                           \par
+                                                                                \b\par
+55. Display those employees who are working in sales or research? \par
+A: \b0 SQL> select * from employee_hema e, dept d where e.deptno=d.deptno and d.dname='SALES' OR D.DNAME='RESEARCH';\par
+(or)\par
+SELECT E.* FROM EMP E,DEPT D WHERE E.DEPTNO=D.DEPTNO AND D.DNAME IN('SALES','RESEARCH'); \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO     DEPTNO DNAME          LOC                             \par
+---------- ---------- ---------- -------------- -------------                   \par
+       101 Hema Priya                                                           \par
+software Employee                              1234 15-OCT-17      30000        \par
+       123         10         20 RESEARCH       DALLAS                          \par
+                                                                                \par
+       102 kalyani                                                              \par
+Developer                                       456 15-OCT-17      50000        \par
+       456         20         20 RESEARCH       DALLAS                          \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO     DEPTNO DNAME          LOC                             \par
+---------- ---------- ---------- -------------- -------------                   \par
+                                                                                \par
+       103 chaitanya                                                            \par
+testing                                         789 15-OCT-17      50000        \par
+       789         30         20 RESEARCH       DALLAS                          \par
+                                                                                \par
+       104 madhavi                                                              \par
+db                                             1011 15-OCT-17     200000        \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO     DEPTNO DNAME          LOC                             \par
+---------- ---------- ---------- -------------- -------------                   \par
+      1011         40         20 RESEARCH       DALLAS                          \par
+                                                                                \par
+       105 Kullu                                                                \par
+Manager                                        1213 15-OCT-17     100000        \par
+      1213         50         20 RESEARCH       DALLAS                          \par
+                                                                                \par
+      7499 alias                                                                \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO     DEPTNO DNAME          LOC                             \par
+---------- ---------- ---------- -------------- -------------                   \par
+SALESMAN                                       7698 20-FEB-81       1600        \par
+       300         30         20 RESEARCH       DALLAS                          \par
+                                                                                \par
+      7521 WARD                                                                 \par
+SALESMAN                                       7698 22-FEB-81       1250        \par
+       500         30         20 RESEARCH       DALLAS                          \par
+                                                                                \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO     DEPTNO DNAME          LOC                             \par
+---------- ---------- ---------- -------------- -------------                   \par
+      7566 JONES                                                                \par
+MANAGER                                        7839 02-APR-81       2975        \par
+                   20         20 RESEARCH       DALLAS                          \par
+                                                                                \par
+      7654 MARTIN                                                               \par
+SALESMAN                                       7698 28-SEP-81       1250        \par
+      1400         30         20 RESEARCH       DALLAS                          \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO     DEPTNO DNAME          LOC                             \par
+---------- ---------- ---------- -------------- -------------                   \par
+                                                                                \par
+      7698 BLAKE                                                                \par
+MANAGER                                        7839 01-MAY-81       2850        \par
+                   30         20 RESEARCH       DALLAS                          \par
+                                                                                \par
+      7782 CLARK                                                                \par
+MANAGER                                        7839 09-JUN-81       2450        \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO     DEPTNO DNAME          LOC                             \par
+---------- ---------- ---------- -------------- -------------                   \par
+                   10         20 RESEARCH       DALLAS                          \par
+                                                                                \par
+      7788 SCOTT                                                                \par
+ANALYST                                        7566 09-DEC-82       3000        \par
+                   20         20 RESEARCH       DALLAS                          \par
+                                                                                \par
+      7839 KING                                                                 \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO     DEPTNO DNAME          LOC                             \par
+---------- ---------- ---------- -------------- -------------                   \par
+PRESIDENT                                           17-NOV-81       5000        \par
+                   10         20 RESEARCH       DALLAS                          \par
+                                                                                \par
+      7844 TURNER                                                               \par
+SALESMAN                                       7698 08-SEP-81       1500        \par
+         0         30         20 RESEARCH       DALLAS                          \par
+                                                                                \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO     DEPTNO DNAME          LOC                             \par
+---------- ---------- ---------- -------------- -------------                   \par
+      7876 ADAMS                                                                \par
+CLERK                                          7788 12-JAN-83       1100        \par
+                   20         20 RESEARCH       DALLAS                          \par
+                                                                                \par
+      7900 JAMES                                                                \par
+CLERK                                          7698 03-DEC-81        950        \par
+                   30         20 RESEARCH       DALLAS                          \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO     DEPTNO DNAME          LOC                             \par
+---------- ---------- ---------- -------------- -------------                   \par
+                                                                                \par
+      7902 FORD                                                                 \par
+ANALYST                                        7566 03-DEC-81       3000        \par
+                   20         20 RESEARCH       DALLAS                          \par
+                                                                                \par
+      7934 MILLER                                                               \par
+CLERK                                          7782 23-JAN-82       1300        \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO     DEPTNO DNAME          LOC                             \par
+---------- ---------- ---------- -------------- -------------                   \par
+                   10         20 RESEARCH       DALLAS                          \par
+                                                                                \par
+      1200 priya                                                                \par
+                                                                                \par
+                   12         20 RESEARCH       DALLAS                          \par
+                                                                                \par
+        12 kk                                                                   \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO     DEPTNO DNAME          LOC                             \par
+---------- ---------- ---------- -------------- -------------                   \par
+kkto                                             83 15-DEC-17        400        \par
+        20          2         20 RESEARCH       DALLAS                          \par
+                                                                                \par
+       103 chaitanya                                                            \par
+testing                                         789 15-OCT-17      50000        \par
+       789         30         30 SALES          CHICAGO                         \par
+                                                                                \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO     DEPTNO DNAME          LOC                             \par
+---------- ---------- ---------- -------------- -------------                   \par
+      7499 alias                                                                \par
+SALESMAN                                       7698 20-FEB-81       1600        \par
+       300         30         30 SALES          CHICAGO                         \par
+                                                                                \par
+      7521 WARD                                                                 \par
+SALESMAN                                       7698 22-FEB-81       1250        \par
+       500         30         30 SALES          CHICAGO                         \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO     DEPTNO DNAME          LOC                             \par
+---------- ---------- ---------- -------------- -------------                   \par
+                                                                                \par
+      7654 MARTIN                                                               \par
+SALESMAN                                       7698 28-SEP-81       1250        \par
+      1400         30         30 SALES          CHICAGO                         \par
+                                                                                \par
+      7698 BLAKE                                                                \par
+MANAGER                                        7839 01-MAY-81       2850        \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO     DEPTNO DNAME          LOC                             \par
+---------- ---------- ---------- -------------- -------------                   \par
+                   30         30 SALES          CHICAGO                         \par
+                                                                                \par
+      7844 TURNER                                                               \par
+SALESMAN                                       7698 08-SEP-81       1500        \par
+         0         30         30 SALES          CHICAGO                         \par
+                                                                                \par
+      7900 JAMES                                                                \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+JOB                                             MGR HIREDATE         SAL        \par
+---------------------------------------- ---------- --------- ----------        \par
+      COMM     DEPTNO     DEPTNO DNAME          LOC                             \par
+---------- ---------- ---------- -------------- -------------                   \par
+CLERK                                          7698 03-DEC-81        950        \par
+                   30         30 SALES          CHICAGO                         \par
+                                                                                \par
+\par
+27 rows selected.\b\par
+56. List of employees with hiredate in the format of 'June 4 1988'? \par
+A: \b0 SQL> select ename,to_char(hiredate,'month dd yyyy') from employee_hema;\par
+\par
+ENAME                                    TO_CHAR(HIREDATE,                      \par
+---------------------------------------- -----------------                      \par
+Hema Priya                               october   15 2017                      \par
+kalyani                                  october   15 2017                      \par
+chaitanya                                october   15 2017                      \par
+madhavi                                  october   15 2017                      \par
+Kullu                                    october   15 2017                      \par
+alias                                    february  20 1981                      \par
+WARD                                     february  22 1981                      \par
+JONES                                    april     02 1981                      \par
+MARTIN                                   september 28 1981                      \par
+BLAKE                                    may       01 1981                      \par
+CLARK                                    june      09 1981                      \par
+\par
+ENAME                                    TO_CHAR(HIREDATE,                      \par
+---------------------------------------- -----------------                      \par
+SCOTT                                    december  09 1982                      \par
+KING                                     november  17 1981                      \par
+TURNER                                   september 08 1981                      \par
+ADAMS                                    january   12 1983                      \par
+JAMES                                    december  03 1981                      \par
+FORD                                     december  03 1981                      \par
+MILLER                                   january   23 1982                      \par
+priya                                                                           \par
+kk                                       december  15 2017                      \par
+\par
+20 rows selected.\b\par
+57. print list of employees displaying 'Just salary' if more than 1500 if exactly 1500 \par
+display 'on taget' if less than 1500 display below 1500? \par
+A: \b0 SQL> select ename,job,sal, decode(sal,'sal>1500','just salary', 'sal=1500','on target','sal<1500','below 1500') "revised salary" from employee_hema;\par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                             SAL revised sal                 \par
+---------------------------------------- ---------- -----------                 \par
+Hema Priya                                                                      \par
+software Employee                             30000                             \par
+                                                                                \par
+kalyani                                                                         \par
+Developer                                     50000                             \par
+                                                                                \par
+chaitanya                                                                       \par
+testing                                       50000                             \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                             SAL revised sal                 \par
+---------------------------------------- ---------- -----------                 \par
+madhavi                                                                         \par
+db                                           200000                             \par
+                                                                                \par
+Kullu                                                                           \par
+Manager                                      100000                             \par
+                                                                                \par
+alias                                                                           \par
+SALESMAN                                       1600                             \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                             SAL revised sal                 \par
+---------------------------------------- ---------- -----------                 \par
+WARD                                                                            \par
+SALESMAN                                       1250                             \par
+                                                                                \par
+JONES                                                                           \par
+MANAGER                                        2975                             \par
+                                                                                \par
+MARTIN                                                                          \par
+SALESMAN                                       1250                             \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                             SAL revised sal                 \par
+---------------------------------------- ---------- -----------                 \par
+BLAKE                                                                           \par
+MANAGER                                        2850                             \par
+                                                                                \par
+CLARK                                                                           \par
+MANAGER                                        2450                             \par
+                                                                                \par
+SCOTT                                                                           \par
+ANALYST                                        3000                             \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                             SAL revised sal                 \par
+---------------------------------------- ---------- -----------                 \par
+KING                                                                            \par
+PRESIDENT                                      5000                             \par
+                                                                                \par
+TURNER                                                                          \par
+SALESMAN                                       1500                             \par
+                                                                                \par
+ADAMS                                                                           \par
+CLERK                                          1100                             \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                             SAL revised sal                 \par
+---------------------------------------- ---------- -----------                 \par
+JAMES                                                                           \par
+CLERK                                           950                             \par
+                                                                                \par
+FORD                                                                            \par
+ANALYST                                        3000                             \par
+                                                                                \par
+MILLER                                                                          \par
+CLERK                                          1300                             \par
+                                                                                \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+JOB                                             SAL revised sal                 \par
+---------------------------------------- ---------- -----------                 \par
+priya                                                                           \par
+                                                                                \par
+                                                                                \par
+kk                                                                              \par
+kkto                                            400                             \par
+                                                                                \par
+\par
+20 rows selected.\b\par
+58.Find out how many managers are there with out listing them \par
+A: \b0 SQL> select count(*) from employee_hema where job='MANAGER';\par
+\par
+  COUNT(*)                                                                      \par
+----------                                                                      \par
+         3      \b\par
+59.Find out the avg sal and avg total remuneration for each job type remember salesman earn commission \par
+A: \b0 SQL> select job,avg(sal),avg(sal+nvl(comm,0)) from employee_hema group by job;\par
+\par
+JOB                                        AVG(SAL) AVG(SAL+NVL(COMM,0))        \par
+---------------------------------------- ---------- --------------------        \par
+db                                           200000               201011        \par
+Manager                                      100000               101213        \par
+                                                                                \par
+software Employee                             30000                30123        \par
+SALESMAN                                       1400                 1950        \par
+CLERK                                    1116.66667           1116.66667        \par
+kkto                                            400                  420        \par
+testing                                       50000                50789        \par
+PRESIDENT                                      5000                 5000        \par
+Developer                                     50000                50456        \par
+MANAGER                                  2758.33333           2758.33333        \par
+\par
+JOB                                        AVG(SAL) AVG(SAL+NVL(COMM,0))        \par
+---------------------------------------- ---------- --------------------        \par
+ANALYST                                        3000                 3000        \par
+\par
+12 rows selected.\b\par
+60.Check whether all employees number are indeed unique \par
+A: \b0 SQL> select empno from employee_hema minus select distinct empno from employee_hema;\par
+\par
+no rows selected\b\par
+61.List out the lowest paid employees working for each manager, exclude any groups where minsal is less than \par
+1000 sort the output by sal \par
+A: \b0 SQL> SELECTempnon(e.sal)M employee_hemamployee_hemaWHEREgr=e1.empnoUP BYempnoING MIN(e.sal)>1000 ;\b\par
+62.List out the all employees by name and number along with their manager's name and number also display \par
+'NO MANAGER' who has no manager \par
+A: \b0 SQL> select e.empno,e.ename,e1.ename,e1.empno from employee_hema e,employee_hema e1 where e.mgr=e1.empno union select empno,ename,'no manager',0 from employee_hema where mgr=null;\par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+ENAME                                         EMPNO                             \par
+---------------------------------------- ----------                             \par
+      7499 alias                                                                \par
+BLAKE                                          7698                             \par
+                                                                                \par
+      7521 WARD                                                                 \par
+BLAKE                                          7698                             \par
+                                                                                \par
+      7566 JONES                                                                \par
+KING                                           7839                             \par
+                                                                                \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+ENAME                                         EMPNO                             \par
+---------------------------------------- ----------                             \par
+      7654 MARTIN                                                               \par
+BLAKE                                          7698                             \par
+                                                                                \par
+      7698 BLAKE                                                                \par
+KING                                           7839                             \par
+                                                                                \par
+      7782 CLARK                                                                \par
+KING                                           7839                             \par
+                                                                                \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+ENAME                                         EMPNO                             \par
+---------------------------------------- ----------                             \par
+      7788 SCOTT                                                                \par
+JONES                                          7566                             \par
+                                                                                \par
+      7844 TURNER                                                               \par
+BLAKE                                          7698                             \par
+                                                                                \par
+      7876 ADAMS                                                                \par
+SCOTT                                          7788                             \par
+                                                                                \par
+\par
+     EMPNO ENAME                                                                \par
+---------- ----------------------------------------                             \par
+ENAME                                         EMPNO                             \par
+---------------------------------------- ----------                             \par
+      7900 JAMES                                                                \par
+BLAKE                                          7698                             \par
+                                                                                \par
+      7902 FORD                                                                 \par
+JONES                                          7566                             \par
+                                                                                \par
+      7934 MILLER                                                               \par
+CLARK                                          7782                             \par
+                                                                                \par
+\par
+12 rows selected.\b\par
+63.Display the department where there are no employees \par
+A: \b0 SQL> select b.dname from employee_hema a,dept b where a.deptno=b.deptno and a.deptno is null;\par
+\par
+no rows selected\b\par
+64.Display employees who can earn more than lowest sal in dept no 30 \par
+A: \b0 SQL> select ename from employee_hema where sal>(select min(sal) from employee_hema where deptno=30);\par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+Hema Priya                                                                      \par
+kalyani                                                                         \par
+chaitanya                                                                       \par
+madhavi                                                                         \par
+Kullu                                                                           \par
+alias                                                                           \par
+WARD                                                                            \par
+JONES                                                                           \par
+MARTIN                                                                          \par
+BLAKE                                                                           \par
+CLARK                                                                           \par
+\par
+ENAME                                                                           \par
+----------------------------------------                                        \par
+SCOTT                                                                           \par
+KING                                                                            \par
+TURNER                                                                          \par
+ADAMS                                                                           \par
+FORD                                                                            \par
+MILLER                                                                          \par
+\par
+17 rows selected.\b\par
+65.Find all dept's which have more than 3 employees \par
+A: \b0 SQL> select deptno from employee_hema group by deptno having count(deptno)=3;\par
+\par
+no rows selected\b\par
+66.Display the half of the enames in upper case and remaining lower case \par
+A: \par
+\pard\sa200\sl276\slmult1\lang9\b0 SQL> SELECT\par
+  2  SUBSTR(LOWER(ENAME),1,3)||SUBSTR(UPPER(ENAME),3,LENGTH(ENAME))\par
+  3  FROM EMP;\par
+\par
+SUBSTR(LOWE                                                                     \par
+-----------                                                                     \par
+aliIAS                                                                          \par
+warRD                                                                           \par
+jonNES                                                                          \par
+marRTIN                                                                         \par
+blaAKE                                                                          \par
+claARK                                                                          \par
+scoOTT                                                                          \par
+kinNG                                                                           \par
+turRNER                                                                         \par
+adaAMS                                                                          \par
+jamMES                                                                          \par
+\par
+SUBSTR(LOWE                                                                     \par
+-----------                                                                     \par
+forRD                                                                           \par
+milLLER                                                                         \par
+priIYA                                                                          \par
+kk                                                                              \par
+\par
+15 rows selected.\par
+\par
+SQL> Select ename,lower(substr(ename,1,round(length(ename)/2)))||upper(substr(ename,round(length(ename)/2)+1,length(ename))) a from emp ;\par
+\par
+ENAME      A                                                                    \par
+---------- --------------------                                                 \par
+alias      aliAS                                                                \par
+WARD       waRD                                                                 \par
+JONES      jonES                                                                \par
+MARTIN     marTIN                                                               \par
+BLAKE      blaKE                                                                \par
+CLARK      claRK                                                                \par
+SCOTT      scoTT                                                                \par
+KING       kiNG                                                                 \par
+TURNER     turNER                                                               \par
+ADAMS      adaMS                                                                \par
+JAMES      jamES                                                                \par
+\par
+ENAME      A                                                                    \par
+---------- --------------------                                                 \par
+FORD       foRD                                                                 \par
+MILLER     milLER                                                               \par
+priya      priYA                                                                \par
+kk         kK                                                                   \par
+\par
+15 rows selected.\b\par
+}
+ 

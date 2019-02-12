@@ -1,0 +1,103 @@
+SQL> select DEPTNO,decode(sal_rank,1,ENAME,' ') AS HIGH1,decode(sal_rank,2,ENAME,' ') AS HIGH2,decode(sal_rank,3,ENAME,' '),sal AS HIGH3 from(
+  2  SELECT EMPNO,ENAME,DEPTNO,sal,DENSE_RANK() OVER(PARTITION BY  DEPTNO ORDER BY SAL  DESC) sal_rank from emp )WHERE sal_rank<=3;
+
+    DEPTNO HIGH1      HIGH2      DECODE(SAL      HIGH3                          
+---------- ---------- ---------- ---------- ----------                          
+         2 kk                                      400                          
+        10 KING                                   5000                          
+        10            CLARK                       2450                          
+        10                       MILLER           1300                          
+        12 priya                                                                
+        20 SCOTT                                  3000                          
+        20 FORD                                   3000                          
+        20            JONES                       2975                          
+        20                       ADAMS            1100                          
+        30 BLAKE                                  2850                          
+        30            alias                       1600                          
+
+    DEPTNO HIGH1      HIGH2      DECODE(SAL      HIGH3                          
+---------- ---------- ---------- ---------- ----------                          
+        30                       TURNER           1500                          
+
+12 rows selected.
+
+SQL> select serial,count(serial) as occurances ,listagg(text,',') within group(order by serial) "List" from words group by serial;
+
+no rows selected
+
+SQL> select serial,count(serial) as occurances ,listagg(text,',') within group(order by serial) "List" from words group by serial;
+
+    SERIAL OCCURANCES                                                           
+---------- ----------                                                           
+List                                                                            
+--------------------------------------------------------------------------------
+       101          4                                                           
+DELL,LENOVA,LG,MOTO                                                             
+                                                                                
+       201          3                                                           
+ACER,HTC,SAMSUNG                                                                
+                                                                                
+       301          4                                                           
+ERICSON,KARBON,NOKIA,SONY                                                       
+                                                                                
+
+    SERIAL OCCURANCES                                                           
+---------- ----------                                                           
+List                                                                            
+--------------------------------------------------------------------------------
+       401          1                                                           
+COMPAQ                                                                          
+                                                                                
+
+SQL> Select substr(dump('plsql'),15) from dual;
+
+SUBSTR(DUMP('PLSQL'                                                             
+-------------------                                                             
+112,108,115,113,108                                                             
+
+SQL> Select substr(dump('plsql'),5) from dual;
+
+SUBSTR(DUMP('PLSQL'),5)                                                         
+-----------------------------                                                   
+96 Len=5: 112,108,115,113,108                                                   
+
+SQL> SELECT  S.YEAR,P.PRD_NAME,S.QTY*S.AMT FROM PRDS_DTL P,SALE_DTL S WHERE P.PRD_ID=S.PRD_ID AND S.QTY*S.AMT IN (SELECT MAX(QTY*AMT) FROM SALE_DTL GROUP BY YEAR)ORDER BY S.YEAR;
+
+      YEAR PRD_NAME             S.QTY*S.AMT                                     
+---------- -------------------- -----------                                     
+      2010 ACER                      140000                                     
+      2011 LENOVA                    135000                                     
+      2012 ACER                      140000                                     
+      2012 LENOVA                    180000                                     
+
+SQL> SELECT  S.YEAR,P.PRD_NAME,S.QTYS.AMT FROM PRDS_DTL P,SALE_DTL S WHERE P.PRD_ID=S.PRD_ID AND S.QTY IN (SELECT MAX(QTY) FROM SALE_DTL GROUP BY YEAR)ORDER BY S.YEAR;
+SELECT  S.YEAR,P.PRD_NAME,S.QTYS.AMT FROM PRDS_DTL P,SALE_DTL S WHERE P.PRD_ID=S.PRD_ID AND S.QTY IN (SELECT MAX(QTY) FROM SALE_DTL GROUP BY YEAR)ORDER BY S.YEAR
+                          *
+ERROR at line 1:
+ORA-00904: "S"."QTYS"."AMT": invalid identifier 
+
+
+SQL> 
+SQL> SELECT  S.YEAR,P.PRD_NAME,S.QTY FROM PRDS_DTL P,SALE_DTL S WHERE P.PRD_ID=S.PRD_ID AND S.QTY IN (SELECT MAX(QTY) FROM SALE_DTL GROUP BY YEAR)ORDER BY S.YEAR;
+
+      YEAR PRD_NAME                    QTY                                      
+---------- -------------------- ----------                                      
+      2010 DELL                         25                                      
+      2010 ACER                         20                                      
+      2011 ACER                         18                                      
+      2012 ACER                         20                                      
+      2012 LENOVA                       20                                      
+
+SQL> select substr('prokarma_softtech',1,(instr('prokarma_softtech','_',1)-1)) || ' ' || substr('prokarma_softtech',(instr('prokarma_softech','_',1)+1),length('prokarma_softech'))from dual;
+
+SUBSTR('PROKARMA_                                                               
+-----------------                                                               
+prokarma softtech                                                               
+
+SQL>  select replace ('prokarma softech','prokarma_softech') from dual;
+
+REPLACE('PROKARM                                                                
+----------------                                                                
+prokarma softech                                                                
+
+SQL> spool off;

@@ -1,0 +1,225 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang16393{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\b\f0\fs28 ASSIGNMENT-3\par
+\fs24 1) Create a table employee with empno number(4),ename varchar2(40),job varchar2(20),mgr number(4), hiredate date,sal number(10,2),comm number(10)\par
+\b0 A : syntax: create table employee_hema\par
+(empno number(4),ename varchar2(40),job varchar2(20),mgr number(4), hiredate date,sal number(10,2),comm number(10) );\par
+\b 1) add a column deptno varchar2(2) to employee\par
+A : SYNTAX: \b0 ALTER table employee_hema add  deptno varchar2(2);\par
+\b 3) change the deptno datatype to number.\par
+A: syntax:\b0  alter table employee_hema modify deptno number(10);\par
+\b 4) rename employee table as employ\par
+A: syntax:  \b0 alter table employee_hema rename to employ;\b\par
+5.drop table employ\par
+A: syntax: \b0  drop table employ;\b\par
+6.insert 5 unique rows into employee table\par
+A: syntax: \b0\par
+insert into employee_hema values(101,'Hema Priya','software Employee',1234,'15-10-17',30000,123);\par
+ insert into employee_hema values(102,'kalyani','Developer',456,'15-10-17',50000,456);\par
+ insert into employee_hema values(103,'chaitanya','testing',789,'15-10-17',50000,789);\par
+ insert into employee_hema values(104,'madhavi','db',1011,'15-10-17',200000,1011);\par
+ insert into employee_hema values(105,'Kullu','Manager',1213,'15-10-17',100000,1213);\b\par
+7.update sal of employees by 10%\par
+A: \b0 update  employee_hema set sal=(sal*1.1);\par
+\b 8.delete all the employees of dept 10\par
+A:\b0  delete from employee_hema where DEPTNO=10;\b\par
+9.increase commission for deptno 20 employees.\par
+A:\b0   update employee_hema set comm=5000 where deptno=20;\par
+\b 10. Add a not null plus unique  column to the employee table for ename\par
+\b0 A:   ALTER table employee_hema MODIFY ename varchar2(40) NOT NULL UNIQUE; \b\par
+11. Set default value as 1000 for column comm\par
+A: \b0  alter table employee_hema modify comm default 1000;\b\tab\par
+12 insert multiple records into employee table with a single query from emp table.\par
+A: \b0  insert into employee_hema  select * from emp;\b\par
+13.update salary of a employee to 15000 whose job designation is \ldblquote manager\rdblquote\par
+A: \b0 update employee_hema set sal=(sal+15000) where job='manager'or job='Manager'or job='MANAGER';\b\par
+14. Update salary of a employee to 5000 whose comm is more than salary\par
+A: \b0 update employee_hema set sal=(sal+5000) where comm > sal;\par
+\b 15. Change the hiredate column data type to character;\par
+A: \b0 syntax: alter table employee_hema modify hiredate char(25);\par
+ORA-01439: column to be modified must be empty to change datatype\par
+01439. 00000 -  "column to be modified must be empty to change datatype"\b\par
+16. Update the job designation of an employee to senior  software engineer who has joined in 1982\par
+A: \b0 update employee_hema set job='senior software engineer' where hiredate between '1-1-1982' and '31-12-1982';\par
+(OR)\par
+  update employee_hema set job='senior software engineer' where to_char(hiredate,'yyyy')=1982;\par
+\b 17. Update mgr id to 7782 whose mgr id is 7566;\par
+A:  \b0 update employee_hema set mgr=7782 where mgr=7566;\par
+\b 18. Delete all employees  records  from employee table whose salary is greater than 10000 and job is not \lquote   manager\rquote ;\par
+A: \b0  delete employee_hema where sal>10000 and job !='manager';\par
+\b 19. Add a primary key constraint on column empno\par
+A: \b0 alter table employee_hema add CONSTRAINT pk primary Key(empno);\par
+\b 20. Remove the primary key constraint on empno column;\par
+A: \b0 alter table employee_hema drop CONSTRAINT pk;\b\par
+21. Create a view empl_view on employee table with the following columns(empno,job,sal)\par
+A: \b0 create view empl_view as select empno,job,sal from employee_hema;\par
+\b 22. Insert some records into view  empl_view\par
+A: \b0 insert into empl_view values(7988,'manager',30000);\par
+ORA-01400: cannot insert NULL into ("HVELUVOLU"."EMPLOYEE_HEMA"."ENAME")\b\par
+23. Update the view column job to \ldblquote software engineer\rdblquote  whose sal is greater than 6000\par
+A:\b0  update employee_hema set job='software engineer' where sal>6000;\par
+\b 24. Add a column deptno to the view empl_view\par
+A:\b0 create or replace view empl_view as select empno,job,sal,deptno from employee_hema;\b\par
+25. Drop a column sal from the view empl_view\par
+A: \b0 create or replace view empl_view as select empno,job,deptno from employee_hema;\b\par
+26. Rename the view empl_view to view_emp\par
+A\b0 :create or replace view view_emp as select empno,job,deptno from employee_hema;\par
+\b 27. Drop the view empl_view;\par
+A: \b0 drop view empl_view;\b\par
+28. Rename the table employee to employ\par
+A:\b0 alter table employee_hema rename to employ;\b\par
+29. Grant accesses permissions select, insert on table employee to user pkrm***;\par
+A: \b0 grant select,insert on hveluvolu.employee_hema to  SNAGANDLA;\par
+\b 30. Insert a record into employee table of  user pkrm***\par
+A: \b0 insert into SNAGANDLA.EMPLOYEE values(7988,'Priya','software engg',7546,'15-7-17',20000,5000,30);\par
+\b 31. Remove insert privilege from user pkrm*** on employee table.\par
+A:\b0  revoke insert on hveluvolu.employee_hema from SNAGANDLA;\par
+\b 32. Remove all   privilege from user pkrm***  on employee table\par
+A: \b0 revoke all on hveluvolu.employee_hema from SNAGANDLA;\b\par
+33. Create a save point with the name s1;\par
+A: \b0 savepoint s1;\b\par
+34. Remove a record from employee table;\par
+A: \b0 delete from employee_hema where DEPTNO=12;\b\par
+35. Get the removed record using rollback;\par
+A: \b0 rollback;\b\par
+36. Remove all records from employee table;\par
+A: \b0 delete from employee_hema;\b\par
+37. Drop the complete employee table;\par
+A: \b0 drop table employee_hema;\b\par
+38. Restore employee table to save point s1;\par
+A\b0 : syntax : rollback to s1;\par
+ Error report -\par
+ORA-01086: savepoint 'S1' never established in this session or is invalid\par
+01086. 00000 -  "savepoint '%s' never established in this session or is invalid"\par
+*Cause:    An attempt was made to roll back to a savepoint that was never\par
+           established in this session, or was invalid.\par
+*Action:   Try rolling back to the savepoint from the session where it is established.\par
+\b 39. Create a table emp1 with the employee table columns;\par
+A: \b0 create table employee1 as select * from employee_hema where 1=5;\b\par
+40. Insert records into emp1 table from employee table;\par
+A: \b0 insert into employee1 select * from employee_hema;\b\par
+41. Create an index hd_index on column \lquote hiredate\rquote ;\par
+A: \b0 create index hd_index on  employee1(hiredate);\b\par
+42. Drop an index hd_index;\par
+A: \b0 drop index hd_index;\b\par
+43. Create a public synonym pub_emp on employee table;\par
+A: \b0 CREATE OR REPLACE PUBLIC SYNONYM  pub_emp for employee1;\b\par
+44. Create a private synonym pri_emp on table emp1;\par
+A: \b0 create  SYNONYM pri_emp  for employee_hema;\par
+ORA-01031: insufficient privileges\par
+01031. 00000 -  "insufficient privileges"\par
+*Cause:    An attempt was made to perform a database operation without\par
+           the necessary privileges.\par
+*Action:   Ask your database administrator or designated security\par
+           administrator to grant you the necessary privileges\b\par
+45. Insert records into employee table using synonym pub_emp;\par
+A: \b0 insert into pub_emp values(106,'Priya','developer',3444,'15-10-17',20000,5565,60);\b\par
+45. Drop the synonym pub_emp on employee table;\par
+A: \b0 drop  public SYNONYM pub_emp;\par
+ORA-01031: insufficient privileges\par
+01031. 00000 -  "insufficient privileges"\par
+*Cause:    An attempt was made to perform a database operation without\par
+           the necessary privileges.\par
+*Action:   Ask your database administrator or designated security\par
+           administrator to grant you the necessary privileges\b\par
+46. Create a comment on table employee;\par
+A: \b0 comment on table employee_hema is 'This is a table comment';\b\par
+47. Create a comment on column empno of employee table\par
+A: \b0 comment on column EMPLOYEE_HEMA.EMPNO is 'This is a column comment';\b\par
+48. Create a sequence on empno column of a employee table;\par
+A: \b0 create SEQUENCE emp_seq minvalue 101 start with 101 increment by 1;\b\par
+49. Modify the sequence incremental value;\par
+A: \b0 alter sequence emp_seq increment by 2;\b\par
+50. Commit all the data;\par
+A:\b0  commit;\par
+\b\par
+\par
+--dql operations\par
+\par
+51.display the dept information from department table\par
+A: \b0 select * from dept;\par
+desc dept;\b\par
+52.display the details of all employees \par
+A: \b0 select * from employee_hema;\b\par
+53.display the name and job for all employees \par
+A: \b0 select ename,job from employee_hema;\b\par
+54.display name and salary for all employees \par
+A: \b0 select ename,sal from employee_hema;\b\par
+55.display employee number and total salary for each employee\par
+A: \b0 select empno,(sal+comm) from employee_hema;\b\par
+56.display employee name and annual salary for all employees \par
+A: \b0 select empno,((sal+comm)*12) from employee_hema;\b\par
+57.display the names of all employees who are working in department number 10 \par
+A: \b0 select * from employee_hema where deptno=10;\b\par
+58.display the names of all employees working as clerks and drawing a salary more than 3000 \par
+A:\b0  select ename from employee_hema where job='clerk' and sal>3000;\par
+\b 59.display employee number and names for employees who earn commission \par
+A: \b0 select empno,ename from employee_hema where comm>0;\b\par
+60.display names of employees who do not earn any commission \par
+A: \b0 select ename from employee_hema where comm=0;\b\par
+61.display the names of employees who are working as clerk , salesman or analyst and drawing a salary more than 3000 \par
+A: \b0 select ename from employee_hema where (job='clerk'or job='salesman'or job='analyst') and sal>3000; \par
+--(OR)\par
+select ename from empLOYEE_HEMA where job in('CLERK','SALESMAN','ANALYST') and (sal+nvl(comm,0))>3000;\b\par
+62.display the names of employees who are working in the company for the past 5 years \par
+A: \b0 select ename from employee_hema where sysdate-hiredate>5*365;\b\par
+63.display the list of employees who have joined the company before 30 th june 90 or after 31 st dec 90 \par
+A: \b0 select * from employee_hema where hiredate between '30-jun-1990' and '31-dec-1990';\b\par
+64.display current date \par
+A: \b0 select sysdate from dual;\par
+\b 65.display the list of users in your database (using log table) \par
+A:\b0  select * from all_users;\par
+\b 66.display the names of all tables from the current user \par
+A: \b0 select * from tab;\par
+\b 67.display the name of the current user \par
+A: \b0 show user;\b\par
+68.display the names of employees working in department number 10 or 20 or 40 or employees working as clerks , salesman or analyst \par
+A: \b0 select ename from employee_hema where deptno in(10,20,30) or job in('clerks' , 'salesman' , 'analyst'); \b\par
+69.display the names of employees whose name starts with alphabet s \par
+A: \b0 select ename from employee_hema where ename like 's%';\b\par
+70.display employee name from employees whose name ends with alphabet s \par
+A: \b0 select ename from employee_hema where ename like '%s';\b\par
+71.display the names of employees whose names have second alphabet a in their names\par
+A: \b0 select ename from employee_hema where ename like'_a%';\b\par
+72.display the names of employees whose name is exactly five characters in length \par
+A: \b0 select ename from employee_hema where ename like '_____';\b\par
+73.display the names of employees who are not working as salesman or clerk or analyst\par
+A: \b0 select ename from employee_hema where job not in('salesman ','clerk','analyst','SALESMAN','CLERK','ANALYST');\b\par
+74.display the names of employees in order of salary i.e. The name of the employee earning lowest salary shoud appear first \par
+A: \b0 select ename from employee_hema order by sal;\b\par
+75.display the names of employees in job ascending order of salary \par
+A: \b0 select ename from employee_hema order by sal;\b\par
+76.display the details from employee table in order of employee name \par
+A: \b0 select * from employee_hema order by ename;\b\par
+77.display empnno,ename,deptno and sal. Sort the output first based on name and within name by deptno and within deptno by sal; \par
+A: \b0 select * from employee_hema order by ename,deptno,sal;\par
+--(or)..\par
+SELECT empno,ename,deptno,sal from employee_hema order by ename,deptno,sal;\b\par
+78. Display the name of employees along with their annual salary(sal*12). The name of the employee earning highest annual salary should appear first?\par
+A: \b0 select ename,(sal*12) from employee_hema order by (sal*12) desc;\b\par
+79. Display name,salary,hra,pf,da,totalsalary for each employee.\par
+A: \b0 select ename,sal,((sal*15)/100) as hra,((sal*5)/100) as pf,((sal*10)/100) as da, sal+((sal*15)/100)-((sal*5)/100) as Total_Salary from employee_hema;\b\par
+80. Display the name of employee concatnate with employee number?\par
+A: \b0 select concat(ename,empno) from employee_hema;\b\par
+81. Display those employees who joined the company before 15th of the month\par
+A: \b0 select ename from employee_hema where extract(day from hiredate)<15;\b\par
+82. Display those employees who has joined after 15th of the month?\par
+A: \b0 select ename from employee_hema where extract(day from hiredate)>15;\par
+\b 83. Display the deptname where no employee is working?\par
+A:\b0  SELECT D.DNAME FROM DEPT D WHERE NOT EXISTS(SELECT E.DEPTNO FROM EMP E WHERE D.DEPTNO=E.DEPTNO) ; \par
+\b 84. Produce the output of the emptable "employee_and job" for ename and job ?\par
+A: \b0 select concat(ename,'_and')||job from employee_hema;\b\par
+85. Display those employees whose name contains a?\par
+A: \b0 select ename from employee_hema where ename like('%a%');\b\par
+86. Display those employees who are not working under any manager?\par
+A: \b0 select ename from employee_hema where mgr is null;\b\par
+87. Display those who are not managers?\par
+A: \b0 select * from employee_hema where job != 'manager' ;\b\par
+88. Display the jobs which are unique to department 10?\par
+A: \b0 select job from employee_hema where deptno = 10 AND job not in (\par
+select distinct job from employee_hema where deptno!= 10); \par
+--(or)---\par
+select distinct(job) from employee_hema where deptno=10;\b\par
+\fs28\par
+\b0\fs22\par
+}
+ 
